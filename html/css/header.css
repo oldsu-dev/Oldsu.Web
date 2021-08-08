@@ -8,6 +8,13 @@ header {
   justify-content: space-between;
 }
 
+.menu {
+  width: 800px;
+}
+
 .menu_list {
   list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
