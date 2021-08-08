@@ -1,6 +1,7 @@
 @import url(header.css);
+@import url(reset.css);
 
 body {
   background-color: #241a1b;
-  margin-top: 50px;
+  margin-top: 75px;
 }
