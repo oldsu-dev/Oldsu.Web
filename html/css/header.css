@@ -1,4 +1,11 @@
+@import url(reset.css);
+
 header {
+  display: flex;
+  margin: 0 auto;
+  width: 1350px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .menu_list {
