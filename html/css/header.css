@@ -4,7 +4,7 @@
 .header {
   display: flex;
   margin: 0 auto;
-  width: 1350px;
+  width: 1250px;
   height: 55px;
   align-items: center;
   justify-content: space-between;
@@ -48,6 +48,14 @@
 }
 
 .menu_list_item {
+  text-align: center;
+  width: 120px;
+  line-height: 55px;
+  background-color: #a8234c;
+}
+
+.menu_list_item:hover {
+  background-color: #e02f64;
 }
 
 .menu_list_item_link {
