@@ -49,7 +49,8 @@
 
 .menu_list_item {
   text-align: center;
-  width: 120px;
+  padding-left: 40px;
+  padding-right: 40px;
   line-height: 55px;
   background-color: #a8234c;
 }
@@ -59,4 +60,7 @@
 }
 
 .menu_list_item_link {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  color: white;
 }
