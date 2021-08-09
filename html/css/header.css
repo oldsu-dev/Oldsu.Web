@@ -53,6 +53,8 @@
   padding-right: 40px;
   line-height: 55px;
   background-color: #a8234c;
+  cursor: pointer;
+  transition: background-color 150ms linear;
 }
 
 .menu_list_item:hover {
