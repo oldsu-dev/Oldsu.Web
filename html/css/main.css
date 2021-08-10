@@ -6,3 +6,10 @@
   display: flex;
   justify-content: center;
 }
+
+.banner_image {
+  width: 1250px;
+  height: 225px;
+  object-fit: cover;
+  object-position: -50%;
+}
