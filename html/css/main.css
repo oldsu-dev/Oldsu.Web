@@ -12,4 +12,5 @@
   height: 225px;
   object-fit: cover;
   object-position: -50%;
+  border-radius: 13px 13px 0px 0px;
 }
