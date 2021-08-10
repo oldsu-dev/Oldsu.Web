@@ -1,0 +1,8 @@
+@import url(reset.css);
+@import url(reset.css);
+
+.banner {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
