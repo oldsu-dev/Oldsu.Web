@@ -5,6 +5,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .banner_image {
@@ -14,4 +15,13 @@
   object-position: -50%;
   border-radius: 15px 15px 0px 0px;
   margin-top: 20px;
+}
+
+.content {
+  background-color: #2a2021;
+  width: 1250px;
+  height: 550px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
