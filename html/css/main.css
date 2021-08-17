@@ -67,7 +67,22 @@
   height: 48px;
   margin-top: 26px;
   background-color: #8b1d3e;
+  color: rgb(43, 43, 43);
   outline: none;
   border: none;
   border-radius: 15px;
+  font-family: "Quicksand", sans-serif;
+  padding-left: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.playtest_form input::placeholder {
+  color: black;
+  font-weight: 400;
+}
+
+.playtest_form input:focus {
+  outline: none;
+  border: none;
 }
