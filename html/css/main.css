@@ -63,7 +63,11 @@
 }
 
 .playtest_form input {
-  width: 300px;
-  height: 26px;
-  margin-top: 40px;
+  width: 320px;
+  height: 48px;
+  margin-top: 26px;
+  background-color: #8b1d3e;
+  outline: none;
+  border: none;
+  border-radius: 15px;
 }
