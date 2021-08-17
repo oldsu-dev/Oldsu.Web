@@ -34,6 +34,8 @@
   width: 420px;
   height: 500px;
   border-radius: 13px;
+  margin: 0 auto;
+  margin-top: 27px;
 }
 
 .playtest_form_heading_wrapper {
