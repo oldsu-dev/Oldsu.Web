@@ -67,7 +67,7 @@
   height: 48px;
   margin-top: 26px;
   background-color: #8b1d3e;
-  color: rgb(43, 43, 43);
+  color: rgb(255, 255, 255);
   outline: none;
   border: none;
   border-radius: 15px;
@@ -78,7 +78,7 @@
 }
 
 .playtest_form input::placeholder {
-  color: black;
+  color: #bea4ac;
   font-weight: 400;
 }
 
