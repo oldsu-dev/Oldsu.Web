@@ -58,4 +58,12 @@
 .playtest_form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.playtest_form input {
+  width: 300px;
+  height: 26px;
+  margin-top: 40px;
 }
