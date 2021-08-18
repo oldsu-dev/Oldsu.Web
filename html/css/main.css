@@ -87,3 +87,22 @@
   outline: none;
   border: none;
 }
+
+.playtest_form input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+}
+
+.playtest_form_checkbox_wrapper {
+}
+
+.playtest_form_checkbox_label {
+  width: 200px;
+  position: relative;
+  top: -8px;
+  left: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Quicksand", sans-serif;
+  color: rgb(255, 255, 255);
+}
