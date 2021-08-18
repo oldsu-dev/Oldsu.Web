@@ -91,6 +91,7 @@
 .playtest_form input[type="checkbox"] {
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 .playtest_form input[type="submit"]:hover {
   background-color: #e02f64;
