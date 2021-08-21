@@ -99,9 +99,6 @@
   transition: background-color 150ms linear;
 }
 
-.playtest_form_checkbox_wrapper {
-}
-
 .playtest_form_checkbox_label {
   width: 200px;
   position: relative;
