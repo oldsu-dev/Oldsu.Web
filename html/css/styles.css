@@ -59,3 +59,18 @@ body {
   text-transform: capitalize;
   margin-top: 5px;
 }
+
+.home_news_text {
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.home_news_divider {
+  border: none;
+  border-top: 4px solid rgb(255, 255, 255);
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
