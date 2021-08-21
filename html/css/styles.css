@@ -13,8 +13,6 @@ body {
   height: 65px;
   background-color: #a8234c;
   border-radius: 15px;
-  text-align: center;
-  margin: 0 auto;
 }
 
 .home_info_heading {
@@ -23,22 +21,29 @@ body {
   font-weight: 700;
   font-size: 32px;
   line-height: 65px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .home_news_heading {
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 65px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .home_news_heading_wrapper {
-  width: 280px;
+  width: 320px;
   height: 65px;
   background-color: #a8234c;
   border-radius: 15px;
 }
 
-.home_wrapper {
-}
-
 .home_info {
+  margin-right: 25px;
 }
 
 .home_news {
