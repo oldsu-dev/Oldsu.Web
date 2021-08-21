@@ -51,5 +51,11 @@ body {
   margin-top: 25px;
 }
 
-.home_news {
+.home_news_title {
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: capitalize;
+  margin-top: 5px;
 }
