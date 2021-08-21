@@ -2,7 +2,44 @@
 @import url(reset.css);
 @import url(main.css);
 @import url(playtest_form.css);
+
 body {
   background-color: #241a1b;
   margin-top: 50px;
+}
+
+.home_info_heading_wrapper {
+  width: 720px;
+  height: 65px;
+  background-color: #a8234c;
+  border-radius: 15px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.home_info_heading {
+  color: white;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 65px;
+}
+
+.home_news_heading {
+}
+
+.home_news_heading_wrapper {
+  width: 280px;
+  height: 65px;
+  background-color: #a8234c;
+  border-radius: 15px;
+}
+
+.home_wrapper {
+}
+
+.home_info {
+}
+
+.home_news {
 }
