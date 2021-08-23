@@ -99,4 +99,7 @@ body {
 .user_card_name {
   display: flex;
   justify-content: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: white;
 }
