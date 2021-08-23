@@ -20,7 +20,6 @@
 .main_content, .playtest_content, .register_content {
   background-color: #2a2021;
   width: 1250px;
-  height: 550px;
   margin: 0 auto;
   display: flex;
   justify-content: center;

@@ -4,13 +4,14 @@
 .form_wrap {
   background-color: #a8234c;
   width: 420px;
-  height: 510px;
   border-radius: 13px;
-  margin: 0 auto;
-  margin-top: 27px;
+  margin: 27px auto;
+  padding-bottom: 27px;
 }
 
 .form_heading_wrapper {
+  border-radius: 13px 13px 0px 0px;
+  background-color: #e02f64;
   width: 420px;
   height: 60px;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
@@ -80,4 +81,13 @@
   vertical-align: middle;
   font-family: "Quicksand", sans-serif;
   color: rgb(255, 255, 255);
+}
+
+.form_top_info {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Quicksand", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 20px;
 }
