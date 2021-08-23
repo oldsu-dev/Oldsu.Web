@@ -129,6 +129,7 @@ body {
   padding-top: 8px;
   display: flex;
   flex-direction: column;
+  margin: 14px 27px 14px 27px;
 }
 
 .leaderboard_player {
