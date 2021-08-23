@@ -1,0 +1,88 @@
+.players_wrapper {
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 14px 27px 14px 27px;
+}
+
+.player {
+    height: 36px;
+    width: 100%;
+    background: #5F474A;
+    border: 1px solid #000000;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    margin-bottom: 3px;
+    padding-right: 15px;
+    display: flex;
+    vertical-align: center;
+    text-align: center;
+    align-items: center;
+}
+
+.player_large {
+    height: 93px;
+}
+
+.player_rank {
+    color: white;
+    line-height: 28px;
+    padding-left: 15px;
+    padding-right: 20px;
+
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 24px;
+    /*text-align: center;*/
+}
+
+.player_large .player_rank {
+    font-size: 36px;
+    line-height: 42px;
+    padding-top: 25px;
+}
+
+.player_avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 15px;
+}
+
+.player_large .player_avatar {
+    width: 82px;
+    height: 82px;
+    border-radius: 15px;
+}
+
+.player_name {
+    color: white;
+    line-height: 21px;
+    padding-left: 15px;
+    padding-right: 20px;
+
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 18px;
+}
+
+.player_large .player_name {
+    line-height: 28px;
+    font-size: 24px;
+    padding-top: 32px;
+}
+
+.player_flag {
+    width: 24px;
+    height: 24px;
+}
+
+.player_large .player_flag {
+    width: 64px;
+    height: 64px;
+}
+
+.player_gap {
+    width: 100%;
+}
