@@ -102,6 +102,8 @@ body {
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
   color: white;
+  font-size: 28px;
+  margin-top: 10px;
 }
 
 .user_card_avatar {
