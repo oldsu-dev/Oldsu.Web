@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet">
+    <title>oldsu!</title>
+</head>
+<body>
+<div class="header_wrapper">
+    <header class="header">
+        <div class="logo_wrapper">
+            <h1 class="logo">oldsu!</h1>
+        </div>
+        <div class="menu_wrapper">
+            <nav class="menu">
+                <ul class="menu_list">
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Home</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Beatmaps</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Leaderboard</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Community</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Help</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <a class="user_profile_link">
+            <img href="#" alt="upl" class="user_profile_image">
+        </a>
+    </header>
+</div>
+<div class="banner_wrapper">
+    <img src="image/banner.png" alt="oldsu_banner" class="banner_image">
+</div>
+<div class="register_content">
+    <div class="form_wrap">
+        <div class="form_heading_wrapper">
+            <h2 class="form_heading">Sign up</h2>
+        </div>
+        <form name="register_form" class="form">
+            <input type="text" class="form_username" id="username" maxlength="32" name="username" placeholder="Username" required>
+            <input type="email" class="form_email" id="email" name="email" placeholder="E-Mail" required>
+            <input type="password" class="form_password" id="password" name="password" placeholder="Password" required>
+            <input type="password" class="form_cnf-password" id="confirmpassword" name="cnf-password" placeholder="Confirm Password" required>
+            <div class="form_checkbox_wrapper">
+                <input type="checkbox" class="form_checkbox" id="tos_checkbox" name="tos_checkbox" value="ss" required>
+                <label for="tos_checkbox" class="form_checkbox_label">I agree to Terms of Service</label>
+            </div>
+            <input type="submit" class="form_submit_button" id="register_submit" name="register_submit" value="Sign up">
+        </form>
+    </div>
+</div>
+</body>
+</html>
