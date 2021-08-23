@@ -85,7 +85,18 @@ body {
 
 .user_card {
   background-color: #a8234c;
-  width: 280px;
-  height: 420px;
+  width: 260px;
+  height: 430px;
   border-radius: 13px;
+  margin-left: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user_card_name {
+  display: flex;
+  justify-content: center;
 }
