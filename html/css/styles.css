@@ -82,3 +82,10 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.user_card {
+  background-color: #a8234c;
+  width: 280px;
+  height: 420px;
+  border-radius: 13px;
+}
