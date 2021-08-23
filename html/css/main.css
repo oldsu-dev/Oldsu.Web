@@ -37,4 +37,6 @@
 .user_content {
   height: 1120px;
   margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
 }
