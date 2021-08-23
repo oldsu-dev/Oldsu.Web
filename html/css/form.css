@@ -1,22 +1,23 @@
 @import url(reset.css);
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
 
-.playtest_form_wrap {
+.form_wrap {
   background-color: #a8234c;
   width: 420px;
-  height: 510px;
   border-radius: 13px;
-  margin: 0 auto;
-  margin-top: 27px;
+  margin: 27px auto;
+  padding-bottom: 27px;
 }
 
-.playtest_form_heading_wrapper {
+.form_heading_wrapper {
+  border-radius: 13px 13px 0px 0px;
+  background-color: #e02f64;
   width: 420px;
   height: 60px;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
-.playtest_form_heading {
+.form_heading {
   color: white;
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
@@ -27,14 +28,14 @@
   line-height: 60px;
 }
 
-.playtest_form {
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.playtest_form input {
+.form input {
   width: 320px;
   height: 48px;
   margin-top: 26px;
@@ -50,28 +51,28 @@
   font-size: 18px;
 }
 
-.playtest_form input::placeholder {
+.form input::placeholder {
   color: #bea4ac;
   font-weight: 400;
 }
 
-.playtest_form input:focus {
+.form input:focus {
   outline: none;
   border: none;
 }
 
-.playtest_form input[type="checkbox"] {
+.form input[type="checkbox"] {
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
-.playtest_form input[type="submit"]:hover {
+.form input[type="submit"]:hover {
   background-color: #e02f64;
   cursor: pointer;
   transition: background-color 150ms linear;
 }
 
-.playtest_form_checkbox_label {
+.form_checkbox_label {
   width: 200px;
   position: relative;
   top: -8px;
@@ -80,4 +81,13 @@
   vertical-align: middle;
   font-family: "Quicksand", sans-serif;
   color: rgb(255, 255, 255);
+}
+
+.form_top_info {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Quicksand", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: 20px;
 }
