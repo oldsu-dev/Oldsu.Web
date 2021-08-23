@@ -195,3 +195,13 @@ body {
   line-height: 28px;
   font-size: 24px;
 }
+
+.leaderboard_player_flag {
+  width: 24px;
+  height: 24px;
+}
+
+.leaderboard_player_large .leaderboard_player_flag {
+  width: 64px;
+  height: 64px;
+}
