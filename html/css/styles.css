@@ -83,6 +83,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* <editor-fold desc="Search bar"> */
 .searchbar_wrapper {
   background-color: #a8234c;
   border-radius: 15px;
@@ -116,3 +117,4 @@ body {
   padding-left: 15px;
   border: black;
 }
+/* </editor-fold> */
