@@ -165,6 +165,7 @@ body {
 .leaderboard_player_large .leaderboard_player_rank {
   font-size: 36px;
   line-height: 42px;
+  padding-top: 25px;
 }
 
 .leaderboard_player_avatar {
@@ -194,6 +195,7 @@ body {
 .leaderboard_player_large .leaderboard_player_name {
   line-height: 28px;
   font-size: 24px;
+  padding-top: 32px;
 }
 
 .leaderboard_player_flag {
