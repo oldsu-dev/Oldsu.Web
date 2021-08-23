@@ -84,7 +84,7 @@ body {
 }
 
 /* <editor-fold desc="Search bar"> */
-.searchbar_wrapper {
+.inputbar_wrapper {
   background-color: #a8234c;
   border-radius: 15px;
   height: 50px;
@@ -96,7 +96,7 @@ body {
   margin: 14px 27px 14px 27px;
 }
 
-.searchbar_label {
+.inputbar_label {
   color: white;
   font-family: "Quicksand", sans-serif;
   font-weight: bold;
@@ -108,7 +108,7 @@ body {
   padding-bottom: 3px;
 }
 
-.searchbar_text {
+.inputbar_text {
   color: white;
   font-size: 24px;
   background: #901f42;
@@ -120,7 +120,7 @@ body {
   border: black;
 }
 
-#searchbar_ranking_search {
+#inputbar_ranking_search {
   margin-bottom: 27px;
 }
 /* </editor-fold> */
