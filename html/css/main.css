@@ -19,7 +19,8 @@
 
 .main_content,
 .playtest_content,
-.register_content {
+.register_content,
+.leaderboard_content {
   background-color: #2a2021;
   width: 1250px;
   margin: 0 auto;
