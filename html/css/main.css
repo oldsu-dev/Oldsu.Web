@@ -33,3 +33,7 @@
 .main_content {
   height: 560px;
 }
+
+.leaderboard_content {
+  flex-direction: column;
+}

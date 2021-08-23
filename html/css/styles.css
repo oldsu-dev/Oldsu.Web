@@ -90,9 +90,10 @@ body {
   height: 50px;
   padding-left: 18px;
   padding-right: 9px;
-  display: inline-flex;
+  display: flex;
   vertical-align: center;
   align-items: center;
+  margin: 14px 27px 14px 27px;
 }
 
 .searchbar_label {
@@ -102,7 +103,8 @@ body {
   font-size: 24px;
   line-height: 30px;
   text-align: center;
-  padding-right: 10px;
+  width: 150px;
+  padding-right: 15px;
   padding-bottom: 3px;
 }
 
@@ -110,11 +112,15 @@ body {
   color: white;
   font-size: 24px;
   background: #901f42;
-  width: 872px; /* TODO: make this take up as much horizontal space as allowed*/
+  width: 90%;
   height: 39px;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   padding-left: 15px;
   border: black;
+}
+
+#searchbar_ranking_search {
+  margin-bottom: 27px;
 }
 /* </editor-fold> */

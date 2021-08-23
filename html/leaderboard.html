@@ -44,10 +44,18 @@
             <img src="image/banner.png" alt="oldsu_banner" class="banner_image">
         </div>
         <div class="leaderboard_content">
-            <div class="searchbar_wrapper">
+            <div class="searchbar_wrapper" id="searchbar_ranking_search">
                 <p class="searchbar_label">Search for:</p>
-                <!--suppress HtmlFormInputWithoutLabel -->
                 <input class="searchbar_text" type="text"/>
+            </div>
+
+            <div class="searchbar_wrapper" id="searchbar_ranking_gamemode">
+                <p class="searchbar_label">Gamemode:</p>
+                <select class="searchbar_text">
+                    <option value="0">Standard</option>
+                    <option value="1">Taiko</option>
+                    <option value="2">Catch The Beat</option>
+                </select>
             </div>
         </div>
     </main>
