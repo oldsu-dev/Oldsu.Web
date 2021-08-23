@@ -55,7 +55,10 @@
     border-radius: 15px;
 }
 
-.player_name {
+.player_name,
+.player_score,
+.player_acc,
+.player_playcount {
     color: white;
     line-height: 21px;
     padding-left: 15px;
@@ -65,9 +68,13 @@
     font-weight: bold;
     font-style: normal;
     font-size: 18px;
+    white-space: nowrap;
 }
 
-.player_leader .player_name {
+.player_leader .player_name,
+.player_leader .player_score,
+.player_leader .player_acc,
+.player_leader .player_playcount {
     line-height: 28px;
     font-size: 24px;
     padding-top: 32px;
