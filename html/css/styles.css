@@ -124,3 +124,74 @@ body {
   margin-bottom: 27px;
 }
 /* </editor-fold> */
+
+.leaderboard_players_wrapper {
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderboard_player {
+  height: 36px;
+  width: 100%;
+  background: #5F474A;
+  border: 1px solid #000000;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  margin-bottom: 3px;
+  display: flex;
+  vertical-align: center;
+  text-align: center;
+  align-items: center;
+}
+
+.leaderboard_player_large {
+  height: 93px;
+}
+
+.leaderboard_player_rank {
+  color: white;
+  line-height: 28px;
+  padding-left: 15px;
+  padding-right: 20px;
+
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 24px;
+  /*text-align: center;*/
+}
+
+.leaderboard_player_large .leaderboard_player_rank {
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.leaderboard_player_avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 15px;
+}
+
+.leaderboard_player_large .leaderboard_player_avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 15px;
+}
+
+.leaderboard_player_name {
+  color: white;
+  line-height: 21px;
+  padding-left: 15px;
+  padding-right: 20px;
+
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 18px;
+}
+
+.leaderboard_player_large .leaderboard_player_name {
+  line-height: 28px;
+  font-size: 24px;
+}
