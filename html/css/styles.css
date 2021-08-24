@@ -111,3 +111,8 @@ body {
   margin-bottom: 20px;
   border-radius: 15px;
 }
+
+.user_card_badge {
+  width: 86px;
+  height: 35px;
+}
