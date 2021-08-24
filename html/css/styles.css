@@ -150,3 +150,13 @@ body {
   margin-bottom: 15px;
   background-color: #8b1d3e;
 }
+
+.user_card_ranking_rank,
+.user_card_ranking_level {
+  display: flex;
+  justify-content: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 21px;
+}
