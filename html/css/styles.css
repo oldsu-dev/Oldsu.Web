@@ -94,6 +94,8 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  height: fit-content;
+  resize: both;
 }
 
 .user_card_name {
@@ -115,4 +117,27 @@ body {
 .user_card_badge {
   width: 86px;
   height: 35px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.user_card_badges_wrapper {
+  display: flex;
+  flex-flow: row wrap;
+
+  width: 200px;
+  justify-content: center;
+  width: 100%;
+}
+
+.user_card_player_title {
+  display: flex;
+  justify-content: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 21px;
+  margin-top: 10px;
 }
