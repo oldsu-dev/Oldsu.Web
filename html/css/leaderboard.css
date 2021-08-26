@@ -71,13 +71,19 @@
     white-space: nowrap;
 }
 
-.player_leader .player_name,
-.player_leader .player_score,
-.player_leader .player_acc,
-.player_leader .player_playcount {
+.player_leader .player_name {
     line-height: 28px;
     font-size: 24px;
     padding-top: 32px;
+}
+
+.player_leader .player_score,
+.player_leader .player_acc,
+.player_leader .player_playcount {
+    /*line-height: 0px;*/
+    font-size: 24px;
+    /*padding-top: 32px;*/
+    height: 24px;
 }
 
 .player_flag {
@@ -92,4 +98,17 @@
 
 .player_gap {
     width: 100%;
+}
+
+.player_leader_stat_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.player_leader_stats_info {
+    margin-left: auto;
+}
+
+.player_leader_stats_info, .player_leader_stats {
+    display: flex;
 }
