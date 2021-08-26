@@ -20,6 +20,7 @@
 .main_content,
 .playtest_content,
 .register_content,
+.user_content,
 .leaderboard_content {
   background-color: #2a2021;
   width: 1250px;
@@ -36,4 +37,11 @@
 
 .leaderboard_content {
   flex-direction: column;
+}
+
+.user_content {
+  height: 1120px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
 }
