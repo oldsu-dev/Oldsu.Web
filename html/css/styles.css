@@ -83,6 +83,84 @@ body {
   margin-bottom: 10px;
 }
 
+.user_card {
+  background-color: #a8234c;
+  width: 260px;
+  height: 430px;
+  border-radius: 13px;
+  margin-left: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: fit-content;
+  resize: both;
+}
+
+.user_card_name {
+  display: flex;
+  justify-content: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 28px;
+  margin-top: 10px;
+}
+
+.user_card_avatar {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+.user_card_badge {
+  width: 86px;
+  height: 35px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.user_card_badges_wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  width: 200px;
+  justify-content: center;
+  width: 100%;
+}
+
+.user_card_player_title {
+  display: flex;
+  justify-content: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 21px;
+  margin-top: 10px;
+}
+
+.user_card_ranking {
+  box-shadow: inset 0px 2px 7px 5px rgba(0, 0, 0, 0.25);
+  height: 70px;
+  width: 220px;
+  border-radius: 13px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #8b1d3e;
+}
+
+.user_card_ranking_rank,
+.user_card_ranking_level {
+  display: flex;
+  justify-content: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 21px;
+}
+
 /* <editor-fold desc="Search bar"> */
 .inputbar_wrapper {
   background-color: #a8234c;
