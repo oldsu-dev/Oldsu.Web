@@ -149,6 +149,10 @@ body {
   margin-top: 15px;
   margin-bottom: 15px;
   background-color: #8b1d3e;
+  display: flex;
+  flex: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .user_card_ranking_rank,
@@ -159,4 +163,9 @@ body {
   font-weight: 700;
   color: white;
   font-size: 21px;
+}
+
+.user_card_ranking_values_wrapper {
+  display: block;
+  margin-left: 25px;
 }
