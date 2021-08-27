@@ -88,8 +88,6 @@ body {
   width: 260px;
   height: 430px;
   border-radius: 13px;
-  margin-left: 20px;
-  margin-top: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
