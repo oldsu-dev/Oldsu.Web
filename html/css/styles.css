@@ -142,8 +142,8 @@ body {
 }
 
 .user_card_ranking {
-  box-shadow: inset 0px 2px 7px 5px rgba(0, 0, 0, 0.25);
-  height: 70px;
+  box-shadow: inset 0px 2px 4px 5px rgba(0, 0, 0, 0.20);
+  height: 60px;
   width: 220px;
   border-radius: 13px;
   margin-top: 15px;
