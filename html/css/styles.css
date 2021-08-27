@@ -183,6 +183,7 @@ body {
   flex-direction: column;
   background-color: #241a1b;
   border-radius: 13px;
+  margin-top: 10px;
 }
 
 .user_info_title,
