@@ -2,6 +2,7 @@
 @import url(reset.css);
 @import url(main.css);
 @import url(form.css);
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 
 body {
   background-color: #241a1b;
@@ -168,15 +169,43 @@ body {
   margin-left: 25px;
 }
 
-.user_info {
-  width: 220px;
-  height: 100px;
-  box-shadow: inset 0px 2px 4px 5px rgba(0, 0, 0, 0.20);
-  display: flex;
-}
-
 .user_card-info_wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.user_info {
+  width: 220px;
+  height: 140px;
+  box-shadow: inset 0px 2px 4px 4px rgba(0, 0, 0, 0.20);
+  display: flex;
+  flex-direction: column;
+  background-color: #241a1b;
+  border-radius: 13px;
+}
+
+.user_info_title,
+.user_info_joindate {
+  display: flex;
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+.user_info_location,
+.user_info_age,
+.user_info_occupation,
+.user_info_interests,
+.user_info_twitter {
+  display: flex;
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 12px;
 }
