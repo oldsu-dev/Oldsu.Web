@@ -250,3 +250,9 @@ body {
   width: 600px;
   height: 250px;
 }
+
+.user_stat_info_values {
+  background-color: #2A2021;
+  width: 150px;
+  height: 250px;
+}
