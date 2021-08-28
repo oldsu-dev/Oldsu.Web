@@ -263,8 +263,28 @@ body {
 
 .user_stat_info_values {
   background-color: #2A2021;
-  width: 150px;
-  height: 250px;
+  width: 200px;
+  height: 300px;
   border-radius: 13px;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.user_stat_info_value_title,
+.user_stat_info_value_number {
+  font-family: "Raleway", sans-serif;
+  color: white;
+  font-size: 16px;
+}
+
+.user_stat_info_value_title {
+  margin-top: 7px;
+}
+
+.user_stat_info_value_number {
+  margin-bottom: 7px;
 }
