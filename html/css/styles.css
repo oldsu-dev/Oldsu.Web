@@ -220,21 +220,26 @@ body {
   margin-left: 10px;
   border-radius: 13px;
   margin-top: 10px;
+  display: flex;
 }
 
 .user_stat_info_heading_wrapper {
-  width: 900px;
-  height: 48px;
+  width: 925px;
+  height: 40px;
   background-color: #5F474A;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 13px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 0;
 }
 
 .user_stat_info_heading {
   font-family: "Raleway", sans-serif;
   font-size: 18px;
-  line-height: 48px;
+  line-height: 40px;
   color:white;
   font-weight: 200;
+  display: flex;
+  justify-content: center;
 }
