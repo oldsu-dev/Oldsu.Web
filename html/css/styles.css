@@ -231,3 +231,10 @@ body {
   text-align: center;
 }
 
+.user_stat_info_heading {
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  line-height: 48px;
+  color:white;
+  font-weight: 200;
+}
