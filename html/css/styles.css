@@ -221,6 +221,7 @@ body {
   border-radius: 13px;
   margin-top: 10px;
   display: flex;
+  flex-flow: row wrap;
 }
 
 .user_stat_info_heading_wrapper {
@@ -242,4 +243,10 @@ body {
   font-weight: 200;
   display: flex;
   justify-content: center;
+}
+
+.user_stat_info_rankgraph {
+  background-color: #2A2021;
+  width: 600px;
+  height: 250px;
 }
