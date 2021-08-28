@@ -250,6 +250,7 @@ body {
   width: 600px;
   height: 250px;
   border-radius: 13px;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .user_stat_info_values {
@@ -257,4 +258,5 @@ body {
   width: 150px;
   height: 250px;
   border-radius: 13px;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
