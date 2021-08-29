@@ -311,6 +311,19 @@ body {
   font-family: "Raleway", sans-serif;
   font-size: 28px;
   line-height: 48px;
+  margin-right: 5px;
+}
+
+.silv_SS_rank_value,
+.gold_SS_rank_value,
+.silv_S_rank_value,
+.gold_S_rank_value,
+.A_rank_value {
+  font-family: "Quicksand", sans-serif;
+  color: white;
+  font-size: 28px;
+  line-height: 48px;
+  margin-right: 20px;
 }
 
 .silv_SS_rank_text,
