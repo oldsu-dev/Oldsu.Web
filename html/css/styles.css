@@ -301,3 +301,25 @@ body {
   margin-left: 10px;
   margin-top: -20px;
 }
+
+.silv_SS_rank_text,
+.gold_SS_rank_text,
+.silv_S_rank_text,
+.gold_S_rank_text,
+.A_rank_text {
+  font-family: "Raleway", sans-serif;
+}
+
+.silv_SS_rank_text,
+.silv_S_rank_text {
+  color: #8A8787;
+}
+
+.gold_SS_rank_text,
+.gold_S_rank_text {
+  color: #F5FF7C;
+}
+
+.A_rank_text {
+  color: #58F40E;
+}
