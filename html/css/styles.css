@@ -84,6 +84,11 @@ body {
   margin-bottom: 10px;
 }
 
+.user_content {
+  height: fit-content;
+  padding-bottom: 10px;
+}
+
 .user_card {
   background-color: #a8234c;
   width: 260px;
