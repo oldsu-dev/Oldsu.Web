@@ -224,7 +224,7 @@ body {
   flex-flow: row wrap;
 }
 
-.user_stat_info_heading_wrapper {
+.user_stat_heading_wrapper {
   width: 925px;
   height: 40px;
   background-color: #5F474A;
@@ -235,7 +235,7 @@ body {
   margin: 10px auto 0;
 }
 
-.user_stat_info_heading {
+.user_stat_heading {
   font-family: "Raleway", sans-serif;
   font-size: 18px;
   line-height: 40px;
