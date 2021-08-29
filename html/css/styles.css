@@ -340,3 +340,20 @@ body {
 .A_rank_text {
   color: #58F40E;
 }
+
+.user_signature_text {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.user_signature_text_wrapper {
+  width: 850px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
