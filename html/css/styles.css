@@ -229,6 +229,18 @@ body {
   flex-flow: row wrap;
 }
 
+.user_stat_fp {
+  width: 950px;
+  height: 400px;
+  box-shadow: inset 0px 2px 4px 4px rgba(0, 0, 0, 0.20);
+  background-color: #241a1b;
+  margin-left: 10px;
+  border-radius: 13px;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .user_stat_heading_wrapper {
   width: 925px;
   height: 40px;
@@ -361,4 +373,19 @@ body {
   display: flex;
   justify-content: center;
   margin: 0 auto;
+}
+
+.first_places_wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 1000px;
+  height: 340px;
+}
+
+.first_place_content {
+  width: 900px;
+  height: 60px;
+  background-color: #2A2021;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.25);
 }
