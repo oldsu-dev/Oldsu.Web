@@ -398,3 +398,8 @@ body {
   align-self: center;
   margin-left: 5px;
 }
+
+.first_place_metadata_wrapper {
+  display: flex;
+  flex-direction: column;
+}
