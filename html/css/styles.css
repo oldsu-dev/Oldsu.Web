@@ -402,4 +402,14 @@ body {
 .first_place_metadata_wrapper {
   display: flex;
   flex-direction: column;
+  align-self: center;
+  margin-left: 5px;
+}
+
+.first_place_metadata,
+.first_place_diff {
+  font-family: "Raleway", sans-serif;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
 }
