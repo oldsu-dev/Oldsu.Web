@@ -424,6 +424,7 @@ body {
   display: flex;
   align-items: center;
   width: 32px;
+  margin-right: 5px;
 }
 
 .first_place_score_details {
