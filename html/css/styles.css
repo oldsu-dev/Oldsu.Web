@@ -389,6 +389,7 @@ body {
   background-color: #2A2021;
   box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.25);
   display: flex;
+  justify-content: space-between;
 }
 
 .first_place_bg {
@@ -438,4 +439,8 @@ body {
 
 .first_place_score_acc {
   margin-right: 25px;
+}
+
+.first_place_metadata-bg_wrapper {
+  display: flex;
 }
