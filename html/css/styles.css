@@ -434,7 +434,8 @@ body {
   flex-wrap: wrap;
   align-items: center;
   height: 60px;
-  width: 300px;
+  width: fit-content;
+  padding-right: 10px;
 }
 
 .first_place_score_acc {
