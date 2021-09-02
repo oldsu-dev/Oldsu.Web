@@ -435,3 +435,7 @@ body {
   height: 60px;
   width: 300px;
 }
+
+.first_place_score_acc {
+  margin-right: 25px;
+}
