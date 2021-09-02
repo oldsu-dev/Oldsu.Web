@@ -413,3 +413,14 @@ body {
   font-weight: 400;
   font-size: 16px;
 }
+
+.first_place_rank_image {
+  width: 32px;
+  height: 32px;
+
+}
+
+.first_place_rank {
+  display: flex;
+  align-content: center;
+}
