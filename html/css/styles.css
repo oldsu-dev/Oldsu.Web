@@ -417,10 +417,13 @@ body {
 .first_place_rank_image {
   width: 32px;
   height: 32px;
-
+  vertical-align: middle;
+  display: flex;
+  margin: auto;
 }
 
 .first_place_rank {
   display: flex;
   align-content: center;
+  height: 60px;
 }
