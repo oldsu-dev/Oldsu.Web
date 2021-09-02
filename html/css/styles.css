@@ -431,6 +431,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   height: 60px;
   width: 300px;
 }
