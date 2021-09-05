@@ -1,0 +1,28 @@
+@page
+@model Oldsu.Web.Pages.Register
+
+@{
+    Layout = null;
+}
+
+
+<script>
+function validateForm() {
+    const passwordField = document.getElementById("password")
+    const confirmPasswordField = document.getElementById("confirmpassword")
+    
+    if (passwordField.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/) == null)
+    {
+        alert("The password must contain minimum eight characters, at least one uppercase letter, " +
+              "one lowercase letter and one number.")
+        return false
+    }
+    
+    if (passwordField.value !== confirmPasswordField.value) {
+        alert("The passwords do not match.")
+        return false
+    }
+    
+    return true;
+}
+</script>
