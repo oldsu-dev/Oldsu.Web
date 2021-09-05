@@ -98,3 +98,19 @@
 .player_leader_stats_info, .player_leader_stats {
     display: flex;
 }
+
+#inputbar_ranking_search {
+    width: 65%;
+    margin: 0;
+}
+
+#inputbar_ranking_gamemode {
+    width: 33%;
+    margin: 0;
+    margin-left: 27px;
+}
+
+.search_settings_wrapper {
+    display: flex;
+    margin: 27px;
+}

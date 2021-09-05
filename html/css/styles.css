@@ -469,6 +469,7 @@ body {
   width: 150px;
   padding-right: 15px;
   padding-bottom: 3px;
+  white-space: nowrap;
 }
 
 .inputbar_text {
