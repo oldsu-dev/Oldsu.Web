@@ -21,7 +21,7 @@
 .playtest_content,
 .register_content,
 .user_content,
-.leaderboard_content {
+.leaderboard_content,
 .user_content {
   padding: 20px;
   background-color: #2a2021;
@@ -34,7 +34,7 @@
 }
 
 .main_content {
-  height: 560px;
+  height: fit-content;
 }
 
 .leaderboard_content {
