@@ -43,18 +43,6 @@
     padding-top: 25px;
 }
 
-.player_avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 15px;
-}
-
-.player_leader .player_avatar {
-    width: 82px;
-    height: 82px;
-    border-radius: 15px;
-}
-
 .player_name,
 .player_score,
 .player_acc,
