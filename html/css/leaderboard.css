@@ -114,3 +114,10 @@
     display: flex;
     margin: 27px;
 }
+
+.load_more_wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 18px;
+}
