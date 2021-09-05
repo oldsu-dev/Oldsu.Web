@@ -2,6 +2,7 @@
 @import url(reset.css);
 @import url(main.css);
 @import url(form.css);
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 
 body {
   background-color: #241a1b;
@@ -83,13 +84,16 @@ body {
   margin-bottom: 10px;
 }
 
+.user_content {
+  height: fit-content;
+  padding-bottom: 10px;
+}
+
 .user_card {
   background-color: #a8234c;
   width: 260px;
   height: 430px;
   border-radius: 13px;
-  margin-left: 20px;
-  margin-top: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -142,13 +146,17 @@ body {
 }
 
 .user_card_ranking {
-  box-shadow: inset 0px 2px 7px 5px rgba(0, 0, 0, 0.25);
-  height: 70px;
+  box-shadow: inset 0px 2px 4px 5px rgba(0, 0, 0, 0.20);
+  height: 60px;
   width: 220px;
   border-radius: 13px;
   margin-top: 15px;
   margin-bottom: 15px;
   background-color: #8b1d3e;
+  display: flex;
+  flex: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .user_card_ranking_rank,
@@ -161,6 +169,283 @@ body {
   font-size: 21px;
 }
 
+.user_card_ranking_values_wrapper {
+  display: block;
+  margin-left: 25px;
+}
+
+.user_card-info_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.user_info {
+  width: 220px;
+  height: 140px;
+  box-shadow: inset 0px 2px 4px 4px rgba(0, 0, 0, 0.20);
+  display: flex;
+  flex-direction: column;
+  background-color: #241a1b;
+  border-radius: 13px;
+  margin-top: 10px;
+}
+
+.user_info_title,
+.user_info_joindate {
+  display: flex;
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+.user_info_location,
+.user_info_age,
+.user_info_occupation,
+.user_info_interests,
+.user_info_twitter {
+  display: flex;
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 12px;
+}
+
+.user_stat_info {
+  width: 950px;
+  height: 400px;
+  box-shadow: inset 0px 2px 4px 4px rgba(0, 0, 0, 0.20);
+  background-color: #241a1b;
+  margin-left: 10px;
+  border-radius: 13px;
+  margin-top: 10px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.user_stat_fp {
+  width: 950px;
+  height: 400px;
+  box-shadow: inset 0px 2px 4px 4px rgba(0, 0, 0, 0.20);
+  background-color: #241a1b;
+  margin-left: 10px;
+  border-radius: 13px;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user_stat_heading_wrapper {
+  width: 925px;
+  height: 40px;
+  background-color: #5F474A;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 13px;
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 0;
+}
+
+.user_stat_heading {
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  line-height: 40px;
+  color:white;
+  font-weight: 200;
+  display: flex;
+  justify-content: center;
+}
+
+.user_stat_info_rankgraph {
+  background-color: #2A2021;
+  width: 715px;
+  height: 250px;
+  border-radius: 13px;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.user_stat_info_rankgraph_text {
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  color: white;
+  margin: auto;
+}
+
+.user_stat_info_values {
+  background-color: #2A2021;
+  width: 200px;
+  height: 300px;
+  border-radius: 13px;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.user_stat_info_value_title,
+.user_stat_info_value_number {
+  font-family: "Raleway", sans-serif;
+  color: white;
+  font-size: 16px;
+}
+
+.user_stat_info_value_title {
+  margin-top: 7px;
+}
+
+.user_stat_info_value_number {
+  margin-bottom: 7px;
+}
+
+.user_stat_info_ranks {
+  background-color: #2A2021;
+  width: fit-content;
+  height: 48px;
+  border-radius: 13px;
+  display: flex;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.25);
+  margin-left: 10px;
+  margin-top: -20px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.silv_SS_rank_text,
+.gold_SS_rank_text,
+.silv_S_rank_text,
+.gold_S_rank_text,
+.A_rank_text {
+  font-family: "Raleway", sans-serif;
+  font-size: 28px;
+  line-height: 48px;
+  margin-right: 5px;
+}
+
+.silv_SS_rank_value,
+.gold_SS_rank_value,
+.silv_S_rank_value,
+.gold_S_rank_value,
+.A_rank_value {
+  font-family: "Quicksand", sans-serif;
+  color: white;
+  font-size: 28px;
+  line-height: 48px;
+  margin-right: 20px;
+}
+
+.silv_SS_rank_text,
+.silv_S_rank_text {
+  color: #8A8787;
+}
+
+.gold_SS_rank_text,
+.gold_S_rank_text {
+  color: #F5FF7C;
+}
+
+.A_rank_text {
+  color: #58F40E;
+}
+
+.user_signature_text {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.user_signature_text_wrapper {
+  width: 850px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.first_places_wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 1000px;
+  height: 340px;
+}
+
+.first_place_content {
+  width: 900px;
+  height: 60px;
+  background-color: #2A2021;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: space-between;
+}
+
+.first_place_bg {
+  width: 64px;
+  height: 48px;
+  display: flex;
+  align-self: center;
+  margin-left: 5px;
+}
+
+.first_place_metadata_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-left: 5px;
+}
+
+.first_place_metadata,
+.first_place_diff {
+  font-family: "Raleway", sans-serif;
+  color: white;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.first_place_rank_image {
+  width: 32px;
+  height: 32px;
+}
+
+.first_place_rank {
+  display: flex;
+  align-items: center;
+  width: 32px;
+  margin-right: 5px;
+}
+
+.first_place_score_details {
+  font-family: "Raleway", sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 60px;
+  width: fit-content;
+  padding-right: 10px;
+}
+
+.first_place_score_acc {
+  margin-right: 25px;
+}
+
+.first_place_metadata-bg_wrapper {
+  display: flex;
+}
 /* <editor-fold desc="Search bar"> */
 .inputbar_wrapper {
   background-color: #a8234c;
