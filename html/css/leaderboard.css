@@ -74,12 +74,13 @@
 
 .player_flag {
     width: 24px;
-    height: 24px;
+    border-radius: 4px;
+    /* height: 24px; */
 }
 
 .player_leader .player_flag {
     width: 64px;
-    height: 64px;
+    height: initial;
 }
 
 .player_gap {

@@ -1,0 +1,97 @@
+@page "/leaderboard"
+@using System.Globalization
+@using Oldsu.Web.Pages
+@using Oldsu
+@using Oldsu.Enums
+@using Oldsu.Types
+@{
+    Layout = "BaseLayoutWithBanner";
+}
+
+@{
+    CultureInfo defaultCulture = new CultureInfo("en-US");
+
+    string GetCommaSeparatedThousandsNumber(ulong n) => n.ToString("N0", defaultCulture);
+}
+
+@model Oldsu.Web.Pages.Leaderboard
+
+<div class="leaderboard_content">
+    <div class="search_settings_wrapper">
+        <div class="inputbar_wrapper" id="inputbar_ranking_search">
+            <p class="inputbar_label">Search for:</p>
+            <input class="inputbar_text" type="text"/>
+        </div>
+
+        <div class="inputbar_wrapper" id="inputbar_ranking_gamemode">
+            <p class="inputbar_label">Gamemode:</p>
+            <select class="inputbar_text">
+                <option value="0">Standard</option>
+                <option value="1">Taiko</option>
+                <option value="2">Catch The Beat</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="players_wrapper">
+        @{
+            if (Model.Stats.Length == 0)
+            {
+                <p>No rank matches the query. Want to be the first?</p>
+                return;
+            }
+        }
+        
+        @{
+            bool doSkip = false;
+            StatsWithRank firstStatWithRank = Model.Stats[0];
+
+            @if (firstStatWithRank.Rank == 1)
+            {
+                <div class="player player_leader">
+                    <p class="player_rank player_leader">#1</p>
+                    <p class="player_name player_leader">@firstStatWithRank.User.Username</p>
+                    <img src="@firstStatWithRank.User.FlagBaseUrl" class="player_flag player_leader" alt="@firstStatWithRank.User.Username">
+
+                    <div class="player_gap player_leader"></div>
+
+                    <div class="player_leader_stat_container">
+                        <div class="player_leader_stats_info">
+                            <p class="player_score player_leader">Score</p>
+                            <p class="player_acc player_leader">Accuracy</p>
+                            <p class="player_playcount player_leader">Plays</p>
+                        </div>
+                        <div class="player_leader_stats">
+                            <p class="player_score player_leader" title="Score">@GetCommaSeparatedThousandsNumber(firstStatWithRank.RankedScore)</p>
+                            <p class="player_acc player_leader" title="Accuracy">@($"{@firstStatWithRank.Accuracy:.##}")%</p>
+                            <p class="player_playcount player_leader" title="Plays">@GetCommaSeparatedThousandsNumber(firstStatWithRank.Playcount)</p>
+                        </div>
+                    </div>
+                </div>
+
+                doSkip = true;
+            }
+
+            foreach (var statWithRank in Model.Stats.Skip(doSkip ? 1 : 0))
+            {
+                <div class="player">
+                    <p class="player_rank">#@statWithRank.Rank</p>
+                    <p class="player_name">@statWithRank.User.Username</p>
+                    <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="@statWithRank.User.Username">
+
+                    <div class="player_gap"></div>
+
+                    <p class="player_score" title="Score">@GetCommaSeparatedThousandsNumber(statWithRank.RankedScore)</p>
+                    <p class="player_acc" title="Accuracy">@($"{@statWithRank.Accuracy:.##}")%</p>
+                    <p class="player_playcount" title="Plays">@GetCommaSeparatedThousandsNumber(statWithRank.Playcount)</p>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="next_page_wrapper">
+        <div class="button_wrapper">
+            <p class="button_label">Next page</p>
+        </div>
+    </div>
+</div>

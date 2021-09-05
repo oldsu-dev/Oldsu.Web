@@ -27,19 +27,19 @@ namespace Oldsu.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/css")),
+                    RequestPath = "/resources/css"
+                });
+            
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/image")),
+                    RequestPath = "/resources/image"
+                });
             }
-            
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/css")),
-                RequestPath = "/resources/css"
-            });
-            
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/image")),
-                RequestPath = "/resources/image"
-            });
             
             app.UseRouting(); 
 
