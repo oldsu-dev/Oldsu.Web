@@ -1,0 +1,41 @@
+
+@using Oldsu.Web.Pages
+@model BaseLayout
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/resources/css/styles.css" rel="stylesheet">
+    <title>oldsu!</title>
+</head>
+<body>
+<div class="header_wrapper">
+    <header class="header">
+        <div class="logo_wrapper">
+            <h1 class="logo">oldsu!</h1>
+        </div>
+        <div class="menu_wrapper">
+            <nav class="menu">
+                <ul class="menu_list">
+                    @foreach (var item in BaseLayout.PageMenuItems)
+                    {
+                        <li class="menu_list_item">
+                            <a class="menu_list_item_link" href="@item.Link">@item.PageName</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+        <a class="user_profile_link">
+            <img href="#" alt="upl" class="user_profile_image">
+        </a>
+    </header>
+</div>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>
