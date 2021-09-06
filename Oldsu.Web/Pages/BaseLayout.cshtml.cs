@@ -13,7 +13,7 @@ namespace Oldsu.Web.Pages
         {
             (PageName: "Home", Link: "/"),
             (PageName: "Beatmaps", Link: "/beatmaps"),
-            (PageName: "Rankings", Link: "/rankings"),
+            (PageName: "Rankings", Link: "/leaderboard"),
             (PageName: "Download", Link: "/download"),
         };
 

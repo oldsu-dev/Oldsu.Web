@@ -17,7 +17,7 @@ namespace Oldsu.Web.Pages
         public StatsWithRank[] Stats { get; private set; }
 
         [FromQuery(Name = "query")] 
-        public string SearchQuery { get; set; } = string.Empty;
+        public string? SearchQuery { get; set; } = string.Empty;
 
         [FromQuery(Name = "mode")]
         public Mode Mode { get; set; } = 0;
@@ -34,7 +34,7 @@ namespace Oldsu.Web.Pages
             return Page();
         }
 
-        private async Task LoadStats(int page, Mode mode, string searchQuery)
+        private async Task LoadStats(int page, Mode mode, string? searchQuery)
         {
             await using var database = new Database();
 
@@ -43,7 +43,7 @@ namespace Oldsu.Web.Pages
                 .OrderBy(s => s.Rank)
                 .Where(s => s.Mode == mode);
 
-            if (searchQuery != string.Empty)
+            if (!string.IsNullOrEmpty(searchQuery))
                 statsQuery = statsQuery.Where(s => s.User.Username.Contains(searchQuery));
 
             statsQuery = statsQuery.Skip(page * PerPageRanks).Take(PerPageRanks);
