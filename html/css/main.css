@@ -31,6 +31,8 @@
   justify-content: center;
   border-radius: 0px 0px 15px 15px;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  font-family: 'Quicksand', sans-serif;
+  color: white;
 }
 
 .main_content {

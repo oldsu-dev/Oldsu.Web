@@ -12,36 +12,41 @@ namespace Oldsu.Web.Pages
 {
     public class Leaderboard : BaseLayout
     {
-        public StatsWithRank[] Stats { get; private set; } 
+        private const int PerPageRanks = 50;
+        
+        public StatsWithRank[] Stats { get; private set; }
+
+        [FromQuery(Name = "query")] 
+        public string SearchQuery { get; set; } = string.Empty;
+
+        [FromQuery(Name = "mode")]
+        public Mode Mode { get; set; } = 0;
+        
+        [FromQuery(Name = "page")]
+        public int Page { get; set; } = 0;
         
         public async Task<IActionResult> OnGet()
         {
-            StringValues usernameQuery, gamemodeQuery;
-
-            if (!Request.Query.TryGetValue("gamemode", out gamemodeQuery))
-                gamemodeQuery = "0";
-
-            if (!Request.Query.TryGetValue("username", out usernameQuery))
-                usernameQuery = string.Empty;
+            Page = Math.Clamp(Page - 1, 0, int.MaxValue);
             
-            int gamemode = Math.Clamp(int.Parse(gamemodeQuery), 0, 2);
-            
-            await LoadStats(gamemode, usernameQuery);
+            await LoadStats(Page, Mode, SearchQuery);
 
             return Page();
         }
 
-        private async Task LoadStats(int gamemode, StringValues usernameQuery)
+        private async Task LoadStats(int page, Mode mode, string searchQuery)
         {
             await using var database = new Database();
 
             var statsQuery = database.StatsWithRank
                 .Include(s => s.User)
                 .OrderBy(s => s.Rank)
-                .Where(s => s.Mode == (Mode) gamemode);
+                .Where(s => s.Mode == mode);
 
-            if (usernameQuery == string.Empty)
-                statsQuery = statsQuery.Where(s => s.User.Username.Contains(usernameQuery));
+            if (searchQuery != string.Empty)
+                statsQuery = statsQuery.Where(s => s.User.Username.Contains(searchQuery));
+
+            statsQuery = statsQuery.Skip(page * PerPageRanks).Take(PerPageRanks);
 
             Stats = await statsQuery.ToArrayAsync();
         }
