@@ -143,3 +143,7 @@ form[name="search_settings_wrapper"] {
     flex-direction: column;
     padding-bottom: 18px;
 }
+
+.player_leader_table {
+    text-align: right;
+}
