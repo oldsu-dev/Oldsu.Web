@@ -56,18 +56,18 @@
 
                     <div class="player_gap player_leader"></div>
 
-                    <div class="player_leader_stat_container">
-                        <div class="player_leader_stats_info">
-                            <p class="player_score player_leader">Score</p>
-                            <p class="player_acc player_leader">Accuracy</p>
-                            <p class="player_playcount player_leader">Plays</p>
-                        </div>
-                        <div class="player_leader_stats">
-                            <p class="player_score player_leader" title="Score">@GetCommaSeparatedThousandsNumber(firstStatWithRank.RankedScore)</p>
-                            <p class="player_acc player_leader" title="Accuracy">@($"{@firstStatWithRank.Accuracy:.##}")%</p>
-                            <p class="player_playcount player_leader" title="Plays">@GetCommaSeparatedThousandsNumber(firstStatWithRank.Playcount)</p>
-                        </div>
-                    </div>
+                    <table class="player_leader_table">
+                        <tr>
+                            <th class="player_score player_leader">Score</th>
+                            <th class="player_acc player_leader">Accuracy</th>
+                            <th class="player_playcount player_leader">Plays</th>
+                        </tr>
+                        <tr>
+                            <td class="player_score player_leader" title="Score">@GetCommaSeparatedThousandsNumber(firstStatWithRank.RankedScore)</td>
+                            <td class="player_acc player_leader" title="Accuracy">@($"{@firstStatWithRank.Accuracy:.##}")%</td>
+                            <td class="player_playcount player_leader" title="Plays">@GetCommaSeparatedThousandsNumber(firstStatWithRank.Playcount)</td>
+                        </tr>
+                    </table>
                 </div>
 
                 foreach (var statWithRank in Model.Stats.Skip(1))
