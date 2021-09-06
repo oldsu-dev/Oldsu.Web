@@ -476,6 +476,7 @@ body {
 }
 
 .inputbar_text {
+  outline: none;
   color: white;
   font-size: 24px;
   background: #901f42;
