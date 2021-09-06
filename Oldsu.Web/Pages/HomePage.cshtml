@@ -26,6 +26,7 @@
         </div>
         <h3 class="home_news_title">@(Model.LatestNews?.Title ?? "Nothing to worry about.")</h3>
         <hr class="home_news_divider">
-        <p class="home_news_text">@(Model.LatestNews?.Content ?? "There isn't any news")</p>
+        <p class="home_news_text">@(Html.Raw(Model.LatestNews?.Content ?? "There isn't any news"))</p>
+        <p class="home_news_date">Published on @(Model.LatestNews?.Date ?? DateTime.MinValue)</p>
     </div>
 </div>

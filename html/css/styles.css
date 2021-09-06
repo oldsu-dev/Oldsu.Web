@@ -45,6 +45,13 @@ body {
   margin: 0 auto;
 }
 
+.home_news_date {
+  margin-top: 1em;
+  text-align: right;
+  font-size: 0.85rem;
+  color: lightgray;
+}
+
 .home_news {
    width: inherit;
 }
