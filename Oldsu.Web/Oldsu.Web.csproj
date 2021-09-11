@@ -9,4 +9,8 @@
       <ProjectReference Include="..\oldsu\oldsu\Oldsu.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
+    </ItemGroup>
+
 </Project>
