@@ -218,7 +218,8 @@ body {
 .user_info_age,
 .user_info_occupation,
 .user_info_interests,
-.user_info_twitter {
+.user_info_twitter,
+.user_info_discord {
   display: flex;
   justify-content: center;
   font-family: "Raleway", sans-serif;
