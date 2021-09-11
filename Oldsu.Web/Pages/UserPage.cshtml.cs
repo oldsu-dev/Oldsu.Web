@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Oldsu.Types;
+using UserPageInfo = Oldsu.Types.UserPage;
 
 namespace Oldsu.Web.Pages {
     public class UserPage : BaseLayout {
         public StatsWithRank UserStats { get; set; }
+        public UserPageInfo UserPageInfo { get; set; }
 
         public async Task<IActionResult> OnGet([FromRoute] int userId = -1) {
             await using Database database = new();
@@ -25,6 +27,19 @@ namespace Oldsu.Web.Pages {
 
             if(userStats == null) return this.NotFound();
             UserStats = userStats;
+
+            UserPageInfo? userPageInfo = null;
+
+            try {
+                userPageInfo = database.UserPages
+                    .First(s => s.UserID == userId);
+            }
+            catch(InvalidOperationException) {
+                // same as above
+            }
+
+            if(userPageInfo == null) return this.NotFound();
+            UserPageInfo = userPageInfo;
 
             return this.Page();
         }
