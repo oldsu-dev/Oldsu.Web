@@ -27,11 +27,11 @@
     <div class="user_card-info_wrapper">
         <div class="user_card">
             <h2 class="user_card_name">@(userStats.User.Username)</h2>
-            <img src="/resources/image/avatar_placeholder.png" alt="user avatar" class="user_card_avatar" width="128px" height="128px">
+            <img src="/resources/image/avatar_placeholder.png" alt="@(userStats.User.Username)'s avatar" class="user_card_avatar" width="128px" height="128px">
             <div class="user_card_badges_wrapper">
                 @{
                     if(userStats.Rank == 1) {
-                        <img src="/resources/image/1Badge.png" alt="N1 oldsu badge" class="user_card_badge">
+                        <img src="/resources/image/1Badge.png" alt="#1 Badge" class="user_card_badge">
                     }
                 }
             </div>
@@ -50,6 +50,7 @@
             <h5 class="user_info_age">Age: @GetAge(userPage.Birthday)</h5>
             <h5 class="user_info_occupation">Occupation: @(userPage.Occupation)</h5>
             <h5 class="user_info_interests">Interests: @(userPage.Interests)</h5>
+            <h5 class="user_info_website">Website: <a href="@userPage.Website">@(userPage.Website)</a></h5>
             <h5 class="user_info_twitter">Twitter: @(userPage.Twitter)</h5>
             <h5 class="user_info_discord">Discord: @(userPage.Discord)</h5>
             <h4 class="user_info_joindate">Joined: 01.01.0001</h4>
@@ -106,7 +107,7 @@
                 <div class="first_places_wrapper">
                     <div class="first_place_content">
                         <div class="first_place_metadata-bg_wrapper">
-                            <img class="first_place_bg" src="/resources/image/discoprincebg.jpg" alt="map bg">
+                            <img class="first_place_bg" src="/resources/image/discoprincebg.jpg" alt="Artist - Title (by Mapper)">
                             <div class="first_place_metadata_wrapper">
                                 <span class="first_place_metadata">Artist - Title (by Mapper)</span>
                                 <span class="first_place_diff">[Difficulty]</span>
