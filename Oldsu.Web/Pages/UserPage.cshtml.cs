@@ -14,32 +14,22 @@ namespace Oldsu.Web.Pages {
         public async Task<IActionResult> OnGet([FromRoute] int userId = -1) {
             await using Database database = new();
 
-            StatsWithRank? userStats = null;
-
-            try {
-                userStats = database.StatsWithRank
-                    .Include(s => s.User)
-                    .First(s => s.UserID == userId);
-            }
-            catch(InvalidOperationException) {
-                // no HResult for "Sequence contains no elements", just assume that's the error for now and move on
-            }
+            StatsWithRank? userStats = database.StatsWithRank
+                .Include(s => s.User)
+                .FirstOrDefault(s => s.UserID == userId);
 
             if(userStats == null) return this.NotFound();
             UserStats = userStats;
 
-            UserPageInfo? userPageInfo = null;
-
-            try {
-                userPageInfo = database.UserPages
-                    .First(s => s.UserID == userId);
-            }
-            catch(InvalidOperationException) {
-                // same as above
-            }
-
-            if(userPageInfo == null) return this.NotFound();
-            UserPageInfo = userPageInfo;
+            UserPageInfo = database.UserPages.FirstOrDefault(s => s.UserID == userId) ?? new UserPageInfo {
+                UserID = userId,
+                Birthday = null,
+                Discord = string.Empty,
+                Interests = string.Empty,
+                Occupation = string.Empty,
+                Twitter = string.Empty,
+                Website = string.Empty
+            };
 
             return this.Page();
         }
