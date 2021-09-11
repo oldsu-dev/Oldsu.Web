@@ -51,12 +51,19 @@
     line-height: 21px;
     padding-left: 15px;
     padding-right: 20px;
-
+    
     font-family: "Raleway", sans-serif;
     font-weight: bold;
     font-style: normal;
     font-size: 18px;
     white-space: nowrap;
+}
+
+/*lynx compatibility, makes it so table headers are shown on lynx but not in browser*/
+th.player_score:not(.player_leader),
+th.player_acc:not(.player_leader),
+th.player_playcount:not(.player_leader) {
+    display: none;
 }
 
 .player_leader .player_name {
@@ -144,6 +151,6 @@ form[name="search_settings_wrapper"] {
     padding-bottom: 18px;
 }
 
-.player_leader_table {
+.player_table, .player_leader_table {
     text-align: right;
 }

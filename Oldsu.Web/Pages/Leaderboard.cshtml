@@ -51,7 +51,7 @@
                 <div class="player player_leader">
                     <p class="player_rank player_leader">#1</p>
                     <p class="player_name player_leader">@firstStatWithRank.User.Username</p>
-                    <img src="@firstStatWithRank.User.FlagBaseUrl" class="player_flag player_leader" alt="@CountryCodes.FromCode[firstStatWithRank.User.Country]">
+                    <img src="@firstStatWithRank.User.FlagBaseUrl" class="player_flag player_leader" alt="Country: @CountryCodes.FromCode[firstStatWithRank.User.Country]">
 
                     <div class="player_gap player_leader"></div>
 
@@ -74,13 +74,22 @@
                     <div class="player">
                         <p class="player_rank">#@statWithRank.Rank</p>
                         <p class="player_name">@statWithRank.User.Username</p>
-                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="@CountryCodes.FromCode[statWithRank.User.Country]">
+                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="Country: @CountryCodes.FromCode[statWithRank.User.Country]">
 
                         <div class="player_gap"></div>
 
-                        <p class="player_score" title="Score">@GetCommaSeparatedThousandsNumber(statWithRank.RankedScore)</p>
-                        <p class="player_acc" title="Accuracy">@($"{@statWithRank.Accuracy:.##}")%</p>
-                        <p class="player_playcount" title="Plays">@GetCommaSeparatedThousandsNumber(statWithRank.Playcount)</p>
+                        <table class="player_table">
+                            <tr>
+                                <th class="player_score">Score</th>
+                                <th class="player_acc">Accuracy</th>
+                                <th class="player_playcount">Plays</th>
+                            </tr>
+                            <tr>
+                                <td class="player_score" title="Score">@GetCommaSeparatedThousandsNumber(statWithRank.RankedScore)</td>
+                                <td class="player_acc" title="Accuracy">@($"{@statWithRank.Accuracy:.##}")%</td>
+                                <td class="player_playcount" title="Plays">@GetCommaSeparatedThousandsNumber(statWithRank.Playcount)</td>
+                            </tr>
+                        </table>
                     </div>
                 }
             }
@@ -91,13 +100,22 @@
                     <div class="player">
                         <p class="player_rank">#@statWithRank.Rank</p>
                         <p class="player_name">@statWithRank.User.Username</p>
-                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="@CountryCodes.FromCode[statWithRank.User.Country]">
+                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="Country: @CountryCodes.FromCode[statWithRank.User.Country]">
 
                         <div class="player_gap"></div>
 
-                        <p class="player_score" title="Score">@GetCommaSeparatedThousandsNumber(statWithRank.RankedScore)</p>
-                        <p class="player_acc" title="Accuracy">@($"{@statWithRank.Accuracy:.##}")%</p>
-                        <p class="player_playcount" title="Plays">@GetCommaSeparatedThousandsNumber(statWithRank.Playcount)</p>
+                        <table class="player_table">
+                            <tr>
+                                <th class="player_score">Score</th>
+                                <th class="player_acc">Accuracy</th>
+                                <th class="player_playcount">Plays</th>
+                            </tr>
+                            <tr>
+                                <td class="player_score" title="Score">@GetCommaSeparatedThousandsNumber(statWithRank.RankedScore)</td>
+                                <td class="player_acc" title="Accuracy">@($"{@statWithRank.Accuracy:.##}")%</td>
+                                <td class="player_playcount" title="Plays">@GetCommaSeparatedThousandsNumber(statWithRank.Playcount)</td>
+                            </tr>
+                        </table>
                     </div>
                 }
             }
