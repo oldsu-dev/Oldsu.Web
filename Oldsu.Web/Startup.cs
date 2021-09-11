@@ -22,6 +22,8 @@ namespace Oldsu.Web
             #else
                 services.AddRazorPages();
             #endif
+
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
