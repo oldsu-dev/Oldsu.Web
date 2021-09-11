@@ -102,7 +102,6 @@ body {
 .user_card {
   background-color: #a8234c;
   width: 260px;
-  height: 430px;
   border-radius: 13px;
   display: flex;
   justify-content: flex-start;
@@ -192,8 +191,7 @@ body {
 }
 
 .user_info {
-  width: 220px;
-  height: 140px;
+  width: 260px;
   box-shadow: inset 0px 2px 4px 4px rgba(0, 0, 0, 0.20);
   display: flex;
   flex-direction: column;
@@ -226,6 +224,7 @@ body {
   font-weight: 700;
   color: white;
   font-size: 12px;
+  text-align: center;
 }
 
 .user_stat_info {
