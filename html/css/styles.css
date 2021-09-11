@@ -216,6 +216,7 @@ body {
 .user_info_age,
 .user_info_occupation,
 .user_info_interests,
+.user_info_website,
 .user_info_twitter,
 .user_info_discord {
   display: flex;
@@ -225,6 +226,14 @@ body {
   color: white;
   font-size: 12px;
   text-align: center;
+}
+
+.user_info_website > a:visited {
+  color: white;
+}
+
+.user_info_website > a {
+  color: white;
 }
 
 .user_stat_info {

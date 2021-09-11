@@ -51,7 +51,7 @@
                 <div class="player player_leader">
                     <p class="player_rank player_leader">#1</p>
                     <p class="player_name player_leader">@firstStatWithRank.User.Username</p>
-                    <img src="@firstStatWithRank.User.FlagBaseUrl" class="player_flag player_leader" alt="@firstStatWithRank.User.Username">
+                    <img src="@firstStatWithRank.User.FlagBaseUrl" class="player_flag player_leader" alt="@CountryCodes.FromCode[firstStatWithRank.User.Country]">
 
                     <div class="player_gap player_leader"></div>
 
@@ -74,7 +74,7 @@
                     <div class="player">
                         <p class="player_rank">#@statWithRank.Rank</p>
                         <p class="player_name">@statWithRank.User.Username</p>
-                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="@statWithRank.User.Username">
+                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="@CountryCodes.FromCode[statWithRank.User.Country]">
 
                         <div class="player_gap"></div>
 
@@ -91,7 +91,7 @@
                     <div class="player">
                         <p class="player_rank">#@statWithRank.Rank</p>
                         <p class="player_name">@statWithRank.User.Username</p>
-                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="@statWithRank.User.Username">
+                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="@CountryCodes.FromCode[statWithRank.User.Country]">
 
                         <div class="player_gap"></div>
 
