@@ -366,6 +366,7 @@ body {
   color: white;
   font-size: 28px;
   line-height: 48px;
+  line-height: 48px;
   margin-right: 20px;
 }
 
@@ -384,10 +385,10 @@ body {
 }
 
 .user_signature_text {
+  overflow-y: scroll;
   font-family: "Raleway", sans-serif;
   color: white;
   font-size: 16px;
-  justify-content: center;
 }
 
 .user_signature_text_wrapper {
