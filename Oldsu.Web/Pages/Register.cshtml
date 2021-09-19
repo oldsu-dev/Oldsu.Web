@@ -6,16 +6,6 @@
     Layout = "BaseLayoutWithBanner";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/styles.css" rel="stylesheet">
-    <title>oldsu!</title>
-</head>
-<body>
 <div class="register_content">
     <div class="form_wrap">
         <div class="form_heading_wrapper">
@@ -27,7 +17,7 @@
                 People with multiple accounts can and will be banned.
             </p>
         </div>
-        <form onsubmit="return validateForm()" method="post" name="register_form" class="form">
+        <form onsubmit="return formCallback()" method="post" name="register_form" class="form">
             <input type="text" class="form_username" id="username" maxlength="32" name="username" placeholder="Username" required>
             <input type="email" class="form_email" id="email" name="email" placeholder="E-Mail" required>
             <input type="password" class="form_password" id="password" name="password" placeholder="Password" required>
@@ -50,22 +40,31 @@
         }
     }
 </div>
-</body>
-</html>
 
+<script src="/resources/js/sha256_helper.js"></script>
 <script>
-function validateForm() {
+function formCallback() {
     const passwordField = document.getElementById("password")
     const confirmPasswordField = document.getElementById("confirmpassword")
     
-    if (passwordField.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/) == null)
+    if (!validateForm(passwordField.value, confirmPasswordField.value))
+        return false;
+    
+    passwordField.value = sha256(passwordField.value);
+    confirmPasswordField.value = passwordField.value
+    
+    return true;
+}
+
+function validateForm(password, confirmPassword) {
+    if (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/) == null)
     {
         alert("The password must contain minimum eight characters, at least one uppercase letter, " +
               "one lowercase letter and one number.")
         return false
     }
     
-    if (passwordField.value !== confirmPasswordField.value) {
+    if (confirmPassword !== confirmPassword) {
         alert("The passwords do not match.")
         return false
     }
