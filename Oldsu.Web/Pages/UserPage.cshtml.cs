@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Oldsu.Types;
+using Oldsu.Web.Utils;
 using UserPageInfo = Oldsu.Types.UserPage;
 
 namespace Oldsu.Web.Pages {
-    public class UserPage : BaseLayout {
+    public class UserPage : BaseLayout
+    {
         public StatsWithRank UserStats { get; set; }
         public UserPageInfo UserPageInfo { get; set; }
 
