@@ -35,6 +35,10 @@
   color: white;
 }
 
+.register_content {
+  flex-direction: column;
+}
+
 .main_content {
   height: fit-content;
 }

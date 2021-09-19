@@ -1,10 +1,57 @@
-@page
+@page "/register"
 @model Oldsu.Web.Pages.Register
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-    Layout = null;
+    Layout = "BaseLayoutWithBanner";
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet">
+    <title>oldsu!</title>
+</head>
+<body>
+<div class="register_content">
+    <div class="form_wrap">
+        <div class="form_heading_wrapper">
+            <h2 class="form_heading">Sign up</h2>
+        </div>
+        <div class="form_top_info">
+            <p>
+                Keep in mind you can only create one account ever!
+                People with multiple accounts can and will be banned.
+            </p>
+        </div>
+        <form onsubmit="return validateForm()" method="post" name="register_form" class="form">
+            <input type="text" class="form_username" id="username" maxlength="32" name="username" placeholder="Username" required>
+            <input type="email" class="form_email" id="email" name="email" placeholder="E-Mail" required>
+            <input type="password" class="form_password" id="password" name="password" placeholder="Password" required>
+            <input type="password" class="form_cnf-password" id="confirmpassword" name="cnf-password" placeholder="Confirm Password" required>
+            <div class="form_checkbox_wrapper">
+                <input type="checkbox" class="form_checkbox" id="tos_checkbox" name="tos_checkbox" value="ss" required>
+                <label for="tos_checkbox" class="form_checkbox_label">I agree to Terms of Service</label>
+            </div>
+            <input type="submit" class="form_submit_button" id="register_submit" name="register_submit" value="Sign up">
+        </form>
+
+    </div>
+    @{
+        if (@Model.RegistrationResult != null)
+        {
+            <div class="register_result">
+                <span class="material-icons">error</span>
+                <p>@Model.RegistrationResult</p>
+            </div>
+        }
+    }
+</div>
+</body>
+</html>
 
 <script>
 function validateForm() {
