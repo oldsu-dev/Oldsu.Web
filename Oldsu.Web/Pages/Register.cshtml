@@ -38,7 +38,11 @@
             </div>
             <input type="submit" class="form_submit_button" id="register_submit" name="register_submit" value="Sign up">
         </form>
-        @Model.RegistrationResult
+
+    </div>
+    <div class="register_result">
+        <span class="material-icons">error</span>
+        <p>@Model.RegistrationResult</p>
     </div>
 </div>
 </body>
