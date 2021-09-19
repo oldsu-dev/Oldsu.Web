@@ -1,14 +1,15 @@
 @page "/u/{userId:int}"
 @using System.Globalization
 @using Oldsu
+@using Oldsu.Enums
 @using Oldsu.Types
 @using Oldsu.Web.Utils
 
 
 @{
     Layout = "BaseLayoutWithBanner";
-    StatsWithRank userStats = Model.UserStats;
-    UserPage userPage = Model.UserPageInfo;
+    StatsWithRank? userStats = Model.UserStats;
+    UserPage? userPage = Model.UserPageInfo;
 
     string GetCommaSeparatedNumber(ulong n) => n.ToString("N0", new CultureInfo("en-US"));
     
@@ -27,7 +28,7 @@
 <script src="/resources/js/chart.min.js"></script>
 
 <script id="stats" type="application/json">
-@Json.Serialize(new {totalScore = userStats.TotalScore, rankHistory = Model.RankHistory})
+@Json.Serialize(new {totalScore = userStats?.TotalScore ?? 0, rankHistory = Model.RankHistory})
 </script>
 
 @model Oldsu.Web.Pages.UserPage
@@ -35,39 +36,58 @@
 <div class="user_content">
     <div class="user_card-info_wrapper">
         <div class="user_card">
-            <h2 class="user_card_name">@(userStats.User.Username)</h2>
-            <img src="/resources/image/avatar_placeholder.png" alt="@(userStats.User.Username)'s avatar" class="user_card_avatar" width="128px" height="128px">
+            <h2 class="user_card_name">@(Model.UserInfo.Username)</h2>
+            <img src="/resources/image/avatar_placeholder.png" alt="@(Model.UserInfo.Username)'s avatar" class="user_card_avatar" width="128px" height="128px">
             <div class="user_card_badges_wrapper">
+
+            </div>
+            <h3 class="user_card_player_title">@userPage?.Title</h3>
+            <div class="user_card_ranking">
+                <img class="user_card_ranking_flag" src="@Model.UserInfo.FlagBaseUrl" alt="Country: @CountryCodes.FromCode[Model.UserInfo.Country]" height="48px">
                 @{
-                    if(userStats.Rank == 1) {
-                        <img src="/resources/image/1Badge.png" alt="#1 Badge" class="user_card_badge">
+                    if (userStats != null)
+                    {
+                        <div class="user_card_ranking_values_wrapper">
+                            <h3 class="user_card_ranking_rank">Rank #@GetCommaSeparatedNumber(userStats.Rank)</h3>
+                            <h3 class="user_card_ranking_level" id="user_card_ranking_level">Level @userStats.UserLevel</h3>;
+                        </div>
                     }
                 }
             </div>
-            <h3 class="user_card_player_title">@userPage.Title</h3>
-            <div class="user_card_ranking">
-                <img class="user_card_ranking_flag" src="@userStats.User.FlagBaseUrl" alt="Country: @CountryCodes.FromCode[userStats.User.Country]" height="48px">
-                <div class="user_card_ranking_values_wrapper">
-                    <h3 class="user_card_ranking_rank">Rank #@GetCommaSeparatedNumber(userStats.Rank)</h3>
-                    <h3 class="user_card_ranking_level" id="user_card_ranking_level">Level @userStats.UserLevel</h3>
+        </div>
+        @{
+            if (Model.UserPageInfo != null)
+            {
+                <div class="user_info">
+                    @{ if(userPage.Birthday != null) { <h5 class="user_info_age">Age: @GetAge((DateTime)userPage.Birthday)</h5> } }
+                    @{ if(!string.IsNullOrEmpty(userPage.Occupation)) { <h5 class="user_info_occupation">Occupation: @(userPage.Occupation)</h5> } }
+                    @{ if(!string.IsNullOrEmpty(userPage.Interests)) { <h5 class="user_info_interests">Interests: @(userPage.Interests)</h5> } }
+                    @{ if(!string.IsNullOrEmpty(userPage.Website)) { <h5 class="user_info_website">Website: <a href="@userPage.Website">@(userPage.Website)</a></h5> } }
+                    @{ if(!string.IsNullOrEmpty(userPage.Twitter)) { <h5 class="user_info_twitter">Twitter: @(userPage.Twitter)</h5> } }
+                    @{ if(!string.IsNullOrEmpty(userPage.Discord)) { <h5 class="user_info_discord">Discord: @(userPage.Discord)</h5> } }
+                    <h4 class="user_info_joindate">Joined: @Model.UserInfo.JoinedAt.ToShortDateString()</h4>
                 </div>
-            </div>
-        </div>
-        <div class="user_info">
-            @{ if(userPage.Birthday != null) { <h5 class="user_info_age">Age: @GetAge((DateTime)userPage.Birthday)</h5> } }
-            @{ if(!string.IsNullOrEmpty(userPage.Occupation)) { <h5 class="user_info_occupation">Occupation: @(userPage.Occupation)</h5> } }
-            @{ if(!string.IsNullOrEmpty(userPage.Interests)) { <h5 class="user_info_interests">Interests: @(userPage.Interests)</h5> } }
-            @{ if(!string.IsNullOrEmpty(userPage.Website)) { <h5 class="user_info_website">Website: <a href="@userPage.Website">@(userPage.Website)</a></h5> } }
-            @{ if(!string.IsNullOrEmpty(userPage.Twitter)) { <h5 class="user_info_twitter">Twitter: @(userPage.Twitter)</h5> } }
-            @{ if(!string.IsNullOrEmpty(userPage.Discord)) { <h5 class="user_info_discord">Discord: @(userPage.Discord)</h5> } }
-            <h4 class="user_info_joindate">Joined: @userStats.User.JoinedAt.ToShortDateString()</h4>
-        </div>
+            }
+        }
     </div>
     <div class="user_stat_wrapper">
+                @{
+                    if (Model.UserStats != null)
+                    {
         <div class="user_stat_info">
             <div class="user_stat_heading_wrapper">
-                <h4 class="user_stat_heading">Information for: osu! Standard</h4>
-            </div>
+                            <h4 class="user_stat_heading">Information for:
+                                @{
+                                    var mode = Model.UserStats.Mode switch 
+                                    {
+                                        Mode.Standard => "osu!",
+                                        Mode.Taiko => "osu!taiko",
+                                        Mode.CatchTheBeat => "catch the beat!",
+                                        Mode.Mania => "osu!mania"
+                                    };
+                                }
+                            </h4>            
+                </div>
             <div class="user_stat_info_rankgraph">
                 <span class="user_stat_info_rankgraph_text"><canvas id="myChart" width="600" height="200"></canvas></span>
             </div>
@@ -96,41 +116,52 @@
                 <h5 class="A_rank_value">@GetCommaSeparatedNumber(userStats.CountA)</h5>
             </div>
         </div>
+                        }
+                        else
+                        {
+                            <h5>User hasn't yet played any maps on this gamemode, try to persuade them to play it.</h5>
+                        }
+                    }
         <div class="user_stat_wrapper">
             <div class="user_stat_info">
                 <div class="user_stat_heading_wrapper">
                     <h4 class="user_stat_heading">Signature</h4>
                 </div>
                 <div class="user_signature_text_wrapper">
-                    <p class="user_signature_text">@Html.Raw(BBCodeHelper.Format(userPage.BBText ?? string.Empty))</p>
+                    <p class="user_signature_text">@Html.Raw(BBCodeHelper.Format(userPage?.BBText ?? string.Empty))</p>
                 </div>
             </div>
         </div>
-        <div class="user_stat_wrapper">
-            <div class="user_stat_fp">
-                <div class="user_stat_heading_wrapper">
-                    <h4 class="user_stat_heading">First Places</h4>
-                </div>
-                <div class="first_places_wrapper">
-                    <div class="first_place_content">
-                        <div class="first_place_metadata-bg_wrapper">
-                            <img class="first_place_bg" src="/resources/image/discoprincebg.jpg" alt="Artist - Title (by Mapper)">
-                            <div class="first_place_metadata_wrapper">
-                                <span class="first_place_metadata">Artist - Title (by Mapper)</span>
-                                <span class="first_place_diff">[Difficulty]</span>
-                            </div>
+        @{
+            if (Model.UserStats != null)
+            {
+                <div class="user_stat_wrapper">
+                    <div class="user_stat_fp">
+                        <div class="user_stat_heading_wrapper">
+                            <h4 class="user_stat_heading">First Places</h4>
                         </div>
-                        <div class="first_place_score_details">
-                            <div class="first_place_rank">
-                                <img class="first_place_rank_image" src="/resources/image/ranks/gl_SS.png">
+                        <div class="first_places_wrapper">
+                            <div class="first_place_content">
+                                <div class="first_place_metadata-bg_wrapper">
+                                    <img class="first_place_bg" src="/resources/image/discoprincebg.jpg" alt="Artist - Title (by Mapper)">
+                                    <div class="first_place_metadata_wrapper">
+                                        <span class="first_place_metadata">Artist - Title (by Mapper)</span>
+                                        <span class="first_place_diff">[Difficulty]</span>
+                                    </div>
+                                </div>
+                                <div class="first_place_score_details">
+                                    <div class="first_place_rank">
+                                        <img class="first_place_rank_image" src="/resources/image/ranks/gl_SS.png">
+                                    </div>
+                                    <span class="first_place_score_acc">00.00%</span>
+                                    <span class="first_place_score_mods">HD DT HR FL</span>
+                                </div>
                             </div>
-                            <span class="first_place_score_acc">00.00%</span>
-                            <span class="first_place_score_mods">HD DT HR FL</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        }
     </div>
 </div>
 

@@ -11,38 +11,38 @@ using UserPageInfo = Oldsu.Types.UserPage;
 namespace Oldsu.Web.Pages {
     public class UserPage : BaseLayout
     {
-        public StatsWithRank UserStats { get; set; }
-        public UserPageInfo UserPageInfo { get; set; }
-        public List<RankHistory> RankHistory { get; set; }
+        public UserInfo UserInfo { get; set; }
+        public StatsWithRank? UserStats { get; set; }
+        public UserPageInfo? UserPageInfo { get; set; }
+        public List<RankHistory>? RankHistory { get; set; }
 
-        public async Task<IActionResult> OnGet([FromRoute] uint userId = 0) {
+        public async Task<IActionResult> OnGet([FromRoute] uint userId) {
             
             await using Database database = new();
 
-            StatsWithRank? userStats = database.StatsWithRank
+            UserInfo = await database.UserInfo
+                .FindAsync(userId);
+            
+            if(UserInfo == null) 
+                return NotFound();
+
+            UserStats = database.StatsWithRank
                 .Include(s => s.User)
                 .FirstOrDefault(s => s.UserID == userId);
-
             
-            if(userStats == null) return this.NotFound();
-            UserStats = userStats;
+            UserPageInfo = await database.UserPages
+                .FirstOrDefaultAsync(s => s.UserID == userId);
 
-            UserPageInfo = database.UserPages.FirstOrDefault(s => s.UserID == userId) ?? new UserPageInfo {
-                UserID = userId,
-                Birthday = null,
-                Discord = string.Empty,
-                Interests = string.Empty,
-                Occupation = string.Empty,
-                Twitter = string.Empty,
-                Website = string.Empty
-            };
-
-            RankHistory = new List<RankHistory>();
-
-            var wtf = await database.RankHistory.Where(r => r.UserID == userId).ToArrayAsync();
+            if (UserStats != null)
+            {
+                RankHistory = new List<RankHistory>();
             
-            RankHistory.AddRange(wtf);
-            RankHistory.Add(new RankHistory {UserID = userId, Date = DateTime.Now, Rank = userStats.Rank});
+                // dog 123
+                var wtf = await database.RankHistory.Where(r => r.UserID == userId).ToArrayAsync();
+            
+                RankHistory.AddRange(wtf);
+                RankHistory.Add(new RankHistory {UserID = userId, Date = DateTime.Now, Rank = UserStats.Rank});
+            }
             
             return this.Page();
         }
