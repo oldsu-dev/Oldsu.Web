@@ -2,6 +2,8 @@
 @using System.Globalization
 @using Oldsu
 @using Oldsu.Types
+@using Oldsu.Web.Utils
+
 
 @{
     Layout = "BaseLayoutWithBanner";
@@ -21,6 +23,9 @@
     
 }
 
+<script src="/resources/js/user_level_calc.js"></script>
+<script id="stats" type="application/json">@Json.Serialize(new { totalScore = userStats.TotalScore })</script>
+
 @model Oldsu.Web.Pages.UserPage
 
 <div class="user_content">
@@ -35,25 +40,23 @@
                     }
                 }
             </div>
-            <h3 class="user_card_player_title">The God of oldsu!</h3>
+            <h3 class="user_card_player_title">@userPage.Title</h3>
             <div class="user_card_ranking">
                 <img class="user_card_ranking_flag" src="@userStats.User.FlagBaseUrl" alt="Country: @CountryCodes.FromCode[userStats.User.Country]" height="48px">
                 <div class="user_card_ranking_values_wrapper">
                     <h3 class="user_card_ranking_rank">Rank #@GetCommaSeparatedNumber(userStats.Rank)</h3>
-                    <h3 class="user_card_ranking_level">Level @userStats.UserLevel</h3>
+                    <h3 class="user_card_ranking_level" id="user_card_ranking_level">Level @userStats.UserLevel</h3>
                 </div>
             </div>
         </div>
         <div class="user_info">
-            <h4 class="user_info_title">General:</h4>
-            <h5 class="user_info_location">Location: </h5>
             @{ if(userPage.Birthday != null) { <h5 class="user_info_age">Age: @GetAge((DateTime)userPage.Birthday)</h5> } }
             @{ if(!string.IsNullOrEmpty(userPage.Occupation)) { <h5 class="user_info_occupation">Occupation: @(userPage.Occupation)</h5> } }
             @{ if(!string.IsNullOrEmpty(userPage.Interests)) { <h5 class="user_info_interests">Interests: @(userPage.Interests)</h5> } }
             @{ if(!string.IsNullOrEmpty(userPage.Website)) { <h5 class="user_info_website">Website: <a href="@userPage.Website">@(userPage.Website)</a></h5> } }
             @{ if(!string.IsNullOrEmpty(userPage.Twitter)) { <h5 class="user_info_twitter">Twitter: @(userPage.Twitter)</h5> } }
             @{ if(!string.IsNullOrEmpty(userPage.Discord)) { <h5 class="user_info_discord">Discord: @(userPage.Discord)</h5> } }
-            <h4 class="user_info_joindate">Joined: 01.01.0001</h4>
+            <h4 class="user_info_joindate">Joined: @userStats.User.JoinedAt.ToShortDateString()</h4>
         </div>
     </div>
     <div class="user_stat_wrapper">
@@ -95,7 +98,7 @@
                     <h4 class="user_stat_heading">Signature</h4>
                 </div>
                 <div class="user_signature_text_wrapper">
-                    <p class="user_signature_text">This is the placeholder for what you can later do with bb code, making a preview for this one is kinda useless. It will be a scrollable page within the given parameter.</p>
+                    <p class="user_signature_text">@Html.Raw(BBCodeHelper.Format(userPage.BBText ?? string.Empty))</p>
                 </div>
             </div>
         </div>
@@ -126,3 +129,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    var stats = JSON.parse(document.getElementById("stats").textContent);
+    document.getElementById("user_card_ranking_level").textContent = `Level: ${calcLevelPrecise(stats.totalScore).toFixed(0)}`
+</script>
