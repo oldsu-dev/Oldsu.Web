@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +13,17 @@ namespace Oldsu.Web.Pages {
     {
         public StatsWithRank UserStats { get; set; }
         public UserPageInfo UserPageInfo { get; set; }
+        public List<RankHistory> RankHistory { get; set; }
 
-        public async Task<IActionResult> OnGet([FromRoute] int userId = -1) {
+        public async Task<IActionResult> OnGet([FromRoute] uint userId = 0) {
+            
             await using Database database = new();
 
             StatsWithRank? userStats = database.StatsWithRank
                 .Include(s => s.User)
                 .FirstOrDefault(s => s.UserID == userId);
 
+            
             if(userStats == null) return this.NotFound();
             UserStats = userStats;
 
@@ -33,6 +37,13 @@ namespace Oldsu.Web.Pages {
                 Website = string.Empty
             };
 
+            RankHistory = new List<RankHistory>();
+
+            var wtf = await database.RankHistory.Where(r => r.UserID == userId).ToArrayAsync();
+            
+            RankHistory.AddRange(wtf);
+            RankHistory.Add(new RankHistory {UserID = userId, Date = DateTime.Now, Rank = userStats.Rank});
+            
             return this.Page();
         }
     }
