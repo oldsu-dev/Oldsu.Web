@@ -40,10 +40,15 @@
         </form>
 
     </div>
-    <div class="register_result">
-        <span class="material-icons">error</span>
-        <p>@Model.RegistrationResult</p>
-    </div>
+    @{
+        if (@Model.RegistrationResult != null)
+        {
+            <div class="register_result">
+                <span class="material-icons">error</span>
+                <p>@Model.RegistrationResult</p>
+            </div>
+        }
+    }
 </div>
 </body>
 </html>
