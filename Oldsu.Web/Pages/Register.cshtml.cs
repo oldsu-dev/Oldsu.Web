@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Primitives;
 using Oldsu.Enums;
 using Oldsu.Logging;
 using Oldsu.Logging.Strategies;
@@ -11,56 +12,51 @@ using Oldsu.Web.Models;
 
 namespace Oldsu.Web.Pages
 {
-    [IgnoreAntiforgeryToken]
     public class Register : BaseLayout
     {
         public string? RegistrationResult { get; set; }
 
-        public void OnGet()
-        {
-            
-        }
-
-        public async Task OnPost(RegisterSubmitModel registerData)
+        public async Task OnPost([FromForm] RegisterSubmitModel registerData)
         {
             await using var database = new Database();
 
-            if (registerData.Password.Length != 64)
-            {
-                RegistrationResult = "Password did not get hashed properly, are you using an old website?";
-                return;
-            }
-            
             if (registerData.Email == null || registerData.Password == null || registerData.Username == null)
             {
                 RegistrationResult = "Some values were not entered, please assign values to every fields.";
                 return;
             }
 
-            var registerResultTask = database.ValidateUser(
-                registerData.Username, HttpContext.GetServerVariable("HTTP_X_FORWARDED_FOR"));
-            
-            var geolocTask = Geolocation.GetGeolocationAsync(
-                HttpContext.GetServerVariable("HTTP_X_FORWARDED_FOR"));
-            
-            switch (await registerResultTask)
+            if (registerData.Password.Length != 64)
             {
-                case RegisterResult.IpAlreadyRegistered:
+                RegistrationResult = "Password did not get hashed properly, are you using an old website?";
+                return;
+            }
+
+            if (!HttpContext.Request.Headers.TryGetValue("CF-Connecting-IP", out var ip))
+                ip = "127.0.0.1"; 
+            
+            var attemptResult = await database.ValidateRegistrationAttempt(registerData.Username, ip);
+            
+            switch (attemptResult)
+            {
+                case RegisterAttemptResult.IpAlreadyRegistered:
                     await Global.LoggingManager.LogCritical<Register>(
                         $"Username: {registerData.Username} has an already registered ip: {HttpContext.GetServerVariable("HTTP_X_FORWARDED_FOR")}.");
-                    goto case RegisterResult.RegisterSuccessful;
+                    goto case RegisterAttemptResult.RegisterSuccessful;
                     
-                case RegisterResult.RegisterSuccessful:
+                case RegisterAttemptResult.RegisterSuccessful:
+                    var (_, _, country) = await Geolocation.GetGeolocationAsync(ip);
+                    
                     await database.RegisterAsync(
                         registerData.Username, 
                         registerData.Email,
                         registerData.Password, 
-                        (await geolocTask).Country);
+                        country);
 
                     RegistrationResult = "Registration was successful!";
                     break;
 
-                case RegisterResult.UsernameAlreadyExists:
+                case RegisterAttemptResult.UsernameAlreadyExists:
                     RegistrationResult = "Username already exists, please use another one.";
                     break;
             }
