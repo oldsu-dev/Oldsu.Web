@@ -45,6 +45,12 @@ namespace Oldsu.Web
                 FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/image")),
                 RequestPath = "/resources/image"
             });
+            
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/js")),
+                RequestPath = "/resources/js"
+            });
 
             app.UseRouting(); 
 

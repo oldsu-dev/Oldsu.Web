@@ -177,6 +177,10 @@ body {
   color: white;
   font-size: 21px;
 }
+  
+.user_card_ranking_flag {
+  border-radius: 10px;
+}
 
 .user_card_ranking_values_wrapper {
   display: block;
@@ -198,6 +202,7 @@ body {
   background-color: #241a1b;
   border-radius: 13px;
   margin-top: 10px;
+  padding: 10px;
 }
 
 .user_info_title,
@@ -379,10 +384,8 @@ body {
 
 .user_signature_text {
   font-family: "Raleway", sans-serif;
-  font-weight: 700;
   color: white;
   font-size: 16px;
-  display: flex;
   justify-content: center;
 }
 
