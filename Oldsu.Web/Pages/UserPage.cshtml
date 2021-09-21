@@ -49,7 +49,7 @@
                     {
                         <div class="user_card_ranking_values_wrapper">
                             <h3 class="user_card_ranking_rank">Rank #@GetCommaSeparatedNumber(userStats.Rank)</h3>
-                            <h3 class="user_card_ranking_level" id="user_card_ranking_level">Level @userStats.UserLevel</h3>;
+                            <h3 class="user_card_ranking_level" id="user_card_ranking_level">Level @userStats.UserLevel</h3>
                         </div>
                     }
                 }
@@ -122,19 +122,68 @@
                             <h5>User hasn't yet played any maps on this gamemode, try to persuade them to play it!</h5>
                         }
                     }
-        <div class="user_stat_wrapper">
-            <div class="user_stat_info">
-                <div class="user_stat_heading_wrapper">
-                    <h4 class="user_stat_heading">Signature</h4>
-                </div>
-                <div class="user_signature_text_wrapper">
-                    <p class="user_signature_text">@Html.Raw(BBCodeHelper.Format(userPage?.BBText ?? string.Empty))</p>
-                </div>
-            </div>
-        </div>
+                @{
+                    if (userPage?.BBText != null)
+                    {
+                        <div class="user_stat_wrapper">
+                            <div class="user_stat_info">
+                                <div class="user_stat_heading_wrapper">
+                                    <h4 class="user_stat_heading">Signature</h4>
+                                </div>
+                                <div class="user_signature_text_wrapper">
+                                    <p class="user_signature_text">@Html.Raw(BBCodeHelper.Format(userPage?.BBText ?? string.Empty))</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                
         @{
             if (Model.UserStats != null)
             {
+                <div class="user_stat_wrapper">
+                    <div class="user_stat_fp">
+                        <div class="user_stat_heading_wrapper">
+                            <h4 class="user_stat_heading">Top Scores</h4>
+                        </div>
+                        <div class="first_places_wrapper">
+                            <div class="first_place_content" style="flex-direction: column">
+                                @{
+                                    foreach (var score in Model.TopScores)
+                                    {
+
+                                        <div class="first_place_metadata-bg_wrapper">
+                                            @{
+                                                // map is a bancho map
+                                                if (score.Beatmap.OriginalBeatmapID != null)
+                                                {
+                                                    <img class="first_place_bg" src=@($"https://b.ppy.sh/thumb/{score.Beatmap.Beatmapset.OriginalBeatmapsetID}l.jpg") alt="Artist - Title (by Mapper)">
+                                                }
+                                                else
+                                                {
+                                                    <img class="first_place_bg" src="/resources/image/discoprincebg.jpg" alt="Artist - Title (by Mapper)">
+                                                }
+                                            }
+                                            <div class="first_place_metadata_wrapper">
+                                                <span class="first_place_metadata">@($"{score.Beatmap.Beatmapset.Artist} - {score.Beatmap.Beatmapset.Title} (by {score.Beatmap.Beatmapset.CreatorName})")</span>
+                                                <span class="first_place_diff">@($"{score.Beatmap.DifficultyName}")</span>
+                                            </div>
+                                        </div>
+                                        <div class="first_place_score_details">
+                                            <div class="first_place_rank">
+                                                <img class="first_place_rank_image" src="/resources/image/ranks/gl_SS.png">
+                                            </div>
+                                            <span class="first_place_score_acc">@($"temp acc")</span>
+                                            <span class="first_place_score_mods">HD DT HR FL</span>
+                                        </div>
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="user_stat_wrapper">
                     <div class="user_stat_fp">
                         <div class="user_stat_heading_wrapper">
