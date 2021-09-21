@@ -405,6 +405,7 @@ body {
   justify-content: center;
   width: 1000px;
   height: 340px;
+  align-content: flex-start;
 }
 
 .first_place_content {
