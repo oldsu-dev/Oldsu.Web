@@ -22,11 +22,19 @@
                (now.Month > start.Month ||
                 now.Month == start.Month && now.Day >= start.Day ? 1 : 0);
     }
-
+    
+    uint GetHits(uint one, uint two, uint three, uint four) {
+        return one + two + three + four;
+    }
+    
+    double CalculateAccuracy(uint count50, uint count100, uint count300, uint countMiss) {
+        return (double)Math.Round((double)(count50 * 50 + count100 * 100 + count300 * 300) / (double)(GetHits(count50, count100, count300, countMiss) * 300) * 100, 2);
+    }
 }
 
 <script src="/resources/js/user_level_calc.js"></script>
 <script src="/resources/js/chart.min.js"></script>
+<script src="/resources/js/accuracy_calc.js"></script>
 
 <script id="stats" type="application/json">
 @Json.Serialize(new {totalScore = userStats?.TotalScore ?? 0, rankHistory = Model.RankHistory})
@@ -206,9 +214,11 @@
                                         <div class="first_place_rank">
                                             <img class="first_place_rank_image" src="/resources/image/ranks/gl_SS.png">
                                         </div>
-                                        <span>@($"{score.Score}")</span>
-                                        <span class="first_place_score_acc">@($"temp acc")</span>
-                                        <span class="first_place_score_mods">HD DT HR FL</span>
+                                        <span>@($"{GetCommaSeparatedNumber(score.Score)}") </span>
+                                        <span class="first_place_score_acc" id="score_row_accuracy">
+                                            @(CalculateAccuracy(score.Hit50, score.Hit100 + score.HitKatu, score.Hit300 + score.HitGeki, score.HitMiss))%
+                                        </span>
+                                        <span class="first_place_score_mods">@((Mod)score.Mods)</span>
                                     </div>
                                 </div>
                             }
@@ -252,7 +262,7 @@
     document.getElementById("user_card_ranking_level").textContent = `Level: ${calcLevelPrecise(stats.totalScore).toFixed(0)}`
 </script>
 
-<script>
+<script>  
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'line',
