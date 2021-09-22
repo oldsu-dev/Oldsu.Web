@@ -3,4 +3,5 @@
 .bm_banner_image {
     height: 256px;
     object-fit: cover;
+    border-radius: 15px;
 }
