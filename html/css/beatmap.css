@@ -10,4 +10,5 @@
 
 .bm_banner_wrapper {
     overflow: hidden;
+    border-radius: 15px;
 }
