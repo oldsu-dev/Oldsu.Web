@@ -48,7 +48,9 @@
         <h2 class="user_card_name">@(Model.UserInfo.Username)</h2>
         <img src="/resources/image/avatar_placeholder.png" alt="@(Model.UserInfo.Username)'s avatar" class="user_card_avatar" width="128px" height="128px">
         <div class="user_card_badges_wrapper">
-
+            @foreach(Badge badge in Model.Badges!) {
+                <img src="/resources/image/@badge.Filename" alt="@badge.Filename" class="user_card_badge">
+            }
         </div>
         <h3 class="user_card_player_title">@userPage?.Title</h3>
         <div class="user_card_ranking">

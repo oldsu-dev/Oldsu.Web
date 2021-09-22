@@ -17,6 +17,8 @@ namespace Oldsu.Web.Pages {
         public List<RankHistory>? RankHistory { get; set; }
         public List<HighScoreWithRank>? TopScores { get; set; }
         public List<ScoreRow>? RecentScores { get; set; }
+        
+        public List<Badge>? Badges { get; set; }
 
         public async Task<IActionResult> OnGet([FromRoute] uint userId) {
             
@@ -34,6 +36,10 @@ namespace Oldsu.Web.Pages {
             
             UserPageInfo = await database.UserPages
                 .FirstOrDefaultAsync(s => s.UserID == userId);
+
+            Badges = await database.Badges
+                .Where(b => b.UserID == userId)
+                .ToListAsync();
 
             if (UserStats != null)
             {
