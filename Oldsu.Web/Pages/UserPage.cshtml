@@ -214,7 +214,7 @@
                                         <div class="first_place_rank">
                                             <img class="first_place_rank_image" src="/resources/image/ranks/gl_SS.png">
                                         </div>
-                                        <span>@($"{GetCommaSeparatedNumber(score.Score)}") </span>
+                                        <span>@($"{GetCommaSeparatedNumber(score.Score)}")&nbsp;</span>
                                         <span class="first_place_score_acc" id="score_row_accuracy">
                                             @(CalculateAccuracy(score.Hit50, score.Hit100 + score.HitKatu, score.Hit300 + score.HitGeki, score.HitMiss))%
                                         </span>
