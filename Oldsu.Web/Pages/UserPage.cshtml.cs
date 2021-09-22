@@ -15,6 +15,8 @@ namespace Oldsu.Web.Pages {
         public StatsWithRank? UserStats { get; set; }
         public UserPageInfo? UserPageInfo { get; set; }
         public List<RankHistory>? RankHistory { get; set; }
+        public List<HighScoreWithRank>? TopScores { get; set; }
+        public List<ScoreRow>? RecentScores { get; set; }
 
         public async Task<IActionResult> OnGet([FromRoute] uint userId) {
             
@@ -35,6 +37,24 @@ namespace Oldsu.Web.Pages {
 
             if (UserStats != null)
             {
+                // retrieve scores
+                TopScores = await database.HighScoresWithRank
+                    .Where(s => s.UserId == userId)
+                    .Include(s => s.Beatmap)
+                    .ThenInclude(b => b.Beatmapset)
+                    .OrderByDescending(s => s.Score)
+                    .Take(5)
+                    .ToListAsync();
+                
+                RecentScores = await database.Scores
+                    .Where(s => s.UserId == userId)
+                    .Include(s => s.Beatmap)
+                    .ThenInclude(b => b.Beatmapset)
+                    .OrderByDescending(s => s.SubmittedAt)
+                    .Take(5)
+                    .ToListAsync();
+                
+                
                 RankHistory = new List<RankHistory>();
             
                 // dog 123
