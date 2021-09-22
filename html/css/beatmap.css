@@ -2,4 +2,5 @@
 
 .bm_banner_image {
     height: 256px;
+    object-fit: cover;
 }
