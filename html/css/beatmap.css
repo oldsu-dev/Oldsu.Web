@@ -4,4 +4,10 @@
     height: 256px;
     object-fit: cover;
     border-radius: 15px;
+    filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+.bm_banner_wrapper {
+
 }
