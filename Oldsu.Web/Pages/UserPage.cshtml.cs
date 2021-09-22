@@ -38,7 +38,7 @@ namespace Oldsu.Web.Pages {
             if (UserStats != null)
             {
                 // retrieve scores
-                TopScores = await database.HighScoresWithRank
+                TopScores = await database.HighscoresWithRank
                     .Where(s => s.UserId == userId)
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
