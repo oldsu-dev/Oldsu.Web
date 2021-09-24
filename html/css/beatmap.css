@@ -69,3 +69,10 @@
   margin-left: 10px;
   margin-top: 10px;
 }
+
+.bm_creation_info_avatar {
+  border-radius: 13px;
+width: 64px;
+height: 64px;
+margin: 3px;
+}
