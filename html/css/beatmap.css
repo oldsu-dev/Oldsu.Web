@@ -68,11 +68,19 @@
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin-left: 10px;
   margin-top: 10px;
+  display: flex;
 }
 
 .bm_creation_info_avatar {
   border-radius: 13px;
-width: 64px;
-height: 64px;
-margin: 3px;
+  width: 64px;
+  height: 64px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+}
+
+.bm_creation_info_text {
+  display: flex;
+  flex-direction:column;
 }
