@@ -82,5 +82,8 @@
 
 .bm_creation_info_text {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
+  font-weight: 700;
+  justify-content: center;
+  margin-left: 5px;
 }
