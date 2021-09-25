@@ -89,3 +89,15 @@
   justify-content: center;
   margin-left: 5px;
 }
+
+.bm_buttons_wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.bm_button {
+  background-color: #901F42;
+  display: flex;
+  width: 120px;
+  height: 70px;
+}
