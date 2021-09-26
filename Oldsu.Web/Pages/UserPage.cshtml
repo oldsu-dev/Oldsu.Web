@@ -260,7 +260,7 @@
 </div>
 
 <script>
-    var stats = JSON.parse(document.getElementById("stats").textContent);
+    const stats = JSON.parse(document.getElementById("stats").textContent);
     document.getElementById("user_card_ranking_level").textContent = `Level: ${calcLevelPrecise(stats.totalScore).toFixed(0)}`
 </script>
 

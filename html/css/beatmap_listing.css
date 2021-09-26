@@ -1,0 +1,15 @@
+#inputbar_beatmap_search {
+    width: 100%;
+    margin: 0;
+}
+
+form[name="search_settings_wrapper"] {
+    margin-top: 0;
+    width: 100%;
+    padding-right: 54px;
+}
+
+.beatmap_list {
+    padding-left: 27px;
+    padding-right: 27px;
+}
