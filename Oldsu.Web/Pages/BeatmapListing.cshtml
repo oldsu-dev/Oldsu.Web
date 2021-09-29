@@ -1,0 +1,39 @@
+@page "/beatmaps"
+@using Oldsu.Types
+@model Oldsu.Web.Pages.BeatmapListing
+
+@{
+    Layout = "BaseLayoutWithBanner";
+}
+
+
+@* this might be retarded since this isn't a head *@
+<link href="/resources/css/beatmap_listing.css" rel="stylesheet">
+<link href="/resources/css/beatmap_preview.css" rel="stylesheet">
+
+<div class="beatmap_listing_content" style="flex-direction: column">
+    <form name="search_settings_wrapper">
+        <div class="inputbar_wrapper" id="inputbar_beatmap_search">
+            <p class="inputbar_label">Search for:</p>
+            <input class="inputbar_text" type="text" name="query" value="@Model.SearchQuery"/>
+        </div>
+        <input type="submit" id="beatmap_search_submit" value="Search" class="submit_button">
+    </form>
+        
+    <div class="beatmap_list">
+        @{
+            if(Model.BeatmapSets == null) {
+                <p>No results match that query.</p>
+            } else {
+                foreach(Beatmapset beatmapSet in Model.BeatmapSets) {
+                    <div class="beatmap_preview_wrapper" style="background-image: linear-gradient(#FFFFFF, #FFFFFF), url('/resources/image/discoprincebg.jpg');">
+                        <p class="beatmap_preview_title">@beatmapSet.Title</p>
+                        <p class="beatmap_preview_artist">@beatmapSet.Artist</p>    
+                        <p class="beatmap_preview_mapper">Mapped by <a href="/u/@beatmapSet.CreatorID">@beatmapSet.CreatorName</a></p>
+                        <p class="beatmap_preview_info" title="Ranked by @beatmapSet.RankedBy"><b>Ranked</b></p>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
