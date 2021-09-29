@@ -17,6 +17,16 @@
   position: absolute;
   width: 1200px;
   height: 256px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bm_banner_area_wrapper {
+  position: absolute;
+  width: 1200px;
+  height: 256px;
+  display: flex;
+  flex-direction: row;
 }
 
 .bm_status_wrapper {
@@ -120,4 +130,13 @@
 .bm_lower_panel_wrapper {
   display: flex;
   flex-direction: row;
+}
+
+.bm_diff_area {
+  display: flex;
+  justify-self: center;
+  height: 256px;
+  width: 500px;
+  position: absolute;
+  margin-left: 50%;
 }
