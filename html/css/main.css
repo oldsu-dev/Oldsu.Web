@@ -23,7 +23,8 @@
 .user_content,
 .leaderboard_content,
 .user_content,
-.beatmap_content {
+.beatmap_content,
+.beatmap_listing_content {
   padding: 20px;
   background-color: #2a2021;
   width: 1250px;
