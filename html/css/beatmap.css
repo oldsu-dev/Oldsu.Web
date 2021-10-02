@@ -134,9 +134,25 @@
 
 .bm_diff_area {
   display: flex;
-  justify-self: center;
-  height: 256px;
-  width: 500px;
-  position: absolute;
+  flex-direction: row;
+  width:550px;
+  height: 250px;
   margin-left: 50%;
+  flex-flow: row wrap;
+}
+
+.bm_difficulty {
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #36911F;
+  padding: 4px;
+  margin-left: 5px;
+  min-width: 64px;
+  width: fit-content;
+  line-height: 24px;
+  border-radius: 10px;
+  height: 24px;
+}
+
+.bm_diff_wrapper {
+  height: 24px;
 }
