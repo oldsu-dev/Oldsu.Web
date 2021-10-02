@@ -1,0 +1,23 @@
+.team_content {
+    height: fit-content;
+}
+
+.team_info {
+
+}
+
+.team_heading_wrapper {
+    height: 65px;
+    background-color: #a8234c;
+    border-radius: 15px;
+}
+
+.team_info_heading {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 65px;
+    text-align: center;
+    margin: 0 auto;
+}
