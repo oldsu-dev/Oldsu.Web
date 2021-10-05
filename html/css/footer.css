@@ -13,3 +13,13 @@ width: 1000px;
 display: flex;
 justify-content: center;
 }
+
+.footer_list {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    
+}
