@@ -3,6 +3,7 @@
     background-color: #2A2021;
     display: flex;
     justify-content: center;
+    padding-bottom: 5vh;
 }
 
 .footer_content {
@@ -12,6 +13,7 @@
     width: 1000px;
     display: flex;
     justify-content: center;
+    margin-top: 50px;
 }
 
 .footer_list {
