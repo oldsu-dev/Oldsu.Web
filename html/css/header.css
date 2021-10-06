@@ -81,12 +81,15 @@
   width: 320px;
   height: 200px;
   position: absolute;
-  z-index: 10;
   top: 12%;
-  left: 66%;
+  left: 66.5%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
 }
 
 .login_panel_header {
   color: white;
   font-family: "Quicksand";
+  
 }
