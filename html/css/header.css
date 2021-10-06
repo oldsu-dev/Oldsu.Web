@@ -113,3 +113,24 @@
 .login_panel_input::placeholder {
 padding-left: 5px;
 }
+
+.login_panel_button {
+  background: #A8234C;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 220px;
+  height: 24px;
+  font-family: "Quicksand", sans-serif;
+  font-size: 15px;
+  color: white;
+  margin-top: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 150ms linear;
+}
+
+.login_panel_button:hover {
+  background-color: #e02f64;
+}
