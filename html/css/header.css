@@ -92,6 +92,7 @@
 .login_panel_header {
   color: white;
   font-family: "Quicksand";
+  margin-top: 5px;
 }
 
 .login_panel_input {
