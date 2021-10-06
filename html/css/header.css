@@ -79,7 +79,7 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   width: 320px;
-  height: 200px;
+  height: 220px;
   position: absolute;
   top: 12%;
   left: 66.5%;
@@ -129,8 +129,23 @@ padding-left: 5px;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 150ms linear;
+  margin-bottom: 10px;
 }
 
 .login_panel_button:hover {
   background-color: #e02f64;
+}
+
+.login_panel_linktext {
+  font-family: "Quicksand";
+  font-weight: bold;
+  color: #575050;
+  font-style: italic;
+  transition: color 150ms linear;
+  font-size: 14px;
+  padding-top: 5px;
+}
+
+.login_panel_linktext:hover {
+  color: rgb(134, 134, 134);
 }
