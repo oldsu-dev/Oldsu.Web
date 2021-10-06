@@ -87,6 +87,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  display: none; /* TURN TO DISPLAY FLEX WHEN VISIBLE */
 }
 
 .login_panel_header {
