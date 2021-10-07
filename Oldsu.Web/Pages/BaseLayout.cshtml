@@ -2,6 +2,8 @@
 @using Oldsu.Web.Pages
 @model BaseLayout
 
+@{ await Model.AuthenticateUserSession(); }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,14 +30,49 @@
                     }
                 </ul>
             </nav>
-        </div>
-        <a class="user_profile_link">
-            <img src="/resources/image/paimon.jpg" alt="Avatar" class="user_profile_image" width="48px" height="48px">
-        </a>
+        </div> 
+        @{
+            if (Model.AuthenticatedUserInfo != null)
+            {
+                <a class="user_profile_link">
+                    <img src="resources/image/paimon.jpg" alt="upl" class="user_profile_image">
+                </a>
+            }
+            else
+            {
+                <a class="user_profile_link">
+                    <a href="#" onclick="toggleDropdown()" class="sign_in_button">
+                        Sign In &#9660; 
+                    </a>
+                </a>
+                <form onsubmit="return formCallback()" class="login_panel" id="login_panel_dropdown" action="/" method="post" name="login_form">
+                    <h3 class="login_panel_header">Please sign in</h3>
+                    <input class="login_panel_input" type="text" name="username" id="username_input" placeholder="username" required>
+                    <input type="password" class="login_panel_input" id="password" name="password" placeholder="Password" required>
+                    <input type="submit" class="login_panel_button" id="login_submit" name="login_submit" value="Sign In">
+                
+                    <a href="#" class="login_panel_linktext">Register</a>
+                    <a href="#" class="login_panel_linktext">I forgot my password</a>
+                </form>
+            }
+        }
     </header>
 </div>
-    <main>
-        @RenderBody()
-    </main>
+<main>
+    @RenderBody()
+</main>
 </body>
 </html>
+
+<script src="/resources/js/sha256_helper.js"></script>
+
+<script>
+    function formCallback() {
+        const passwordField = document.getElementById("password")
+        passwordField.value = sha256(passwordField.value);
+    }
+    
+    function toggleDropdown() {
+        document.getElementById("login_panel_dropdown").classList.toggle("show");
+    }
+</script>
