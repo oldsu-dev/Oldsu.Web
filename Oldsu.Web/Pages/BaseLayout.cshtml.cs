@@ -19,7 +19,14 @@ namespace Oldsu.Web.Pages
 
         public async Task AuthenticateUserSession()
         {
-            AuthenticatedUserInfo = null;
+            await using var db = new Database();
+
+            if (!Request.Cookies.TryGetValue("oldsu-sid", out var sessionId))
+                return;
+
+            var session = await db.GetWebSession(sessionId);
+            
+            AuthenticatedUserInfo = session?.UserInfo;
         }
     }
 }
