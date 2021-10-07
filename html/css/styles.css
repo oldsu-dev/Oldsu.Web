@@ -100,7 +100,7 @@ body {
 }
 
 .user_content {
-  height: fit-content;
+  height: auto;
   padding-bottom: 10px;
 }
 
