@@ -144,7 +144,6 @@ body {
 .user_card_badges_wrapper {
   display: flex;
   flex-flow: row wrap;
-  width: 200px;
   justify-content: center;
   width: 100%;
 }
@@ -168,7 +167,7 @@ body {
   margin-bottom: 15px;
   background-color: #8b1d3e;
   display: flex;
-  flex: wrap;
+  flex: auto;
   justify-content: center;
   align-items: center;
 }
@@ -369,7 +368,6 @@ body {
   font-family: "Quicksand", sans-serif;
   color: white;
   font-size: 28px;
-  line-height: 48px;
   line-height: 48px;
   margin-right: 20px;
 }
