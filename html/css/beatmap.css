@@ -160,18 +160,28 @@
 }
 
 .bm_description {
-  width: 800px;
+  width: 850px;
   height: 200px;
   background: #5F474A;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   flex-direction: column;
   padding: 10px;
-
+  margin-right: 10px;
 }
 
 .bm_underpanel {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   position: static;
+}
+
+.bm_diffinfo {
+  width: 350px;
+  height: 200px;
+  background: #5F474A;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  flex-direction: column;
+  padding: 10px;
 }
