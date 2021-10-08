@@ -223,9 +223,19 @@
 .mode_switcher {
   background: #A8234C;
   border-radius: 15px;
-  width: 250px;
+  width: 320px;
   height: 48px;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   margin: 0 auto;
+}
+
+.mode_switcher_button {
+  background: #911F42;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  border: none;
+  width: 130px;
+  height: 36px;
 }
