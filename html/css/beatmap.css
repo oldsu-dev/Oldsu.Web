@@ -204,4 +204,17 @@
   width: 330px;
   height: 145px;
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.bm_diff_cs,
+.bm_diff_hp,
+.bm_diff_od,
+.bm_diff_ar,
+.bm_diff_str {
+  font-family: "Raleway";
+  font-size: 22px;
+  font-weight: 700;
 }
