@@ -57,3 +57,7 @@
   justify-content: center;
   position: relative;
 }
+
+.beatmap_content {
+  flex-direction: column;
+}

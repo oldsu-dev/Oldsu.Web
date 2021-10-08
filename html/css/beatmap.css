@@ -11,6 +11,7 @@
 .bm_banner_wrapper {
     overflow: hidden;
     border-radius: 15px;
+    height: 256px;
 }
 
 .bm_banner_area {
@@ -22,11 +23,12 @@
 }
 
 .bm_banner_area_wrapper {
-  position: absolute;
+  position: relative;
   width: 1200px;
   height: 256px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  top: -260px;
 }
 
 .bm_status_wrapper {
@@ -38,7 +40,6 @@
   margin-top: 10px;
   margin-left: 10px;
   text-align: center;
-
 }
 
 .bm_status_text {
@@ -155,4 +156,20 @@
 
 .bm_diff_wrapper {
   height: 24px;
+}
+
+.bm_description {
+  width: 800px;
+  height: 300px;
+  background: #5F474A;
+box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+flex-direction: column;
+
+}
+
+.bm_underpanel {
+  display: flex;
+  flex-direction: column;
+  position: static;
 }
