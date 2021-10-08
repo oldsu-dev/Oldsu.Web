@@ -238,4 +238,13 @@
   border: none;
   width: 130px;
   height: 36px;
+  font-family: "Quicksand";
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 150ms linear;
+}
+
+.mode_switcher_button:hover {
+  background:#992145;
 }
