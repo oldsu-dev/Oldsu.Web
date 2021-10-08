@@ -185,3 +185,23 @@
   flex-direction: column;
   padding: 10px;
 }
+
+.bm_diffinfo_duration {
+  margin-right: 15px;
+}
+
+.bm_diffinfo_duration,
+.bm_diffinfo_tempo {
+  font-family: "Raleway";
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.bm_diff_settings {
+  background: #241A1B;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  width: 330px;
+  height: 145px;
+  margin-top: 10px;
+}
