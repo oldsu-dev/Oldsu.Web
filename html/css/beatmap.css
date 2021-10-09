@@ -317,4 +317,26 @@ font-size: 24px;
   width: 48px;
   height: 48px;
   margin-left: 40px;
+  margin-right: 40px;
+}
+
+.bm_leaderboard_fp_values {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  text-align: center;
+}
+
+.bm_leaderboard_fp_score {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.bm_leaderboard_fp_acc {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
 }
