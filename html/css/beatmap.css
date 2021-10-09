@@ -264,6 +264,9 @@
   border-radius: 15px;
   width: 1210px;
   height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
 
 .bm_leaderboard_place {
@@ -275,8 +278,12 @@
   width: 1210px;
   height: 40px;
   margin-top: 5px;
+  display: flex;
 }
 
 .bm_leadeboard_fp_rank {
-
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
 }
