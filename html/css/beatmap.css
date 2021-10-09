@@ -287,3 +287,8 @@
   font-weight: bold;
   font-size: 28px;
 }
+
+.bm_leaderboard_fp_avatar {
+  border-radius: 15px;
+  margin-left: 15px;
+}
