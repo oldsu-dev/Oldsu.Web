@@ -97,7 +97,7 @@ display: none; /* TEMPORARY! */
   display: flex;
   flex-direction: column;
   align-items: center;
-  display: flex; /* TURN TO DISPLAY FLEX IF YOU WANT LOGIN BOX TO BE VISIBLE */
+  display: none; /* TURN TO DISPLAY FLEX IF YOU WANT LOGIN BOX TO BE VISIBLE */
 }
 
 .login_panel_header {
@@ -177,11 +177,23 @@ display: none; /* TEMPORARY! */
   position: absolute;
   transform: translateY(166%);
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .user_dropdown_avatar {
   width: 64px;
   height: 64px;
   border-radius: 15px;
+}
+
+.user_dropdown_nickname {
+font-family: Quicksand;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 22px;
+text-align: center;
+color: white;
 }
