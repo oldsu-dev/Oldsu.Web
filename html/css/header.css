@@ -95,7 +95,7 @@ display: none; /* TEMPORARY! */
   display: flex;
   flex-direction: column;
   align-items: center;
-  isplay: none; /* TURN TO DISPLAY FLEX IF YOU WANT LOGIN BOX TO BE VISIBLE */
+  display: none; /* TURN TO DISPLAY FLEX IF YOU WANT LOGIN BOX TO BE VISIBLE */
 }
 
 .login_panel_header {
@@ -167,7 +167,7 @@ display: none; /* TEMPORARY! */
 }
 
 .user_dropdown {
-  width: 150px;
+  width: 165px;
   height: 275px;
   background: #2A2021;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
