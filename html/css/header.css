@@ -87,7 +87,7 @@ display: none; /* TEMPORARY! */
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   width: 320px;
-  height: 220px;
+  height: 240px;
   position: absolute;
   top: 12%;
   left: 66.5%;
@@ -95,7 +95,7 @@ display: none; /* TEMPORARY! */
   display: flex;
   flex-direction: column;
   align-items: center;
-  display: none; /* TURN TO DISPLAY FLEX IF YOU WANT LOGIN BOX TO BE VISIBLE */
+  isplay: none; /* TURN TO DISPLAY FLEX IF YOU WANT LOGIN BOX TO BE VISIBLE */
 }
 
 .login_panel_header {
@@ -157,6 +157,13 @@ display: none; /* TEMPORARY! */
 
 .login_panel_linktext:hover {
   color: rgb(134, 134, 134);
+}
+
+.login_panel_status {
+  color: rgb(216, 62, 62);
+  font-family: "Quicksand";
+  font-weight: bold;
+  display: none; /* CHANGE THIS TO DISPLAY:FLEX WHEN UNKNOWN PASSWORD/USERNAME */
 }
 
 .user_dropdown {
