@@ -181,7 +181,7 @@ display: none; /* TEMPORARY! */
   padding: 10px;
   top: 12%;
   left: 74.5%;
-  z-index: 100;
+  z-index: 10;
 }
 
 .user_dropdown_avatar {
