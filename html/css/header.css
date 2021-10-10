@@ -174,4 +174,12 @@ display: none; /* TEMPORARY! */
   border-radius: 15px;
   position: absolute;
   transform: translateY(166%);
+  display: flex;
+  justify-content: center;
+}
+
+.user_dropdown_avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 15px;
 }
