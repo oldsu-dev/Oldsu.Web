@@ -340,3 +340,11 @@ font-size: 24px;
   font-weight: bold;
   font-size: 24px;
 }
+
+.bm_leaderboard_fp_hits {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  text-align: center;
+}
+
