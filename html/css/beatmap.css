@@ -141,6 +141,8 @@
   height: 250px;
   margin-left: 50%;
   flex-flow: row wrap;
+  position: absolute;
+  transform: translateY(10%);
 }
 
 .bm_difficulty {
@@ -153,6 +155,8 @@
   line-height: 24px;
   border-radius: 10px;
   height: 24px;
+  position: relative;
+  
 }
 
 .bm_diff_wrapper {
