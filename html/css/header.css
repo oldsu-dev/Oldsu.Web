@@ -163,7 +163,7 @@ display: none; /* TEMPORARY! */
   color: rgb(216, 62, 62);
   font-family: "Quicksand";
   font-weight: bold;
-  display: none; /* CHANGE THIS TO DISPLAY:FLEX WHEN UNKNOWN PASSWORD/USERNAME */
+  display: flex; /* CHANGE THIS TO DISPLAY:FLEX WHEN UNKNOWN PASSWORD/USERNAME */
 }
 
 .user_dropdown {
