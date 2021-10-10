@@ -345,6 +345,7 @@ font-size: 24px;
   display: flex;
   flex-direction: column;
   margin-left: 100px;
+  margin-right: 100px;
   text-align: center;
 }
 
@@ -360,4 +361,11 @@ font-size: 24px;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
+}
+
+.bm_leaderboard_fp_mods {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
 }
