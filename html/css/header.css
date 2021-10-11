@@ -46,7 +46,7 @@
   vertical-align: middle;
   margin-right: 7px;
   position: relative;
-display: none; /* TEMPORARY! */
+  display: flex;
 }
 
 .sign_in_button {
