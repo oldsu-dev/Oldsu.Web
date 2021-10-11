@@ -35,22 +35,35 @@
             if (Model.AuthenticatedUserInfo != null)
             {
                 <a class="user_profile_link">
-                    <img src="resources/image/paimon.jpg" alt="upl" class="user_profile_image">
+                    <a href="#" onclick="toggleUserDropdown()" class="sign_in_button">
+                        <img src="resources/image/paimon.jpg" alt="upl" class="user_profile_image">
+                    </a>
                 </a>
+                
+                <div class="user_dropdown" id="user_dropdown_panel">
+                    <img src="resources/image/paimon.jpg" class="user_dropdown_avatar">
+                    <span class="user_dropdown_nickname">@Model.AuthenticatedUserInfo.Username</span>
+                    <a href="#" class="user_dropdown_profile">My Profile</a>
+                    <a href="#" class="user_dropdown_profile">Friends</a>
+                    <a href="#" class="user_dropdown_profile">Settings</a>
+                    <a class="user_dropdown_profile" id="log_out_button">Log Out</a>
+                </div>
             }
             else
             {
                 <a class="user_profile_link">
-                    <a href="#" onclick="toggleDropdown()" class="sign_in_button">
+                    <a href="#" onclick="toggleLoginDropdown()" class="sign_in_button">
                         Sign In &#9660; 
                     </a>
                 </a>
-                <form onsubmit="return formCallback()" class="login_panel" id="login_panel_dropdown" action="/" method="post" name="login_form">
+                <form class="login_panel" id="login_panel_dropdown">
                     <h3 class="login_panel_header">Please sign in</h3>
                     <input class="login_panel_input" type="text" name="username" id="username_input" placeholder="username" required>
-                    <input type="password" class="login_panel_input" id="password" name="password" placeholder="Password" required>
+                    <input type="password" class="login_panel_input" id="password_input" name="password" placeholder="Password" required>
                     <input type="submit" class="login_panel_button" id="login_submit" name="login_submit" value="Sign In">
-                
+                    
+                    <span class="login_panel_status" id="message"></span>
+
                     <a href="#" class="login_panel_linktext">Register</a>
                     <a href="#" class="login_panel_linktext">I forgot my password</a>
                 </form>
@@ -67,12 +80,67 @@
 <script src="/resources/js/sha256_helper.js"></script>
 
 <script>
-    function formCallback() {
-        const passwordField = document.getElementById("password")
-        passwordField.value = sha256(passwordField.value);
+            const form = document.getElementById('login_panel_dropdown')
+            
+            if (form != null)
+                form.addEventListener('submit', login)
+                
+            const logoutButton = document.getElementById('log_out_button')
+                       
+            if (logoutButton != null)
+                logoutButton.addEventListener('click', logOut)
+
+            async function login(event) {
+                event.preventDefault()
+                
+                const username = document.getElementById('username_input').value
+                const password = await sha256(document.getElementById('password_input').value)
+                
+                const data = new URLSearchParams();
+                data.append("username", username);
+                data.append("password", password);
+
+                const resp = await fetch('/login', {
+                    method: 'POST',
+                    body: data, 
+                }).catch((error) => {
+                    console.log(error);
+                });
+
+                const result = await resp.json();
+
+                if (result.status === "error")
+                    document.getElementById('message').innerHTML = result.message;
+                else if (result.status === "ok")
+                    window.location.reload();
+                
+                return false;
+            }
+            
+    async function logOut(event) {
+        event.preventDefault()
+        
+        const resp = await fetch('/logout', {
+            method: 'POST' 
+        }).catch((error) => {
+            console.log(error);
+        });
+        
+        const result = await resp.json();
+        
+        if (result.status === "error")
+            alert(result.message);
+        else if (result.status === "ok")
+            window.location.reload();
+        
+        return false;
     }
     
-    function toggleDropdown() {
+    function toggleLoginDropdown() {
         document.getElementById("login_panel_dropdown").classList.toggle("show");
+    }
+    
+    function toggleUserDropdown() {
+        document.getElementById("user_dropdown_panel").classList.toggle("show");
     }
 </script>
