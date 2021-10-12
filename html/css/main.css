@@ -62,3 +62,7 @@
 .beatmap_content {
   flex-direction: column;
 }
+
+.dashboard_main {
+  flex-direction: column;
+}
