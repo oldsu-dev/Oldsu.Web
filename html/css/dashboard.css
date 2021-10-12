@@ -39,6 +39,7 @@
     padding: 5px;
 }
 
-.dashboard_subdiv_username {
-    font-size: 19px;
+.dashboard_subdiv_username,
+.dashboard_subdiv_country {
+    font-size: 18px;
 }
