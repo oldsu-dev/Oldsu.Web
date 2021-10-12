@@ -47,13 +47,7 @@
 }
 
 .dashboard_subdiv_username,
-.dashboard_subdiv_country
-.dashboard_subdiv_occup,
-.dashboard_subdiv_interests,
-.dashboard_subdiv_age,
-.dashboard_subdiv_condiscord,
-.dashboard_subdiv_contwitter,
-.dashboard_subdiv_conwebsite {
+.dashboard_subdiv_country, {
     font-size: 18px;
 }
 
@@ -104,7 +98,13 @@
     font-size: 14px;
 }
 
-.dashboard_subdiv_email {
+.dashboard_subdiv_email,
+.dashboard_subdiv_occup,
+.dashboard_subdiv_interests,
+.dashboard_subdiv_age,
+.dashboard_subdiv_condiscord,
+.dashboard_subdiv_contwitter,
+.dashboard_subdiv_conwebsite {
     background: #35282a;
     display: flex;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
