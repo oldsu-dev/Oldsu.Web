@@ -195,6 +195,10 @@
     transition: background-color 150ms linear;
 }
 
+.dashboard_save:hover {
+    background-color: #e02f64;
+}
+
 .dashboard_underpanel_wrapper {
     display: flex;
     flex-direction: row;
