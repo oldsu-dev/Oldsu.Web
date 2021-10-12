@@ -150,5 +150,11 @@
 
 .dashboard_subdiv_passhider:hover {
     background-color: #e02f64;
+}
 
+#credit_warning {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5px;
 }
