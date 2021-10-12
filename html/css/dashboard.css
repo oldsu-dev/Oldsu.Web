@@ -104,7 +104,8 @@
 .dashboard_subdiv_age,
 .dashboard_subdiv_condiscord,
 .dashboard_subdiv_contwitter,
-.dashboard_subdiv_conwebsite {
+.dashboard_subdiv_conwebsite,
+.dashboard_subdiv_password {
     background: #35282a;
     display: flex;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -120,4 +121,17 @@
     color: white;
     font-family: "Quicksand";
     font-size: 18px;
+}
+
+.dashboard_subdiv_passhider {
+    background: #A8234C;
+    width: 240px;
+    height: 42px;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 15px;
 }
