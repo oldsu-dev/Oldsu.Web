@@ -103,3 +103,21 @@
     color: #7c7070;
     font-size: 14px;
 }
+
+.dashboard_subdiv_email {
+    background: #35282a;
+    display: flex;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 240px;
+    text-align: center;
+    height: 42px;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: "Quicksand";
+    font-size: 18px;
+}
