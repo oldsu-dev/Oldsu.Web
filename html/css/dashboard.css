@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-left: 10px;
 }
 
 .dashboard_subdiv_title {
@@ -41,7 +42,10 @@
 }
 
 .dashboard_subdiv_username,
-.dashboard_subdiv_country {
+.dashboard_subdiv_country
+.dashboard_subdiv_occup,
+.dashboard_subdiv_interests,
+.dashboard_subdiv_age {
     font-size: 18px;
 }
 
