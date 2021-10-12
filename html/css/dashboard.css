@@ -3,6 +3,7 @@
 .dashboard_subdiv_wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .dashboard_profinfo,
@@ -163,3 +164,31 @@
     text-align: center;
     margin-top: 5px;
 }
+
+.dashboard_label {
+    background: #A8234C;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    padding: 7px;
+    margin-top: 10px;
+    display: flex;
+    width: fit-content;
+}
+
+
+.dashboard_save {
+    background: #A8234C;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 220px;
+    height: 30px;
+    font-family: "Quicksand", sans-serif;
+    font-size: 15px;
+    color: white;
+    margin-top: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 150ms linear;
+  }
