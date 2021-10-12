@@ -123,6 +123,10 @@
     font-size: 18px;
 }
 
+.dashboard_subdiv_password {
+    position: relative;
+}
+
 .dashboard_subdiv_passhider {
     background: #A8234C;
     width: 240px;
@@ -134,4 +138,17 @@
     align-items: center;
     font-size: 18px;
     border-radius: 15px;
+    position: absolute;
+    top: 302px;
+    cursor: pointer;
+    transition: background-color 150ms;
+    z-index: 10;
+    color: white;
+    font-family: "Quicksand";
+    font-size: 18px;
+}
+
+.dashboard_subdiv_passhider:hover {
+    background-color: #e02f64;
+
 }
