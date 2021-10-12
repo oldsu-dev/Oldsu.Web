@@ -96,3 +96,8 @@
 .dashboard_avatarupload_button:hover {
     background-color: #e02f64;
 }
+
+.gray_text {
+    color: #7c7070;
+    font-size: 14px;
+}
