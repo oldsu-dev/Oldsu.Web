@@ -48,7 +48,10 @@
 .dashboard_subdiv_country
 .dashboard_subdiv_occup,
 .dashboard_subdiv_interests,
-.dashboard_subdiv_age {
+.dashboard_subdiv_age,
+.dashboard_subdiv_condiscord,
+.dashboard_subdiv_contwitter,
+.dashboard_subdiv_conwebsite {
     font-size: 18px;
 }
 
