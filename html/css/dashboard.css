@@ -7,6 +7,9 @@
     width: 275px;
     height: 350px;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .dashboard_subdiv_title {
@@ -18,4 +21,10 @@
     padding: 10px;
     text-align: center;
     font-weight: normal;
+    width: 260px;
+}
+
+.dashboard_subdiv_label {
+    font-size: 18px;
+    padding: 10px;
 }
