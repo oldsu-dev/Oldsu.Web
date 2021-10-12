@@ -1,6 +1,7 @@
 @import url(reset.css);
 
-.dashboard_profinfo {
+.dashboard_profinfo,
+.dashboard_genfinfo {
     background: #241A1B;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
@@ -43,7 +44,6 @@
 .dashboard_subdiv_country {
     font-size: 18px;
 }
-
 
 .dashboard_avatarupload_wrapper {
     background: #35282a;
