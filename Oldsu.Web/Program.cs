@@ -13,6 +13,7 @@ namespace Oldsu.Web
     {
         public static void Main(string[] args)
         {
+            Configurator.CreateFolders();
             CreateHostBuilder(args).Build().Run();
         }
 
