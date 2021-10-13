@@ -80,42 +80,42 @@
 <script src="/resources/js/sha256_helper.js"></script>
 
 <script>
-            const form = document.getElementById('login_panel_dropdown')
+    const form = document.getElementById('login_panel_dropdown')
             
-            if (form != null)
-                form.addEventListener('submit', login)
+    if (form != null)
+        form.addEventListener('submit', login)
                 
-            const logoutButton = document.getElementById('log_out_button')
+    const logoutButton = document.getElementById('log_out_button')
                        
-            if (logoutButton != null)
-                logoutButton.addEventListener('click', logOut)
+    if (logoutButton != null)
+        logoutButton.addEventListener('click', logOut)
 
-            async function login(event) {
-                event.preventDefault()
+    async function login(event) {
+        event.preventDefault()
                 
-                const username = document.getElementById('username_input').value
-                const password = await sha256(document.getElementById('password_input').value)
+        const username = document.getElementById('username_input').value
+        const password = await sha256(document.getElementById('password_input').value)
                 
-                const data = new URLSearchParams();
-                data.append("username", username);
-                data.append("password", password);
+        const data = new URLSearchParams();
+        data.append("username", username);
+        data.append("password", password);
 
-                const resp = await fetch('/login', {
-                    method: 'POST',
-                    body: data, 
-                }).catch((error) => {
-                    console.log(error);
-                });
+        const resp = await fetch('/login', {
+            method: 'POST',
+            body: data, 
+        }).catch((error) => {
+            console.log(error);
+        });
 
-                const result = await resp.json();
+        const result = await resp.json();
 
-                if (result.status === "error")
-                    document.getElementById('message').innerHTML = result.message;
-                else if (result.status === "ok")
-                    window.location.reload();
+        if (result.status === "error")
+            document.getElementById('message').innerHTML = result.message;
+        else if (result.status === "ok")
+            window.location.reload();
                 
-                return false;
-            }
+        return false;
+    }
             
     async function logOut(event) {
         event.preventDefault()
