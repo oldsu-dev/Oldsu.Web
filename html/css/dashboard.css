@@ -148,7 +148,7 @@
     top: 302px;
     cursor: pointer;
     transition: background-color 150ms;
-    z-index: 10;
+    z-index: 9;
     color: white;
     font-family: "Quicksand";
     font-size: 18px;
