@@ -1,0 +1,115 @@
+﻿@page "/dashboard"
+@using Oldsu
+@using Oldsu.Enums
+@using Oldsu.Web.Pages
+@model Oldsu.Web.Pages.Dashboard
+
+@{
+    Layout = "BaseLayout";
+    await Model.AuthenticateUserSession();
+    
+    await using var db = new Database();
+    Model.UserPageInformation = await db.UserPages.FindAsync(Model.AuthenticatedUserInfo.UserID);
+}
+
+<div class="dashboard_main">
+    <div class="dashboard_subdiv_wrapper">
+        <div class="dashboard_profinfo">
+            <h3 class="dashboard_subdiv_title">Profile Information</h3>
+            <span class="dashboard_subdiv_label">Username</span>
+            <div class="dashboard_label_value_wrapper">
+                <span class="dashboard_subdiv_username">@Model.AuthenticatedUserInfo.Username</span>
+                </div>
+            <span class="dashboard_subdiv_label">Country</span>
+            <div class="dashboard_label_value_wrapper">
+                <span class="dashboard_subdiv_country">@CountryNames.FromByte[Model.AuthenticatedUserInfo.Country]</span>
+                </div>
+                    <span class="dashboard_subdiv_label">Profile Picture <span class="gray_text">(max. 128x128)</span></span>
+            <div class="dashboard_avatarupload_wrapper">
+                <!-- real file name, using fake one too -->
+                <input type="file" id="real_file" hidden="hidden"/>
+                <img class="dashboard_avatarupload_avatar" src="image/paimon.jpg">
+                <button class="dashboard_avatarupload_button" id="file_upload_button">upload</button>
+            </div>
+                </div>
+                <div class="dashboard_genfinfo">
+                    <h3 class="dashboard_subdiv_title">General Information</h3>
+                    <span class="dashboard_subdiv_label">Occupation</span>
+                        <input class="dashboard_subdiv_occup" value="@Model.UserPageInformation.Occupation">
+                    <span class="dashboard_subdiv_label">Interests</span>
+                        <input class="dashboard_subdiv_interests" value="@Model.UserPageInformation.Interests">
+                    <span class="dashboard_subdiv_label">Age</span>
+                        <input class="dashboard_subdiv_age" type="date" value="@Model.UserPageInformation.Birthday">
+                </div>
+                <div class="dashboard_coninfo">
+                    <h3 class="dashboard_subdiv_title">Contact Information</h3>
+                    <span class="dashboard_subdiv_label">Discord</span>
+                        <input class="dashboard_subdiv_condiscord" value="@Model.UserPageInformation.Discord">
+                    <span class="dashboard_subdiv_label">Twitter</span>
+                        <input class="dashboard_subdiv_contwitter" value="@Model.UserPageInformation.Twitter">
+                    <span class="dashboard_subdiv_label">Website</span>
+                        <input class="dashboard_subdiv_conwebsite" value="@Model.UserPageInformation.Website">
+                </div>
+                <div class="dashboard_accinfo">
+                    <h3 class="dashboard_subdiv_title">Account Information</h3>
+                    <span class="dashboard_subdiv_label">E-Mail</span>
+                    <input class="dashboard_subdiv_email" type="email" value="@Model.AuthenticatedUserInfo.Email">
+                    <span class="dashboard_subdiv_label">Password</span>
+                    <input class="dashboard_subdiv_password">
+                    <button class="dashboard_subdiv_passhider">Click to change password</button>
+                    <span class="gray_text" id="credit_warning">Those settings will require e-mail verification in order to change.</span>
+                </div>
+            </div>
+            <div class="dashboard_underpanel_wrapper">
+                <span class="dashboard_label">Please contact staff if you want your country or username to be changed.</span>
+                <button class="dashboard_save" id="save_info">Save Changes</button>
+            </div>
+            <div class="dashboard_signature">
+                <span class="dashboard_signature_title">Signature</span>
+                <textarea class="dashboard_signature_textbox" name="signature">adsads</textarea>
+                <button class="dashboard_save" id="save_signature" rows="104">Save Changes</button>
+            </div>
+        </div>
+<footer class="footer">
+    <div class="footer_content">
+        <ul class="footer_list">
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Privacy</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Gitlab</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Terms of Service</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Copyright</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Discord</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+
+<script>
+    const wrapperFileButton = document.getElementById("file_upload_button");
+    const realFile = document.getElementById("real_file");
+    
+    wrapperFileButton.addEventListener("click", function() {
+        realFile.click();
+    })
+    
+    realFile.addEventListener("change", async function() {
+        let formData = new FormData();
+        
+        formData.append("avatar-image", realFile.files[0]);
+        
+        let resp = await fetch("/avatar", 
+        { 
+            method: "post",
+            body: formData
+        })
+    })
+</script>
