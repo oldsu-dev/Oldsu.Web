@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using HttpMultipartParser;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Oldsu.Web.Utils;
 
 namespace Oldsu.Web.Controllers
 {
@@ -35,10 +32,15 @@ namespace Oldsu.Web.Controllers
             var files = await MultipartFormDataParser.ParseAsync(HttpContext.Request.Body);
 
             var file = files.Files[0];
-            
+
             if (file?.Name != "avatar-image")
+            {
+                Global.LoggingManager.LogInfo<UploadAvatar>(
+                    $"{HttpContext.GetIpAddress()} sent an empty /avatar request.");
+                
                 return BadRequest();
-            
+            }
+
             await using (var stream = System.IO.File.Create($"{_avatarFolderName}\\{userSession.UserID}.png"))
                 await file.Data.CopyToAsync(stream);
 
