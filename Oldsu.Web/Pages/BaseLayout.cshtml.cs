@@ -25,8 +25,14 @@ namespace Oldsu.Web.Pages
                 return;
 
             var session = await db.GetWebSession(sessionId);
-            
-            AuthenticatedUserInfo = session?.UserInfo;
+
+            if (session == null)
+            {
+                Response.Cookies.Delete("oldsu-sid");
+                return;
+            }
+
+            AuthenticatedUserInfo = session.UserInfo;
         }
     }
 }
