@@ -5,21 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Oldsu.Web.Models;
+using Oldsu.Web.Utils;
 
 namespace Oldsu.Web.Controllers
 {
-    public class SessionIdProvider
-    {
-        public static string GetSessionId(uint length)
-        {
-            using var rng = new RNGCryptoServiceProvider();
-            var buffer = new byte[length/2];
-            rng.GetBytes(buffer);
-
-            return BitConverter.ToString(buffer).Replace("-", "");
-        }
-    }
-    
     [ApiController]
     [IgnoreAntiforgeryToken]
     [Route("/login")]
