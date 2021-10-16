@@ -17,6 +17,8 @@ namespace Oldsu.Web.Pages
             (PageName: "Download", Link: "/download"),
         };
 
+        public string ProfileLink;
+
         public async Task AuthenticateUserSession()
         {
             await using var db = new Database();
@@ -33,6 +35,8 @@ namespace Oldsu.Web.Pages
             }
 
             AuthenticatedUserInfo = session.UserInfo;
+            
+            ProfileLink = $"/u/{AuthenticatedUserInfo.UserID}";
         }
     }
 }
