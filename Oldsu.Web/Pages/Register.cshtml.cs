@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using Oldsu.Logging;
 using Oldsu.Logging.Strategies;
 using Oldsu.Utils.Location;
 using Oldsu.Web.Models;
+using Oldsu.Web.Utils;
 
 namespace Oldsu.Web.Pages
 {
@@ -19,6 +21,23 @@ namespace Oldsu.Web.Pages
         public async Task OnPost([FromForm] RegisterSubmitModel registerData)
         {
             await using var database = new Database();
+            
+            var hasCookie = Request.Cookies.TryGetValue("oldsu-sid", out var cookie);
+
+            if (hasCookie)
+            {
+                var userSession = await database.GetWebSession(cookie);
+
+                if (userSession != null)
+                {
+                    Global.LoggingManager.LogCritical<Register>(
+                        $"{HttpContext.GetIpAddress()}, {userSession.UserID} attempted to create an multiaccount.");
+                    
+                    RegistrationResult = "Staff have been notified of your attempt to create a multiaccount.";
+
+                    return;
+                }
+            }
 
             if (registerData.Email == null || registerData.Password == null || registerData.Username == null)
             {
@@ -41,7 +60,7 @@ namespace Oldsu.Web.Pages
             {
                 case RegisterAttemptResult.IpAlreadyRegistered:
                     await Global.LoggingManager.LogCritical<Register>(
-                        $"Username: {registerData.Username} has an already registered ip: {HttpContext.GetServerVariable("HTTP_X_FORWARDED_FOR")}.");
+                        $"Username: {registerData.Username} has an already registered ip: {HttpContext.GetIpAddress()}.");
                     goto case RegisterAttemptResult.RegisterSuccessful;
                     
                 case RegisterAttemptResult.RegisterSuccessful:
