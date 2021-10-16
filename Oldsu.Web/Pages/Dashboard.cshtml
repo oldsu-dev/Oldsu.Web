@@ -28,45 +28,48 @@
             <div class="dashboard_avatarupload_wrapper">
                 <!-- real file name, using fake one too -->
                 <input type="file" id="real_file" hidden="hidden"/>
-                <img class="dashboard_avatarupload_avatar" src="image/paimon.jpg">
+                @{
+                    var imageSrc = $"/a/{Model.AuthenticatedUserInfo.UserID}";
+                    <img id="profile_image_dashboard" class="dashboard_avatarupload_avatar" src=@imageSrc>
+                }
                 <button class="dashboard_avatarupload_button" id="file_upload_button">upload</button>
             </div>
                 </div>
                 <div class="dashboard_genfinfo">
                     <h3 class="dashboard_subdiv_title">General Information</h3>
                     <span class="dashboard_subdiv_label">Occupation</span>
-                        <input class="dashboard_subdiv_occup" value="@Model.UserPageInformation.Occupation">
+                        <input id="occupation" class="dashboard_subdiv_occup" value="@Model.UserPageInformation.Occupation">
                     <span class="dashboard_subdiv_label">Interests</span>
-                        <input class="dashboard_subdiv_interests" value="@Model.UserPageInformation.Interests">
+                        <input id="interests" class="dashboard_subdiv_interests" value="@Model.UserPageInformation.Interests">
                     <span class="dashboard_subdiv_label">Age</span>
-                        <input class="dashboard_subdiv_age" type="date" value="@Model.UserPageInformation.Birthday">
+                        <input id="age" class="dashboard_subdiv_age" type="date" value="@Model.UserPageInformation.Birthday">
                 </div>
                 <div class="dashboard_coninfo">
                     <h3 class="dashboard_subdiv_title">Contact Information</h3>
                     <span class="dashboard_subdiv_label">Discord</span>
-                        <input class="dashboard_subdiv_condiscord" value="@Model.UserPageInformation.Discord">
+                        <input id="discord" class="dashboard_subdiv_condiscord" value="@Model.UserPageInformation.Discord">
                     <span class="dashboard_subdiv_label">Twitter</span>
-                        <input class="dashboard_subdiv_contwitter" value="@Model.UserPageInformation.Twitter">
+                        <input id="twitter" class="dashboard_subdiv_contwitter" value="@Model.UserPageInformation.Twitter">
                     <span class="dashboard_subdiv_label">Website</span>
-                        <input class="dashboard_subdiv_conwebsite" value="@Model.UserPageInformation.Website">
+                        <input id="website" class="dashboard_subdiv_conwebsite" value="@Model.UserPageInformation.Website">
                 </div>
                 <div class="dashboard_accinfo">
                     <h3 class="dashboard_subdiv_title">Account Information</h3>
                     <span class="dashboard_subdiv_label">E-Mail</span>
-                    <input class="dashboard_subdiv_email" type="email" value="@Model.AuthenticatedUserInfo.Email">
+                    <input class="dashboard_subdiv_email" type="email" value="@Model.AuthenticatedUserInfo.Email" disabled>
                     <span class="dashboard_subdiv_label">Password</span>
                     <input class="dashboard_subdiv_password">
                     <button class="dashboard_subdiv_passhider">Click to change password</button>
                     <span class="gray_text" id="credit_warning">Those settings will require e-mail verification in order to change.</span>
                 </div>
             </div>
-            <div class="dashboard_underpanel_wrapper">
-                <span class="dashboard_label">Please contact staff if you want your country or username to be changed.</span>
-                <button class="dashboard_save" id="save_info">Save Changes</button>
-            </div>
-            <div class="dashboard_signature">
+    <div class="dashboard_underpanel_wrapper">
+        <span class="dashboard_label">Please contact staff if you want your country or username to be changed.</span>
+        <button class="dashboard_save" id="save_info">Save Changes</button>
+    </div>
+    <div class="dashboard_signature">
                 <span class="dashboard_signature_title">Signature</span>
-                <textarea class="dashboard_signature_textbox" name="signature">adsads</textarea>
+                <textarea class="dashboard_signature_textbox" id="signature" name="signature">@Model.UserPageInformation.BBText</textarea>
                 <button class="dashboard_save" id="save_signature" rows="104">Save Changes</button>
             </div>
         </div>
@@ -97,10 +100,62 @@
     const wrapperFileButton = document.getElementById("file_upload_button");
     const realFile = document.getElementById("real_file");
     
+    const profileImage = document.getElementById("profile_image_dashboard");
+    
     wrapperFileButton.addEventListener("click", function() {
         realFile.click();
     })
     
+    const saveChangesButton = document.getElementById('save_info')
+    saveChangesButton.addEventListener('click', saveChanges);
+    
+    const saveSignatureButton = document.getElementById('save_signature')
+    saveSignatureButton.addEventListener('click', saveSignature);
+
+    async function saveChanges(event) {
+        event.preventDefault();
+                        
+        const data = new URLSearchParams();
+        
+        data.append("occupation", document.getElementById('occupation').value);
+        data.append("interests", document.getElementById('interests').value);
+        data.append("age", document.getElementById('age').value);
+        data.append("discord", document.getElementById('discord').value);
+        data.append("twitter", document.getElementById('twitter').value);
+        data.append("website", document.getElementById('website').value);
+        
+        const resp = await fetch('/update_information', {
+            method: 'PUT',
+            body: data, 
+        }).catch((error) => {
+            console.log(error);
+        });
+        
+        if (resp.status == 200) {
+            location.assign("/profile");
+        }
+    }
+     
+    async function saveSignature(event) {
+        event.preventDefault();
+                        
+        const data = new URLSearchParams();
+        
+        data.append("bbcode", document.getElementById('signature').value);
+        
+        const resp = await fetch('/update_bbcode', {
+            method: 'PUT',
+            body: data, 
+        }).catch((error) => {
+            console.log(error);
+        });
+        
+        if (resp.status == 200) {
+            location.assign("/profile");
+        }
+    }  
+     
+       
     realFile.addEventListener("change", async function() {
         let formData = new FormData();
         
@@ -111,5 +166,9 @@
             method: "post",
             body: formData
         })
+        
+        if (resp.status == 200) {
+            profileImage.src = profileImage.src + "?" + new Date().getTime();
+        }
     })
 </script>
