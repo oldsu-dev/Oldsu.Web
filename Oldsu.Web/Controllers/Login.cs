@@ -14,6 +14,15 @@ namespace Oldsu.Web.Controllers
     [Route("/login")]
     public class Login : Controller
     {
+        private static DateTime ExpirationAt => DateTime.Now.AddMonths(1);
+
+        private static readonly CookieOptions CookieOptions = new()
+        {
+            Expires = ExpirationAt,
+            HttpOnly = true,
+            Secure = true,
+        };
+
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] LoginSubmitModel loginData)
         {
@@ -48,14 +57,9 @@ namespace Oldsu.Web.Controllers
 
             var sessionId = SessionIdProvider.GetSessionId(128);
 
-            await db.AddWebSession(sessionId, user.UserID);
+            await db.AddWebSession(sessionId, user.UserID, ExpirationAt);
             
-            Response.Cookies.Append("oldsu-sid", sessionId, new CookieOptions
-            {
-                Expires = DateTimeOffset.Now.AddMonths(1),
-                HttpOnly = true,
-                Secure = true,
-            });
+            Response.Cookies.Append("oldsu-sid", sessionId, CookieOptions);
 
             return Ok(new BasicResponseModel
             {
