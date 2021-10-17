@@ -2,13 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Hosting;
+using Oldsu.Logging;
+using Oldsu.Logging.Strategies;
+using Oldsu.Web.Authentication;
 
 namespace Oldsu.Web
 {
@@ -23,6 +30,12 @@ namespace Oldsu.Web
                 services.AddRazorPages();
             #endif
 
+            services.AddScoped<AuthenticationService>();
+            
+            services.AddScoped(_ =>
+                new LoggingManager(
+                    new MongoDbWriter(Environment.GetEnvironmentVariable("OLDSU_MONGO_DB_CONNECTION_STRING")!)));
+            
             services.AddRouting();
         }
 
@@ -37,23 +50,35 @@ namespace Oldsu.Web
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/css")),
+                HttpsCompression = HttpsCompressionMode.Compress,
                 RequestPath = "/resources/css"
             });
             
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/image")),
+                HttpsCompression = HttpsCompressionMode.Compress,
                 RequestPath = "/resources/image"
             });
             
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.GetFullPath("../html/js")),
+                HttpsCompression = HttpsCompressionMode.Compress,
                 RequestPath = "/resources/js"
             });
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.GetFullPath(FolderConfiguration.AvatarsFolder)),
+                HttpsCompression = HttpsCompressionMode.Compress,
+                RequestPath = "/avatars"
+            });
+            
             app.UseRouting(); 
-
+            
+            app.UseMiddleware<AuthenticationMiddleware>();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

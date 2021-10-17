@@ -1,8 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using HttpMultipartParser;
 using Microsoft.AspNetCore.Mvc;
+using Oldsu.Logging;
+using Oldsu.Web.Authentication;
 using Oldsu.Web.Utils;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace Oldsu.Web.Controllers
 {
@@ -10,38 +15,65 @@ namespace Oldsu.Web.Controllers
     [Route("/avatar")]
     public class UploadAvatar : Controller
     {
-        private string _avatarFolderName = Environment.GetEnvironmentVariable("AVATAR_FILE_LOCATION");
+        private AuthenticationService _authenticationService;
+        private LoggingManager _loggingManager;
+        
+        public UploadAvatar(AuthenticationService authenticationService, LoggingManager loggingManager)
+        {
+            _authenticationService = authenticationService;
+        }
         
         // todo check filesize
         [HttpPost]
         public async Task<IActionResult> OnPost()
         {
-            await using var db = new Database();
-
-            var hasCookie = Request.Cookies.TryGetValue("oldsu-sid", out var cookie);
-
-            if (!hasCookie)
+            if (_authenticationService.AuthenticatedUserInfo == null)
                 return Unauthorized();
-
-            var userSession = await SessionAuthenticator.Authenticate(cookie);
-
-            if (userSession == null)
-                return Unauthorized();
-
+            
             var files = await MultipartFormDataParser.ParseAsync(HttpContext.Request.Body);
-
             var file = files.Files[0];
 
             if (file?.Name != "avatar-image")
             {
-                Global.LoggingManager.LogInfo<UploadAvatar>(
+                await _loggingManager.LogInfo<UploadAvatar>(
                     $"{HttpContext.GetIpAddress()} sent an empty /avatar request.");
                 
                 return BadRequest();
             }
 
-            await using (var stream = System.IO.File.Create($"{_avatarFolderName}\\{userSession.UserID}.png"))
-                await file.Data.CopyToAsync(stream);
+            using (var image = await Image.LoadAsync(file.Data))
+            {
+                int width = image.Width, height = image.Height;
+                
+                image.Mutate(x =>
+                {
+                    int newX = 0, newY = 0, newWidth = width, newHeight = height;
+
+                    if (height < width)
+                    {
+                        newX = (width - height) / 2;
+                        newY = 0;
+                        newWidth = newHeight = height;
+                    } 
+                    else if (height > width)
+                    {
+                        newX = 0;
+                        newY = (height - width) / 2;
+                        newWidth = newHeight = width;
+                    }
+
+                    x.Crop(new Rectangle(newX, newY, newWidth, newHeight)).Resize(128, 128);
+                });
+
+                await image.SaveAsPngAsync(
+                    $"{FolderConfiguration.AvatarsFolder}/{_authenticationService.AuthenticatedUserInfo.UserID}.png");
+            }
+
+            await using var database = new Database();
+
+            (await database.UserInfo.FindAsync(_authenticationService.AuthenticatedUserInfo.UserID)).HasAvatar = true;
+
+            await database.SaveChangesAsync();
 
             return Ok();
         }

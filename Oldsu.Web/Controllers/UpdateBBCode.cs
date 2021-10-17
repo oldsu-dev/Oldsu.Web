@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Oldsu.Web.Authentication;
 using Oldsu.Web.Models;
 using Oldsu.Web.Utils;
 
@@ -9,22 +10,21 @@ namespace Oldsu.Web.Controllers
     [Route("/update_bbcode")]
     public class UpdateBBCode : Controller
     {
+        public AuthenticationService _authenticationService;
+        
+        public UpdateBBCode(AuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
+        
         [HttpPut]
         public async Task<IActionResult> OnPut([FromForm] BBCodeUpdateModel updatedBBCode)
         {
-            await using var db = new Database(); // todo move this to middleware
-
-            var hasCookie = Request.Cookies.TryGetValue("oldsu-sid", out var cookie);
-
-            if (!hasCookie)
+            if (_authenticationService.AuthenticatedUserInfo == null)
                 return Unauthorized();
 
-            var userSession = await SessionAuthenticator.Authenticate(cookie);
-
-            if (userSession == null)
-                return Unauthorized();
-
-            await db.UpdateBBCode(userSession.UserID, updatedBBCode.BBCode);
+            await using var db = new Database(); 
+            await db.UpdateBBCode(_authenticationService.AuthenticatedUserInfo.UserID, updatedBBCode.BBCode);
             
             return Ok();
         }

@@ -14,7 +14,7 @@ namespace Oldsu.Web.Controllers
     public class Login : Controller
     {
         private static DateTime ExpirationAt => DateTime.Now.AddMonths(1);
-
+        
         private static readonly CookieOptions CookieOptions = new()
         {
             Expires = ExpirationAt,

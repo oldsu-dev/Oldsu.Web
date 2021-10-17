@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Oldsu.Web.Authentication;
 using Oldsu.Web.Models;
 using Oldsu.Web.Utils;
 
@@ -9,22 +10,23 @@ namespace Oldsu.Web.Controllers
     [Route("/update_information")]
     public class UpdateInformation : Controller
     {
+        private AuthenticationService _authenticationService;
+        
+        public UpdateInformation(AuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        } 
+        
         [HttpPut]
         public async Task<IActionResult> OnPut([FromForm] InformationUpdateModel updatedInformation)
         {
-            await using var db = new Database(); // todo move this to middleware
-
-            var hasCookie = Request.Cookies.TryGetValue("oldsu-sid", out var cookie);
-
-            if (!hasCookie)
+            if (_authenticationService.AuthenticatedUserInfo == null)
                 return Unauthorized();
 
-            var userSession = await SessionAuthenticator.Authenticate(cookie);
-
-            if (userSession == null)
-                return Unauthorized();
-
-            await db.UpdateInformation(userSession.UserID, updatedInformation.Occupation, updatedInformation.Interests,
+            await using var database = new Database(); 
+            
+            await database.UpdateInformation(_authenticationService.AuthenticatedUserInfo.UserID, 
+                updatedInformation.Occupation, updatedInformation.Interests,
                 updatedInformation.Birthday, updatedInformation.Discord, updatedInformation.Twitter,
                 updatedInformation.Website);
 

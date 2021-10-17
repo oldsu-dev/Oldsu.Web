@@ -144,8 +144,7 @@
     align-items: center;
     font-size: 18px;
     border-radius: 15px;
-    position: absolute;
-    top: 302px;
+    margin-top: 20px;
     cursor: pointer;
     transition: background-color 150ms;
     z-index: 9;
@@ -239,8 +238,8 @@
     border: none;
     color: white;
     font-size: 20px;
-    font-family: "Raleway";
-    font-weight: 700;
+    font-family: "monospace";
+    font-weight: normal;
     margin-top: 20px;
     height: fit-content;
     max-width: 800px;

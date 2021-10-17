@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -73,7 +74,6 @@ namespace Oldsu.Web.Utils
             _formatters.Add(new RegexFormatter(@"<(.|\n)*?>", string.Empty));
 
             _formatters.Add(new SearchReplaceFormatter("\r", ""));
-            _formatters.Add(new SearchReplaceFormatter("\n\n", "</p><p>"));
             _formatters.Add(new SearchReplaceFormatter("\n", "<br />"));
 
             _formatters.Add(new RegexFormatter(@"\[b(?:\s*)\]((.|\n)*?)\[/b(?:\s*)\]", "<b>$1</b>"));
@@ -133,7 +133,9 @@ namespace Oldsu.Web.Utils
             {
                 data = formatter.Format(data);
             }
-
+            
+            Console.WriteLine(data);
+            
             return data;
         }
         #endregion

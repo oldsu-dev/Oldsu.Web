@@ -13,7 +13,7 @@ namespace Oldsu.Web.Utils
         /// </summary>
         /// <returns>Session's user info</returns>
         
-        public static async Task<UserInfo> Authenticate(string sessionId)
+        public static async Task<UserInfo?> Authenticate(string sessionId)
         {
             await using var db = new Database();
 
@@ -24,7 +24,6 @@ namespace Oldsu.Web.Utils
 
             await db.RemoveWebSession(sessionId);
             return null;
-
         }
         
         /* yagni
