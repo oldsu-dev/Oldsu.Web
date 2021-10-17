@@ -24,7 +24,7 @@ namespace Oldsu.Web.Controllers
             if (!hasCookie)
                 return Unauthorized();
 
-            var userSession = await db.GetWebSession(cookie);
+            var userSession = await SessionAuthenticator.Authenticate(cookie);
 
             if (userSession == null)
                 return Unauthorized();
