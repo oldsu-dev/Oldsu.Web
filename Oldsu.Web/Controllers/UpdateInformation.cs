@@ -6,7 +6,6 @@ using Oldsu.Web.Utils;
 namespace Oldsu.Web.Controllers
 {
     [ApiController]
-    [IgnoreAntiforgeryToken]
     [Route("/update_information")]
     public class UpdateInformation : Controller
     {

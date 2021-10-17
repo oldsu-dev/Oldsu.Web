@@ -7,7 +7,6 @@ using Oldsu.Web.Utils;
 namespace Oldsu.Web.Controllers
 {
     [ApiController]
-    [IgnoreAntiforgeryToken]
     [Route("/avatar")]
     public class UploadAvatar : Controller
     {
