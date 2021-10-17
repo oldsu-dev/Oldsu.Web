@@ -10,7 +10,6 @@ using Oldsu.Web.Utils;
 namespace Oldsu.Web.Controllers
 {
     [ApiController]
-    [IgnoreAntiforgeryToken]
     [Route("/login")]
     public class Login : Controller
     {

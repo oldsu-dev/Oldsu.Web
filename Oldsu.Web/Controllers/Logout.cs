@@ -10,7 +10,6 @@ namespace Oldsu.Web.Controllers
     // REFACTOR TO CRUD TODO
     
     [ApiController]
-    [IgnoreAntiforgeryToken]
     [Route("/logout")]
     public class Logout : Controller
     {
