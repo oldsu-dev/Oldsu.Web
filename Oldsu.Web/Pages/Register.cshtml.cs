@@ -9,6 +9,7 @@ using Oldsu.Enums;
 using Oldsu.Logging;
 using Oldsu.Logging.Strategies;
 using Oldsu.Utils.Location;
+using Oldsu.Web.Authentication;
 using Oldsu.Web.Models;
 using Oldsu.Web.Utils;
 
@@ -17,7 +18,7 @@ namespace Oldsu.Web.Pages
     public class Register : BaseLayout
     {
         public string? RegistrationResult { get; set; }
-
+        
         public async Task OnPost([FromForm] RegisterSubmitModel registerData)
         {
             await using var database = new Database();
@@ -30,7 +31,7 @@ namespace Oldsu.Web.Pages
 
                 if (userSession != null)
                 {
-                    Global.LoggingManager.LogCritical<Register>(
+                    await _loggingManager.LogCritical<Register>(
                         $"{HttpContext.GetIpAddress()}, {userSession.UserID} attempted to create an multiaccount.");
                     
                     RegistrationResult = "Staff have been notified of your attempt to create a multiaccount.";
@@ -59,7 +60,7 @@ namespace Oldsu.Web.Pages
             switch (attemptResult)
             {
                 case RegisterAttemptResult.IpAlreadyRegistered:
-                    await Global.LoggingManager.LogCritical<Register>(
+                    await _loggingManager.LogCritical<Register>(
                         $"Username: {registerData.Username} has an already registered ip: {HttpContext.GetIpAddress()}.");
                     goto case RegisterAttemptResult.RegisterSuccessful;
                     
@@ -79,6 +80,13 @@ namespace Oldsu.Web.Pages
                     RegistrationResult = "Username already exists, please use another one.";
                     break;
             }
+        }
+
+        private LoggingManager _loggingManager;
+        
+        public Register(LoggingManager loggingManager, AuthenticationService authenticationService) : base(authenticationService)
+        {
+            _loggingManager = loggingManager;
         }
     }
 }

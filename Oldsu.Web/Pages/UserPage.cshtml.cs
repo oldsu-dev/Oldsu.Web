@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Oldsu.Types;
+using Oldsu.Web.Authentication;
 using Oldsu.Web.Utils;
 using UserPageInfo = Oldsu.Types.UserPage;
 
@@ -44,7 +45,7 @@ namespace Oldsu.Web.Pages {
             if (UserStats != null)
             {
                 // retrieve scores
-                TopScores = await database.HighscoresWithRank
+                TopScores = await database.HighScoresWithRank
                     .Where(s => s.UserId == userId)
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
@@ -71,6 +72,10 @@ namespace Oldsu.Web.Pages {
             }
             
             return this.Page();
+        }
+
+        public UserPage(AuthenticationService authenticationService) : base(authenticationService)
+        {
         }
     }
 }

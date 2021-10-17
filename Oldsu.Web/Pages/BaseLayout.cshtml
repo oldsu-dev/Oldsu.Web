@@ -2,8 +2,6 @@
 @using Oldsu.Web.Pages
 @model BaseLayout
 
-@{ await Model.AuthenticateUserSession(); }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,12 +34,12 @@
             {
                 <a class="user_profile_link">
                     <a href="#" onclick="toggleUserDropdown()" class="sign_in_button">
-                        <img src="resources/image/paimon.jpg" alt="upl" class="user_profile_image">
+                        <img src="@(Model.AuthenticatedUserInfo.AvatarBaseUrl)" alt="upl" class="user_profile_image">
                     </a>
                 </a>
                 
                 <div class="user_dropdown" id="user_dropdown_panel">
-                    <img src="resources/image/paimon.jpg" class="user_dropdown_avatar">
+                    <img src="@(Model.AuthenticatedUserInfo.AvatarBaseUrl)" class="user_dropdown_avatar">
                     <span class="user_dropdown_nickname">@Model.AuthenticatedUserInfo.Username</span>
                     @{
                         var profileLink = $"/u/{@Model.AuthenticatedUserInfo.UserID}";
@@ -148,3 +146,25 @@
         document.getElementById("user_dropdown_panel").classList.toggle("show");
     }
 </script>
+
+<footer class="footer">
+    <div class="footer_content">
+        <ul class="footer_list">
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Privacy</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Gitlab</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Terms of Service</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Copyright</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Discord</a>
+            </li>
+        </ul>
+    </div>
+</footer>

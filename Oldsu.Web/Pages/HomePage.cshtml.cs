@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Oldsu.Types;
+using Oldsu.Web.Authentication;
 using Oldsu.Web.Models;
 using Oldsu.Web.Validators;
 
@@ -26,6 +27,10 @@ namespace Oldsu.Web.Pages
             LatestNews = await database.News.OrderByDescending(n => n.Date).FirstOrDefaultAsync();
             
             return Page();
+        }
+
+        public HomePage(AuthenticationService authenticationService) : base(authenticationService)
+        {
         }
     }
 }

@@ -1,6 +1,8 @@
 @import url(reset.css);
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
 
+html { height: 100%; }
+
 .banner_wrapper {
   margin: 0 auto;
   display: flex;
@@ -37,6 +39,11 @@
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
   font-family: 'Quicksand', sans-serif;
   color: white;
+}
+
+.no_banner_margin {
+  border-radius: 15px 15px 15px 15px;
+  margin-top: 20px;
 }
 
 .register_content {

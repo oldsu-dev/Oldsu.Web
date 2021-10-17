@@ -13,7 +13,7 @@ namespace Oldsu.Web
     {
         public static void Main(string[] args)
         {
-            Configurator.CreateFolders(); // add to properties "AVATAR_FILE_LOCATION": "C:\\Users\\RiderProjects\\oldsu.web\\Oldsu.Web\\avatars" or any directory
+            FolderConfiguration.CreateFolders(); // add to properties "AVATAR_FILE_LOCATION": "C:\\Users\\RiderProjects\\oldsu.web\\Oldsu.Web\\avatars" or any directory
             CreateHostBuilder(args).Build().Run();
         }
 

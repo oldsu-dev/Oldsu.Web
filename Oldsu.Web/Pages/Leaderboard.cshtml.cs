@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using Oldsu.Enums;
 using Oldsu.Types;
+using Oldsu.Web.Authentication;
 
 namespace Oldsu.Web.Pages
 {
@@ -49,6 +50,10 @@ namespace Oldsu.Web.Pages
             statsQuery = statsQuery.Skip(page * PerPageRanks).Take(PerPageRanks);
 
             Stats = await statsQuery.ToArrayAsync();
+        }
+
+        public Leaderboard(AuthenticationService authenticationService) : base(authenticationService)
+        {
         }
     }
 }
