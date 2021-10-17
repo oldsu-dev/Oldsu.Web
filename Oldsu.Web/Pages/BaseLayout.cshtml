@@ -43,10 +43,14 @@
                 <div class="user_dropdown" id="user_dropdown_panel">
                     <img src="resources/image/paimon.jpg" class="user_dropdown_avatar">
                     <span class="user_dropdown_nickname">@Model.AuthenticatedUserInfo.Username</span>
-                    <a href=@Model.ProfileLink class="user_dropdown_profile">My Profile</a>
-                    <a href="/friends" class="user_dropdown_profile">Friends</a>
-                    <a href="/dashboard" class="user_dropdown_profile">Settings</a>
-                    <a class="user_dropdown_profile" id="log_out_button">Log Out</a>
+                    @{
+                        var profileLink = $"/u/{@Model.AuthenticatedUserInfo.UserID}";
+                        
+                        <a href=@profileLink class="user_dropdown_profile">My Profile</a>
+                        <a href="/friends" class="user_dropdown_profile">Friends</a>
+                        <a href="/dashboard" class="user_dropdown_profile">Settings</a>
+                        <a class="user_dropdown_profile" id="log_out_button">Log Out</a>
+                    }
                 </div>
             }
             else

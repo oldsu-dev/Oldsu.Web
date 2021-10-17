@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Oldsu.Types;
+using Oldsu.Web.Utils;
 
 namespace Oldsu.Web.Pages
 {
@@ -17,8 +18,6 @@ namespace Oldsu.Web.Pages
             (PageName: "Download", Link: "/download"),
         };
 
-        public string ProfileLink;
-
         public async Task AuthenticateUserSession()
         {
             await using var db = new Database();
@@ -26,17 +25,13 @@ namespace Oldsu.Web.Pages
             if (!Request.Cookies.TryGetValue("oldsu-sid", out var sessionId))
                 return;
 
-            var session = await db.GetWebSession(sessionId);
+            AuthenticatedUserInfo = await SessionAuthenticator.Authenticate(sessionId);
 
-            if (session == null)
+            if (AuthenticatedUserInfo == null)
             {
                 Response.Cookies.Delete("oldsu-sid");
                 return;
             }
-
-            AuthenticatedUserInfo = session.UserInfo;
-            
-            ProfileLink = $"/u/{AuthenticatedUserInfo.UserID}";
         }
     }
 }
