@@ -10,5 +10,7 @@ RUN mkdir Oldsu.Web/avatars
 ENV ASPNETCORE_URLS=http://+:8080
 RUN dotnet publish -c Release --output ./dist Oldsu.Web.sln
 
-CMD ["dist/Oldsu.Web"]
+WORKDIR /usr/src/app/dist
+
+CMD ["Oldsu.Web"]
 
