@@ -12,5 +12,6 @@ RUN dotnet publish -c Release --output ./dist Oldsu.Web.sln
 
 WORKDIR /usr/src/app/dist
 
-CMD ["Oldsu.Web"]
+CMD ["./Oldsu.Web"]
+
 
