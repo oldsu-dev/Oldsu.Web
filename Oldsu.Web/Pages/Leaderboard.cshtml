@@ -51,7 +51,7 @@
 
                 <div class="player player_leader">
                     <p class="player_rank player_leader">#1</p>
-                    <p class="player_name player_leader"><a href="/u/@firstStatWithRank.UserID">@firstStatWithRank.User.Username</a></p>
+                    <p class="player_name player_leader"><a href="@PathCorrection.Correct($"/u/{firstStatWithRank.UserID}")">@firstStatWithRank.User.Username</a></p>
                     <img src="@PathCorrection.Correct(firstStatWithRank.User.FlagBaseUrl)" class="player_flag player_leader" alt="Country: @CountryCodes.FromCode[firstStatWithRank.User.Country]">
 
                     <div class="player_gap player_leader"></div>
@@ -74,8 +74,8 @@
                 {
                     <div class="player">
                         <p class="player_rank">#@statWithRank.Rank</p>
-                        <p class="player_name"><a href="/u/@statWithRank.UserID">@statWithRank.User.Username</a></p>
-                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="Country: @CountryCodes.FromCode[statWithRank.User.Country]">
+                        <p class="player_name"><a href="@PathCorrection.Correct($"/u/{statWithRank.UserID}")">@statWithRank.User.Username</a></p>
+                        <img src="@PathCorrection.Correct(statWithRank.User.FlagBaseUrl)" class="player_flag" alt="Country: @CountryCodes.FromCode[statWithRank.User.Country]">
 
                         <div class="player_gap"></div>
 
