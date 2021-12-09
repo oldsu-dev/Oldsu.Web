@@ -3,6 +3,7 @@
 @using Oldsu
 @using Oldsu.Enums
 @using Oldsu.Types
+@using Oldsu.Web
 @using Oldsu.Web.Utils
 
 
@@ -32,9 +33,9 @@
     }
 }
 
-<script src="/resources/js/user_level_calc.js"></script>
-<script src="/resources/js/chart.min.js"></script>
-<script src="/resources/js/accuracy_calc.js"></script>
+<script src=@PathCorrection.Correct("/resources/js/user_level_calc.js")></script>
+<script src=@PathCorrection.Correct("/resources/js/chart.min.js")></script>
+<script src=@PathCorrection.Correct("/resources/js/accuracy_calc.js")></script>
 
 <script id="stats" type="application/json">
 @Json.Serialize(new {totalScore = userStats?.TotalScore ?? 0, rankHistory = Model.RankHistory})
@@ -46,10 +47,10 @@
 <div class="user_card-info_wrapper">
     <div class="user_card">
         <h2 class="user_card_name">@(Model.UserInfo.Username)</h2>
-        <img src="@(Model.UserInfo.AvatarBaseUrl)" alt="@(Model.UserInfo.Username)'s avatar" class="user_card_avatar" width="128px" height="128px">
+        <img src="@PathCorrection.Correct(Model.UserInfo.AvatarBaseUrl)" alt="@(Model.UserInfo.Username)'s avatar" class="user_card_avatar" width="128px" height="128px">
         <div class="user_card_badges_wrapper">
             @foreach(Badge badge in Model.Badges!) {
-                <img src="/resources/image/@badge.Filename" alt="@badge.Filename" class="user_card_badge">
+                <img src="@PathCorrection.Correct("/resources/image/@badge.Filename")" alt="@badge.Filename" class="user_card_badge">
             }
         </div>
         <h3 class="user_card_player_title">@userPage?.Title</h3>
@@ -209,7 +210,7 @@
                                             }
                                             else
                                             {
-                                                <img class="first_place_bg" src="/resources/image/discoprincebg.jpg" alt="Artist - Title (by Mapper)">
+                                                <img class="first_place_bg" src="@PathCorrection.Correct("/resources/image/discoprincebg.jpg")" alt="Artist - Title (by Mapper)">
                                             }
                                         }
                                         <div class="first_place_metadata_wrapper">
@@ -219,7 +220,7 @@
                                     </div>
                                     <div class="first_place_score_details">
                                         <div class="first_place_rank">
-                                            <img class="first_place_rank_image" src="/resources/image/ranks/gl_SS.png">
+                                            <img class="first_place_rank_image" src=@PathCorrection.Correct("/resources/image/ranks/gl_SS.png")>
                                         </div>
                                         <span>@($"{GetCommaSeparatedNumber(score.Score)}")&nbsp;</span>
                                         <span class="first_place_score_acc" id="score_row_accuracy">
@@ -242,7 +243,7 @@
                     <div class="first_places_wrapper">
                         <div class="first_place_content">
                             <div class="first_place_metadata-bg_wrapper">
-                                <img class="first_place_bg" src="/resources/image/discoprincebg.jpg" alt="Artist - Title (by Mapper)">
+                                <img class="first_place_bg" src=@PathCorrection.Correct("/resources/image/discoprincebg.jpg") alt="Artist - Title (by Mapper)">
                                 <div class="first_place_metadata_wrapper">
                                     <span class="first_place_metadata">Artist - Title (by Mapper)</span>
                                     <span class="first_place_diff">[Difficulty]</span>
@@ -250,7 +251,7 @@
                             </div>
                             <div class="first_place_score_details">
                                 <div class="first_place_rank">
-                                    <img class="first_place_rank_image" src="/resources/image/ranks/gl_SS.png">
+                                    <img class="first_place_rank_image" src=@PathCorrection.Correct("/resources/image/ranks/gl_SS.png")>
                                 </div>
                                 <span class="first_place_score_acc">00.00%</span>
                                 <span class="first_place_score_mods">HD DT HR FL</span>

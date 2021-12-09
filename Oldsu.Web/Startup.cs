@@ -31,10 +31,16 @@ namespace Oldsu.Web
             #endif
 
             services.AddScoped<AuthenticationService>();
-            
+
+#if DEBUG
+            services.AddScoped(_ =>
+                new LoggingManager(new NoLog()));
+#else
             services.AddScoped(_ =>
                 new LoggingManager(
                     new MongoDbWriter(Environment.GetEnvironmentVariable("OLDSU_MONGO_DB_CONNECTION_STRING")!)));
+#endif
+            
             
             services.AddRouting();
         }

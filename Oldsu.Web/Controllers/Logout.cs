@@ -27,7 +27,7 @@ namespace Oldsu.Web.Controllers
 
             await using var db = new Database();
 
-            await db.RemoveWebSession(sessionId);
+            await db.RemoveWebSession(sessionId!);
             
             Response.Cookies.Delete("oldsu-sid");
 

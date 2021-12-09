@@ -4,6 +4,7 @@
 @using Oldsu
 @using Oldsu.Enums
 @using Oldsu.Types
+@using Oldsu.Web
 @{
     Layout = "BaseLayoutWithBanner";
 }
@@ -51,7 +52,7 @@
                 <div class="player player_leader">
                     <p class="player_rank player_leader">#1</p>
                     <p class="player_name player_leader"><a href="/u/@firstStatWithRank.UserID">@firstStatWithRank.User.Username</a></p>
-                    <img src="@firstStatWithRank.User.FlagBaseUrl" class="player_flag player_leader" alt="Country: @CountryCodes.FromCode[firstStatWithRank.User.Country]">
+                    <img src="@PathCorrection.Correct(firstStatWithRank.User.FlagBaseUrl)" class="player_flag player_leader" alt="Country: @CountryCodes.FromCode[firstStatWithRank.User.Country]">
 
                     <div class="player_gap player_leader"></div>
 

@@ -18,10 +18,10 @@ namespace Oldsu.Web.Pages
         
         public static readonly (string PageName, string Link)[] PageMenuItems = new[]
         {
-            (PageName: "Home", Link: "/"),
-            (PageName: "Beatmaps", Link: "/beatmaps"),
-            (PageName: "Rankings", Link: "/leaderboard"),
-            (PageName: "Download", Link: "/download"),
+            (PageName: "Home", Link:  PathCorrection.Correct("/")),
+            (PageName: "Beatmaps", Link: PathCorrection.Correct("/beatmaps")),
+            (PageName: "Rankings", Link: PathCorrection.Correct("/leaderboard")),
+            (PageName: "Download", Link: PathCorrection.Correct("/download")),
         };
     }
 }
