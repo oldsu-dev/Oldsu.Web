@@ -55,7 +55,7 @@
         </div>
         <h3 class="user_card_player_title">@userPage?.Title</h3>
         <div class="user_card_ranking">
-            <img class="user_card_ranking_flag" src="@Model.UserInfo.FlagBaseUrl" alt="Country: @CountryCodes.FromCode[Model.UserInfo.Country]" height="48px">
+            <img class="user_card_ranking_flag" src="@PathCorrection.Correct(Model.UserInfo.FlagBaseUrl)" alt="Country: @CountryCodes.FromCode[Model.UserInfo.Country]" height="48px">
             @{
                 if (userStats != null)
                 {
@@ -127,8 +127,7 @@
                                 Mode.Taiko => "osu!taiko",
                                 Mode.CatchTheBeat => "catch the beat!",
                                 Mode.Mania => "osu!mania"
-                                
-                                };
+                            };
                             
                             @mode
                         }
