@@ -1,6 +1,7 @@
 ﻿@page "/dashboard"
 @using Oldsu
 @using Oldsu.Enums
+@using Oldsu.Web
 @using Oldsu.Web.Pages
 @model Oldsu.Web.Pages.Dashboard
 
@@ -15,7 +16,7 @@
             <h3 class="dashboard_subdiv_title">Profile Information</h3>
             <span class="dashboard_subdiv_label">Username</span>
             <div class="dashboard_label_value_wrapper">
-                <span class="dashboard_subdiv_username">@Model.AuthenticatedUserInfo.Username</span>
+                <span class="dashboard_subdiv_username">@Model.AuthenticatedUserInfo!.Username</span>
                 </div>
             <span class="dashboard_subdiv_label">Country</span>
             <div class="dashboard_label_value_wrapper">
@@ -97,15 +98,15 @@
         data.append("twitter", document.getElementById('twitter').value);
         data.append("website", document.getElementById('website').value);
         
-        const resp = await fetch('/update_information', {
+        const resp = await fetch("@PathCorrection.Correct("/update_information")", {
             method: 'PUT',
             body: data, 
         }).catch((error) => {
             console.log(error);
         });
         
-        if (resp.status == 200) {
-            location.assign("/profile");
+        if (resp.status === 200) {
+            location.assign("@PathCorrection.Correct("/profile")");
         }
     }
      
@@ -116,7 +117,7 @@
         
         data.append("bbcode", document.getElementById('signature').value);
         
-        const resp = await fetch('/update_bbcode', {
+        const resp = await fetch("@PathCorrection.Correct("/upload_bbcode")", {
             method: 'PUT',
             body: data, 
         }).catch((error) => {
@@ -124,7 +125,7 @@
         });
         
         if (resp.status == 200) {
-            location.assign("/profile");
+            location.assign("@PathCorrection.Correct("/profile")");
         }
     }  
      
@@ -134,13 +135,13 @@
         
         formData.append("avatar-image", realFile.files[0]);
         
-        let resp = await fetch("/avatar", 
+        let resp = await fetch("@PathCorrection.Correct("/avatar")", 
         { 
             method: "post",
             body: formData
         })
         
-        if (resp.status == 200) {
+        if (resp.status === 200) {
             profileImage.src = profileImage.src + "?" + new Date().getTime();
         }
     })
