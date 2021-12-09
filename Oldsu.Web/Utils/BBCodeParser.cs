@@ -134,8 +134,6 @@ namespace Oldsu.Web.Utils
                 data = formatter.Format(data);
             }
             
-            Console.WriteLine(data);
-            
             return data;
         }
         #endregion

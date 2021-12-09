@@ -1,5 +1,6 @@
 @page "/beatmaps"
 @using Oldsu.Types
+@using Oldsu.Web
 @model Oldsu.Web.Pages.BeatmapListing
 
 @{
@@ -8,8 +9,8 @@
 
 
 @* this might be retarded since this isn't a head *@
-<link href="/resources/css/beatmap_listing.css" rel="stylesheet">
-<link href="/resources/css/beatmap_preview.css" rel="stylesheet">
+<link href=@PathCorrection.Correct("/resources/css/beatmap_listing.css") rel="stylesheet">
+<link href=@PathCorrection.Correct("/resources/css/beatmap_preview.css") rel="stylesheet">
 
 <div class="beatmap_listing_content" style="flex-direction: column">
     <form name="search_settings_wrapper">

@@ -1,8 +1,11 @@
+
+@using Oldsu.Web
+
 @{
     Layout = "BaseLayout";
 }
 <div class="banner_wrapper">
-    <img src="/resources/image/banner.png" alt="oldsu! banner" class="banner_image">
+    <img src=@PathCorrection.Correct("/resources/image/banner.png") alt="oldsu! banner" class="banner_image">
 </div>
 
 @RenderBody()
