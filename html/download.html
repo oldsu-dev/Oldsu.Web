@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet">
+    <title>oldsu!</title>
+</head>
+<body>
+<div class="header_wrapper">
+    <header class="header">
+        <div class="logo_wrapper">
+            <h1 class="logo">oldsu!</h1>
+        </div>
+        <div class="menu_wrapper">
+            <nav class="menu">
+                <ul class="menu_list">
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Home</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Beatmaps</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Leaderboard</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Community</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Help</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <a class="user_profile_link">
+            <img src="image/paimon.jpg" alt="upl" class="user_profile_image">
+            <a href="#" class="sign_in_button">sign in</a>
+        </a>
+        <div class="login_panel">
+            <h3 class="login_panel_header">Please sign in</h3>
+            <input class="login_panel_input" type="text" id="username_input" placeholder="username">
+            <input class="login_panel_input" type="password" id="password_input" placeholder="password">
+            <input class="login_panel_button" type="submit" id="submit_input" value="Sign in">
+            <span class="login_panel_status">Unknown username or password.</span>
+            <a href="#" class="login_panel_linktext">Register</a>
+            <a href="#" class="login_panel_linktext">I forgot my password</a>
+        </div>
+        <div class="user_dropdown">
+            <img src="image/paimon.jpg" class="user_dropdown_avatar">
+            <span class="user_dropdown_nickname">nickname</span>
+            <a href="#" class="user_dropdown_profile">My Profile</a>
+            <a href="#" class="user_dropdown_profile">Friends</a>
+            <a href="#" class="user_dropdown_profile">Settings</a>
+            <a href="#" class="user_dropdown_profile">Log Out</a>
+        </div>
+    </header>
+</div>
+<main>
+    <div class="banner_wrapper">
+        <img src="image/banner.png" alt="oldsu_banner" class="banner_image">
+    </div>
+    <div class="main_content">
+        <div class="home_info">
+            <div class="home_info_heading_wrapper">
+                <h2 class="home_info_heading">Download</h2>
+            </div>
+            <p class="home_info_text">Here are the instructions on downloading the client and what to do exactly. Probably something  with a link to osekai for the clean client and the patched executable with a separate download and to replace the file(s) where needed.</p>
+        </div>
+        <div class="home_news">
+            <div class="home_news_heading_wrapper">
+                <h2 class="home_news_heading">System Requirements</h2>
+            </div>
+            <h3 class="home_news_title">Windows</h3>
+            <hr class="home_news_divider">
+            <p class="home_news_text">- Anything from Windows 7 SP1 onwards (but preferably just use an OS that's still officially supported)</p>
+            <p class="home_news_text">- Installed <a href="https://www.microsoft.com/en-us/download/details.aspx?id=30653" target="_blank">.NET 4.5</a></p>
+            <p class="home_news_text">- A graphics card that is at least DX9 compatible and has OpenGL 1.1+ support</p>
+            <br>
+            <h3 class="home_news_title">Linux</h3>
+            <hr class="home_news_divider">
+            <p class="home_news_text">While we don't offer <b>official</b> support for any Linux distributions we still provide an <a href="https://github.com/marshallracer/oldsu-linux" target="_blank">install script</a> and some help on Discord or in the forums when needed. Further information can be found in the linked repository or by just shooting us a message.</p>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="footer_content">
+        <ul class="footer_list">
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Privacy</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Gitlab</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Terms of Service</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Copyright</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Discord</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>
