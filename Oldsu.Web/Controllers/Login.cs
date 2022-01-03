@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Oldsu.Utils;
 using Oldsu.Web.Models;
 using Oldsu.Web.Utils;
 
@@ -54,7 +55,7 @@ namespace Oldsu.Web.Controllers
                     Message = "Unknown username or wrong password.",
                 });
 
-            var sessionId = SessionIdProvider.GetSessionId(128);
+            var sessionId = TokenGenerator.GenerateToken(128);
 
             await db.AddWebSession(sessionId, user.UserID, ExpirationAt);
             
