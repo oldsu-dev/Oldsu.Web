@@ -117,7 +117,7 @@
         
         data.append("bbcode", document.getElementById('signature').value);
         
-        const resp = await fetch("@PathCorrection.Correct("/upload_bbcode")", {
+        const resp = await fetch("@PathCorrection.Correct("/update_bbcode")", {
             method: 'PUT',
             body: data, 
         }).catch((error) => {
