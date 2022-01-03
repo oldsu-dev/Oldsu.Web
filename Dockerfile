@@ -9,9 +9,9 @@ RUN mkdir Oldsu.Web/avatars
 
 ENV ASPNETCORE_URLS=http://+:8080
 RUN dotnet publish -c Release --output ./dist Oldsu.Web.sln
+RUN cp ./GeoLite2-City.mmdb ./dist/
 
 WORKDIR /usr/src/app/dist
-RUN cp ./GeoLite2-City.mmdb ./dist/
 
 CMD ["./Oldsu.Web"]
 
