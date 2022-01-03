@@ -10,9 +10,9 @@ namespace Oldsu.Web.Pages
         public async Task<IActionResult> OnGet()
         {
             if (AuthenticatedUserInfo != null)
-                return Redirect($"/u/{AuthenticatedUserInfo.UserID}");
+                return Redirect(PathCorrection.Correct($"/u/{AuthenticatedUserInfo.UserID}"));
 
-            return Redirect("/");
+            return Redirect(PathCorrection.Correct("/"));
         }
 
         public Profile(AuthenticationService authenticationService) : base(authenticationService)
