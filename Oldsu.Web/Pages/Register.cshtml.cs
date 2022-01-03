@@ -1,6 +1,8 @@
 using System;
 using System.Net;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Primitives;
 using Oldsu.Enums;
 using Oldsu.Logging;
 using Oldsu.Logging.Strategies;
+using Oldsu.Utils;
 using Oldsu.Utils.Location;
 using Oldsu.Web.Authentication;
 using Oldsu.Web.Models;
@@ -63,16 +66,23 @@ namespace Oldsu.Web.Pages
                     await _loggingManager.LogCritical<Register>(
                         $"Username: {registerData.Username} has an already registered ip: {HttpContext.GetIpAddress()}.");
                     goto case RegisterAttemptResult.RegisterSuccessful;
-                    
+
                 case RegisterAttemptResult.RegisterSuccessful:
                     var (_, _, country) = await Geolocation.GetGeolocationAsync(ip);
+
+                    string token = TokenGenerator.GenerateToken(128);
+
+                    await EmailSender.SendAsync(registerData.Email, "Email verification",
+                        "Hello. Please click on the following link to verify your email: " +
+                        $"https://oldsu.ayyeve.xyz/dev/site/verify_email?token={HttpUtility.UrlEncode(token)}");
                     
-                    await database.RegisterAsync(
+                    await database.RequireEmailConfirmation(
+                        token,
                         registerData.Username, 
                         registerData.Email,
                         registerData.Password, 
                         country);
-
+                    
                     RegistrationResult = "Registration was successful! Please login to continue.";
                     break;
 
