@@ -17,7 +17,7 @@ namespace Oldsu.Web.Controllers
             await using var database = new Database();
 
             if (await database.CompleteEmailConfirmation(token))
-                return Ok("You're email has been verified successfully");
+                return Ok("You're email has been verified successfully. You can now login.");
 
             return BadRequest("Your email was not verified.");
         }

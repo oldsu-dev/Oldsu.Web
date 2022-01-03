@@ -83,7 +83,7 @@ namespace Oldsu.Web.Pages
                         registerData.Password, 
                         country);
                     
-                    RegistrationResult = "Registration was successful! Please login to continue.";
+                    RegistrationResult = "Registration was successful! Please verify your email to continue.";
                     break;
 
                 case RegisterAttemptResult.UsernameAlreadyExists:
