@@ -35,12 +35,12 @@
             {
                 <a class="user_profile_link">
                     <a href="#" onclick="toggleUserDropdown()" class="sign_in_button">
-                        <img src="@(Model.AuthenticatedUserInfo.AvatarBaseUrl)" alt="upl" class="user_profile_image">
+                        <img src="@(PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl))" alt="upl" class="user_profile_image">
                     </a>
                 </a>
                 
                 <div class="user_dropdown" id="user_dropdown_panel">
-                    <img src="@(Model.AuthenticatedUserInfo.AvatarBaseUrl)" class="user_dropdown_avatar">
+                    <img src="@(PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl))" class="user_dropdown_avatar">
                     <span class="user_dropdown_nickname">@Model.AuthenticatedUserInfo.Username</span>
                     @{
                         var profileLink = PathCorrection.Correct($"/u/{@Model.AuthenticatedUserInfo.UserID}");

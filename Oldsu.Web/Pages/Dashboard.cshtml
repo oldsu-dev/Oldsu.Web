@@ -26,7 +26,7 @@
             <div class="dashboard_avatarupload_wrapper">
                 <!-- real file name, using fake one too -->
                 <input type="file" id="real_file" hidden="hidden"/>
-                <img id="profile_image_dashboard" class="dashboard_avatarupload_avatar" src="@Model.AuthenticatedUserInfo.AvatarBaseUrl">
+                <img id="profile_image_dashboard" class="dashboard_avatarupload_avatar" src="@PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl)">
                 <button class="dashboard_avatarupload_button" id="file_upload_button">upload</button>
             </div>
                 </div>
