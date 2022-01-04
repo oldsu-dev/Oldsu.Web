@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Oldsu.Enums;
 using Oldsu.Types;
 using Oldsu.Web.Authentication;
 using Oldsu.Web.Utils;
@@ -21,9 +22,32 @@ namespace Oldsu.Web.Pages {
         
         public List<Badge>? Badges { get; set; }
 
-        public async Task<IActionResult> OnGet([FromRoute] uint userId) {
+        public async Task<IActionResult> OnGet([FromRoute] uint userId, [FromRoute] string strMode = "") 
+        {
+            Mode mode;
+            switch(strMode) 
+            {
+                 case "osu":
+                     mode = Mode.Standard;
+                     break;
+
+                 case "taiko":
+                     mode = Mode.Taiko;
+                     break;
+                     
+                 case "ctb":
+                     mode = Mode.CatchTheBeat;
+                     break;
+                 
+                 case "mania":
+                     mode = Mode.Mania;
+                     break;
+                 
+                 default:
+                     return Redirect(PathCorrection.Correct($"/u/{userId}/osu"));
+            };
             
-            await using Database database = new();
+            await using Database database = new Database();
 
             UserInfo = await database.UserInfo
                 .FindAsync(userId);
@@ -33,7 +57,7 @@ namespace Oldsu.Web.Pages {
 
             UserStats = database.StatsWithRank
                 .Include(s => s.User)
-                .FirstOrDefault(s => s.UserID == userId);
+                .FirstOrDefault(s => s.UserID == userId && s.Mode == mode);
             
             UserPageInfo = await database.UserPages
                 .FirstOrDefaultAsync(s => s.UserID == userId);
@@ -46,7 +70,7 @@ namespace Oldsu.Web.Pages {
             {
                 // retrieve scores
                 TopScores = await database.HighScoresWithRank
-                    .Where(s => s.UserId == userId)
+                    .Where(s => s.UserId == userId && s.Gamemode == (byte)mode)
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
                     .OrderByDescending(s => s.Score)
@@ -54,7 +78,7 @@ namespace Oldsu.Web.Pages {
                     .ToListAsync();
                 
                 RecentScores = await database.Scores
-                    .Where(s => s.UserId == userId)
+                    .Where(s => s.UserId == userId && s.Gamemode == (byte)mode)
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
                     .OrderByDescending(s => s.SubmittedAt)
@@ -65,7 +89,7 @@ namespace Oldsu.Web.Pages {
                 RankHistory = new List<RankHistory>();
             
                 // dog 123
-                var wtf = await database.RankHistory.Where(r => r.UserID == userId).ToArrayAsync();
+                var wtf = await database.RankHistory.Where(r => r.UserID == userId && r.Mode == mode).ToArrayAsync();
             
                 RankHistory.AddRange(wtf);
                 RankHistory.Add(new RankHistory {UserID = userId, Date = DateTime.Now, Rank = UserStats.Rank});
