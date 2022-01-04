@@ -27,6 +27,26 @@
     uint GetHits(uint one, uint two, uint three, uint four) {
         return one + two + three + four;
     }
+
+    string GetImagePathFromGrade(string rank)
+    {
+        string filename = rank switch 
+        {
+            "A" => "rank_A",
+            "B" => "rank_B",
+            "C" => "rank_C",
+            "D" => "rank_D",
+            "F" => "rank_FAIL",
+            "SH" => "gl_SS",
+            "XH" => "sv_SS",
+            "S" => "gl_S",
+            "X" => "sv_S",
+            
+            _ => throw new ArgumentOutOfRangeException(nameof(rank), rank, null)
+        };
+
+        return $"/resources/image/ranks/{filename}.png";
+    }
     
     double CalculateAccuracy(uint count50, uint count100, uint count300, uint countMiss) {
         return (double)Math.Round((double)(count50 * 50 + count100 * 100 + count300 * 300) / (double)(GetHits(count50, count100, count300, countMiss) * 300) * 100, 2);
@@ -205,11 +225,11 @@
                                             // map is a bancho map
                                             if (score.Beatmap.OriginalBeatmapID != null)
                                             {
-                                                <img class="first_place_bg" src=@($"https://b.ppy.sh/thumb/{score.Beatmap.Beatmapset.OriginalBeatmapsetID}l.jpg") alt="Artist - Title (by Mapper)">
+                                                <img class="first_place_bg" src=@($"https://b.ppy.sh/thumb/{score.Beatmap.Beatmapset.OriginalBeatmapsetID}l.jpg")>
                                             }
                                             else
                                             {
-                                                <img class="first_place_bg" src="@PathCorrection.Correct("/resources/image/discoprincebg.jpg")" alt="Artist - Title (by Mapper)">
+                                                <img class="first_place_bg" src="@PathCorrection.Correct("/resources/image/discoprincebg.jpg")">
                                             }
                                         }
                                         <div class="first_place_metadata_wrapper">
@@ -219,7 +239,7 @@
                                     </div>
                                     <div class="first_place_score_details">
                                         <div class="first_place_rank">
-                                            <img class="first_place_rank_image" src=@PathCorrection.Correct("/resources/image/ranks/gl_SS.png")>
+                                            <img class="first_place_rank_image" src=@PathCorrection.Correct(GetImagePathFromGrade(score.Grade))>
                                         </div>
                                         <span>@($"{GetCommaSeparatedNumber(score.Score)}")&nbsp;</span>
                                         <span class="first_place_score_acc" id="score_row_accuracy">
