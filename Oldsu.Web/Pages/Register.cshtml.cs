@@ -58,7 +58,7 @@ namespace Oldsu.Web.Pages
             if (!HttpContext.Request.Headers.TryGetValue("CF-Connecting-IP", out var ip))
                 ip = "127.0.0.1"; 
             
-            var attemptResult = await database.ValidateRegistrationAttempt(registerData.Username, ip);
+            var attemptResult = await database.ValidateRegistrationAttempt(registerData.Username, registerData.Email, ip);
             
             switch (attemptResult)
             {
