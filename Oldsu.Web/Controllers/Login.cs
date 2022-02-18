@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +14,20 @@ namespace Oldsu.Web.Controllers
     [Route("/login")]
     public class Login : Controller
     {
-        private static DateTime ExpirationAt => DateTime.Now.AddMonths(1);
-        
-        private static readonly CookieOptions CookieOptions = new()
+        private readonly DateTime _expires;
+        private readonly CookieOptions _cookieOptions;
+
+        public Login()
         {
-            Expires = ExpirationAt,
-            HttpOnly = true,
-            Secure = true,
-        };
+            _expires = DateTime.Now.AddMonths(1);
+            
+            _cookieOptions = new CookieOptions()
+            {
+                Expires = _expires,
+                HttpOnly = true,
+                Secure = true,
+            };
+        }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] LoginSubmitModel loginData)
@@ -57,9 +63,9 @@ namespace Oldsu.Web.Controllers
 
             var sessionId = TokenGenerator.GenerateToken(128);
 
-            await db.AddWebSession(sessionId, user.UserID, ExpirationAt);
+            await db.AddWebSession(sessionId, user.UserID, _expires);
             
-            Response.Cookies.Append("oldsu-sid", sessionId, CookieOptions);
+            Response.Cookies.Append("oldsu-sid", sessionId, _cookieOptions);
 
             return Ok(new BasicResponseModel
             {
