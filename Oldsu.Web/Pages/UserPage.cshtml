@@ -68,7 +68,7 @@
     <div class="user_card">
         <h2 class="user_card_name">@(Model.UserInfo.Username)</h2>
         <img src="@PathCorrection.Correct(Model.UserInfo.AvatarBaseUrl)" alt="@(Model.UserInfo.Username)'s avatar" class="user_card_avatar" width="128px" height="128px">
-        <div class="user_card_badges_wrapper">
+        <div class="user_card_badges_wrapper"> 
             @foreach(Badge badge in Model.Badges!) {
                 <img src="@PathCorrection.Correct("/resources/image/@badge.Filename")" alt="@badge.Filename" class="user_card_badge">
             }
