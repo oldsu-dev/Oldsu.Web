@@ -1,7 +1,25 @@
-
+@using Oldsu
 @using Oldsu.Web
 @using Oldsu.Web.Pages
+@using System;
+@using System.Net;
+@using System.Text.Encodings.Web;
+@using System.Threading.Tasks;
+@using System.Web;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Mvc.RazorPages;
+@using Microsoft.Extensions.Primitives;
+@using Oldsu.Enums;
+@using Oldsu.Logging;
+@using Oldsu.Logging.Strategies;
+@using Oldsu.Utils;
+@using Oldsu.Utils.Location;
+@using Oldsu.Web.Authentication;
+@using Oldsu.Web.Models;
+@using Oldsu.Web.Utils;
 @model BaseLayout
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +45,27 @@
                             <a class="menu_list_item_link" href="@item.Link">@item.PageName</a>
                         </li>
                     }
+                    @{
+                        await using var database = new Database();
+                        var hasCookie = Model.Request.Cookies.TryGetValue("oldsu-sid", out var cookie);
+                        if (hasCookie)
+                        {
+                            var userSession = await database.GetWebSession(cookie);
+                            if (userSession != null && userSession.UserInfo.Privileges == Privileges.Developer)
+                            {
+                                <li class="menu_list_item">
+                                    <a class="menu_list_item_link" href="/admindashboard-0">Admin Dashboard</a>
+                                </li>
+                            }
+                        }
+
+
+
+
+                    }
                 </ul>
             </nav>
-        </div> 
+        </div>
         @{
             if (Model.AuthenticatedUserInfo != null)
             {
@@ -38,13 +74,13 @@
                         <img src="@(PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl))" alt="upl" class="user_profile_image">
                     </a>
                 </a>
-                
+
                 <div class="user_dropdown" id="user_dropdown_panel">
                     <img src="@(PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl))" class="user_dropdown_avatar">
                     <span class="user_dropdown_nickname">@Model.AuthenticatedUserInfo.Username</span>
                     @{
                         var profileLink = PathCorrection.Correct($"/u/{@Model.AuthenticatedUserInfo.UserID}");
-                        
+
                         <a href=@profileLink class="user_dropdown_profile">My Profile</a>
                         <a href="@PathCorrection.Correct("/friends")" class="user_dropdown_profile">Friends</a>
                         <a href="@PathCorrection.Correct("/dashboard")" class="user_dropdown_profile">Settings</a>
@@ -56,7 +92,7 @@
             {
                 <a class="user_profile_link">
                     <a href="#" onclick="toggleLoginDropdown()" class="sign_in_button">
-                        Sign In &#9660; 
+                        Sign In &#9660;
                     </a>
                 </a>
                 <form class="login_panel" id="login_panel_dropdown">
@@ -64,7 +100,7 @@
                     <input class="login_panel_input" type="text" name="username" id="username_input" placeholder="username" required>
                     <input type="password" class="login_panel_input" id="password_input" name="password" placeholder="Password" required>
                     <input type="submit" class="login_panel_button" id="login_submit" name="login_submit" value="Sign In">
-                    
+
                     <span class="login_panel_status" id="message"></span>
 
                     <a href="/register" class="login_panel_linktext">Register</a>
