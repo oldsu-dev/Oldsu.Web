@@ -37,7 +37,9 @@ namespace Oldsu.Web.Pages
                 
             await using var db = new Database();
             AdminInformation = await db.UserInfo.FindAsync(AuthenticatedUserInfo.UserID) ?? new Types.UserInfo();
-            _CurrentMenu = (CurrentMenu) 4;
+            //db.TestAddMapAsync("f4b98cf7c6e2d9eed80f4551da211ac3");
+            //db.TestAddMapAsync("f4b98cf7c6e2d9eed80f4551da211ac3");
+            //db.TestAddMapAsync("f4b98cf7c6e2d9eed80f4551da211ac3");
             return Page();
         }
         

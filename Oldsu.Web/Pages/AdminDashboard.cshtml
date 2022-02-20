@@ -2,6 +2,7 @@
 @using Microsoft.EntityFrameworkCore
 @using Oldsu
 @using Oldsu.Storage
+@using Oldsu.Types
 @using Oldsu.Web
 @using Oldsu.Web.Pages
 @using Org.BouncyCastle.Utilities
@@ -117,8 +118,56 @@
             <div class="user-columns">
               @{
                 await using var database = new Database();
-                database.TestAddMapAsync();
-                database.Database.ExecuteSqlRawAsync();
+                foreach (var beatmapset in database.Beatmapsets)
+                {
+                  <div class="card">
+                    <p style="float: left;"><img class="card-image" src="https://cdn.britannica.com/43/172743-138-545C299D/overview-Barack-Obama.jpg?w=800&h=450&c=crop"
+                                                style="width: 200px;
+                                                       float: left; " >
+                    </p>
+                    
+                    <div class="card-body">
+                      <div class="card-info"style=
+                           "clear: left;
+                           color: black; 
+                           
+                            outline: 1px;
+">              
+                        <h5 class="card-title">@beatmapset.Artist - @beatmapset.Title</h5>
+                        <h5 class="card-creator">Mapper: @beatmapset.CreatorName</h5>
+                        <h5 class="card-submitdate">Submitted at: @beatmapset.SubmittedAt</h5>
+                        <h5 class="card-ranking-status">Ranking Status: @beatmapset.RankingStatus</h5>
+                      </div>
+                      <button class="delete-beatmapset"
+                              style="
+                                background-color : #d22d2d;
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 4px;
+                                border-color: #d22d2d;
+                                 ">Delete</button>
+                      <button class="delete-beatmapset"
+                              style="
+                                background-color : #2dd2d2;
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 4px;
+                                border-color: #2dd2d2;
+                                 ">Rank</button>
+                      <button class="delete-beatmapset"
+                              style="
+                                background-color : #e8c42c;
+                                color: white;
+                                padding: 10px 20px;
+                                border-radius: 4px;
+                                border-color: #e8c42c;
+                                 ">Unrank</button>
+
+                    </div>
+                  </div>
+
+                }
+                
               } 
             
             </div>
@@ -144,7 +193,7 @@
               break;
         }
       }
-      <h1>Id : @id</h1>
+      
       <!--<h1>@RouteData.Values["id"]</h1> -->
      
     </main>
