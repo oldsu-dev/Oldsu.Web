@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.FileProviders.Physical;
 using Microsoft.Extensions.Hosting;
+using Oldsu.DatabaseServices;
+using Oldsu.DatabaseServices.MySql;
 using Oldsu.Logging;
 using Oldsu.Logging.Strategies;
 using Oldsu.Web.Authentication;
@@ -31,6 +33,7 @@ namespace Oldsu.Web
             #endif
 
             services.AddScoped<AuthenticationService>();
+            services.AddTransient<IBeatmapService, MySqlBeatmapService>();
 
 #if DEBUG
             services.AddScoped(_ =>

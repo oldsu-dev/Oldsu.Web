@@ -135,14 +135,10 @@
               <h2>Last added beatmaps</h2>
             <div class="user-columns">
               @{
-                await using var database = new Database();
-                var numberOfBeatmapset = database.Beatmaps.Count();
-                var beatmapsett = database.Beatmapsets.AsEnumerable().ToArray();
+                var paginator = Model.BeatmapService.GetBeatmapPaginator(10);
 
-                for (int i = 1; i <= Math.Min(beatmapsett.Length,10); i++)
+                foreach (var beatmapset in await paginator.GetNewestPageAsync(1))
                 {
-                  var beatmapset = beatmapsett[^i];
-                  if (beatmapset == null) break;
                   <div class="card">
                     <p style="float: left;"><img class="card-image" src="https://cdn.britannica.com/43/172743-138-545C299D/overview-Barack-Obama.jpg?w=800&h=450&c=crop"
                                                 style="width: 200px;

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Oldsu.DatabaseServices;
 using Oldsu.Enums;
 using Oldsu.Types;
 using Oldsu.Web.Authentication;
@@ -14,6 +15,8 @@ namespace Oldsu.Web.Pages
 
         public CurrentMenu _CurrentMenu;
 
+        public readonly IBeatmapService BeatmapService;
+
         public enum CurrentMenu
         {
             Dashboard = 0,
@@ -23,9 +26,10 @@ namespace Oldsu.Web.Pages
             Reports = 4
         }
         
-        public AdminDashboard(AuthenticationService authenticationService)
+        public AdminDashboard(AuthenticationService authenticationService, IBeatmapService beatmapService)
         {
             AuthenticatedUserInfo = authenticationService.AuthenticatedUserInfo;
+            BeatmapService = beatmapService;
         }
 
         public async Task<IActionResult> OnGet()
