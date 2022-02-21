@@ -136,8 +136,8 @@
             <div class="user-columns">
               @{
                 var paginator = Model.BeatmapService.GetBeatmapPaginator(10);
-
-                foreach (var beatmapset in await paginator.GetNewestPageAsync(1))
+                var newest = await paginator.GetNewestPageAsync(0);
+                foreach (var beatmapset in newest)
                 {
                   <div class="card">
                     <p style="float: left;"><img class="card-image" src="https://cdn.britannica.com/43/172743-138-545C299D/overview-Barack-Obama.jpg?w=800&h=450&c=crop"
