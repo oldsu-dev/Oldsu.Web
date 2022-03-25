@@ -35,6 +35,45 @@
                     </div>
                 }
             }
+            var paginator = Model.BeatmapService.GetBeatmapPaginator(20);
+            var newest = await paginator.GetNewestPageAsync(0);
+            foreach (var beatmapset in newest)
+            {
+                <div class="card">
+                    <p style="float: left;"><img class="card-image" src="https://cdn.britannica.com/43/172743-138-545C299D/overview-Barack-Obama.jpg?w=800&h=450&c=crop"
+                                                 style="width: 200px;
+                                                       float: left; " >
+                    </p>
+                    <div class="card-body">
+                        <div class="card-info"style=
+                             "clear: left;
+                           color: black; 
+                           
+                            outline: 1px;
+">              
+                            <h5 class="card-title">@beatmapset.Artist - @beatmapset.Title</h5>
+                            <h5 class="card-creator">Mapper: @beatmapset.CreatorName</h5>
+                            <h5 class="card-submitdate">Submitted at: @beatmapset.SubmittedAt</h5>
+                            <h5 class="card-ranking-status">Ranking Status: @beatmapset.RankingStatus</h5>
+                        </div>
+                        <button class="delete-beatmapset"
+                                style="
+                                background-color : rgb(176,166,166);
+                                color: white;
+                                padding: 5px 11px;
+                                border-radius: 7px;
+                                border-color: rgb(176,166,166);
+                                size: 10px;
+                                 ">Download</button>
+                    </div>
+                </div> 
+            }
         }
     </div>
 </div>
+
+<style>
+    h5 {
+        color: #ffeaea;
+    } 
+</style>

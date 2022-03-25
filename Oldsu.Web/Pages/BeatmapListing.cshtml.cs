@@ -1,7 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Oldsu.DatabaseServices;
 using Oldsu.Logging;
 using Oldsu.Types;
 using Oldsu.Web.Authentication;
@@ -9,6 +11,7 @@ using Oldsu.Web.Authentication;
 namespace Oldsu.Web.Pages {
     public class BeatmapListing : BaseLayout {
         public Beatmapset[]? BeatmapSets { get; private set; }
+        public readonly IBeatmapService BeatmapService;
 
         [FromQuery(Name = "query")] public string? SearchQuery { get; set; } = string.Empty;
         
@@ -29,9 +32,10 @@ namespace Oldsu.Web.Pages {
 
         private LoggingManager _loggingManager;
         
-        public BeatmapListing(AuthenticationService authenticationService, LoggingManager loggingManager) 
+        public BeatmapListing(AuthenticationService authenticationService, LoggingManager loggingManager,  IBeatmapService beatmapService) 
             : base(authenticationService)
         {
+            BeatmapService = beatmapService;
             _loggingManager = loggingManager;
         }
     }

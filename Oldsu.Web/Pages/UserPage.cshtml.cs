@@ -55,11 +55,11 @@ namespace Oldsu.Web.Pages {
             if(UserInfo == null) 
                 return NotFound();
 
-            UserStats = database.StatsWithRank
-                .Include(s => s.User)
-                .FirstOrDefault(s => s.UserID == userId && s.Mode == mode);
-            
-            UserPageInfo = await database.UserPages
+           //UserStats = database.StatsWithRank
+           //  .Include(s => s.User)
+           //   .FirstOrDefault(s => s.UserID == userId && s.Mode == mode);
+
+           UserPageInfo = await database.UserPages
                 .FirstOrDefaultAsync(s => s.UserID == userId);
 
             Badges = await database.Badges
