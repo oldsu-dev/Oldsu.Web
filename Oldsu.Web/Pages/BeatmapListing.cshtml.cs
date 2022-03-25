@@ -14,10 +14,11 @@ namespace Oldsu.Web.Pages {
         public readonly IBeatmapService BeatmapService;
 
         [FromQuery(Name = "query")] public string? SearchQuery { get; set; } = string.Empty;
+        [FromQuery(Name = "page")] public string? PageQuery { get; set; } = string.Empty;
         
         public async Task<IActionResult> OnGet() {
             await using Database database = new();
-
+            
             var query = database.Beatmapsets.Where(b => b.OriginalBeatmapsetID == null);
 
             if(!string.IsNullOrEmpty(SearchQuery)) {

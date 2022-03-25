@@ -1,4 +1,5 @@
 @page "/beatmaps"
+@using Oldsu
 @using Oldsu.Types
 @using Oldsu.Web
 @model Oldsu.Web.Pages.BeatmapListing
@@ -35,9 +36,16 @@
                     </div>
                 }
             }
+            await using var database = new Database();
+            
+            if (Model.PageQuery == String.Empty) {
+                Model.PageQuery = "1";
+            }
+            
             var paginator = Model.BeatmapService.GetBeatmapPaginator(20);
-            var newest = await paginator.GetNewestPageAsync(0);
-            foreach (var beatmapset in newest)
+            var totalRows = database.Beatmapsets.Count();
+            var page = await paginator.GetNewestPageAsync(Int16.Parse(Model.PageQuery) - 1);
+            foreach (var beatmapset in page)
             {
                 <div class="card">
                     <p style="float: left;"><img class="card-image" src="https://cdn.britannica.com/43/172743-138-545C299D/overview-Barack-Obama.jpg?w=800&h=450&c=crop"
@@ -53,8 +61,8 @@
 ">              
                             <h5 class="card-title">@beatmapset.Artist - @beatmapset.Title</h5>
                             <h5 class="card-creator">Mapper: @beatmapset.CreatorName</h5>
-                            <h5 class="card-submitdate">Submitted at: @beatmapset.SubmittedAt</h5>
-                            <h5 class="card-ranking-status">Ranking Status: @beatmapset.RankingStatus</h5>
+                            <!--<h5 class="card-submitdate">Submitted at: </h5>-->
+                            <!--<h5 class="card-ranking-status">Ranking Status: </h5> -->
                         </div>
                         <button class="delete-beatmapset"
                                 style="
@@ -70,10 +78,41 @@
             }
         }
     </div>
+    
+    <div class="list_navigation">
+        @{
+            var back = int.Parse(Model.PageQuery) - 1;
+            var next = int.Parse(Model.PageQuery) + 1;
+            
+            if (int.Parse(Model.PageQuery) == 1)
+            {
+                <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
+            }
+            else if ((int.Parse(Model.PageQuery) + 1) * 20 > totalRows)
+            {
+                <a href="/beatmaps?query=@Model.SearchQuery&page=@back">Back</a>
+            }
+            else
+            {
+                <a href="/beatmaps?query=@Model.SearchQuery&page=@back">Back</a>
+                <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
+            }
+        }
+        
+    </div>
+    
 </div>
 
 <style>
     h5 {
         color: #ffeaea;
     } 
+    .list_navigation a {
+        background-color : rgb(176,166,166);
+        color: white;
+        padding: 5px 11px;
+        border-radius: 7px;
+        border-color: rgb(176,166,166);
+        size: 10px;
+    }
 </style>
