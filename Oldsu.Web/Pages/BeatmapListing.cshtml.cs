@@ -27,9 +27,6 @@ namespace Oldsu.Web.Pages
             BeatmapService = beatmapService;
             _loggingManager = loggingManager;
         }
-
-        public Beatmapset[]? BeatmapSets { get; private set; }
-
         [FromQuery(Name = "query")] public string? SearchQuery { get; set; } = string.Empty;
         [FromQuery(Name = "page")] public string? PageQuery { get; set; } = string.Empty;
 
@@ -45,16 +42,15 @@ namespace Oldsu.Web.Pages
             if (!string.IsNullOrEmpty(SearchQuery))
             {
                 // TODO: SOMEONE OPTIMIZE THIS
-                Listing = await database.Beatmapsets.Where(s => s.Title.Contains(SearchQuery) || s.Artist.Contains(SearchQuery)).ToListAsync();
-                // BeatmapSets = await query.Where(s => s.Title.Contains(SearchQuery) || s.Artist.Contains(SearchQuery)).ToArrayAsync();
+                Listing = await database.Beatmapsets.Where(s => s.Title.Contains(SearchQuery) 
+                                                                || s.Artist.Contains(SearchQuery) 
+                                                                || s.CreatorName.Contains(SearchQuery)).ToListAsync();
             }
             else
             {
                 if (PageQuery != null) Listing = await Paginator.GetNewestPageAsync(short.Parse(PageQuery) - 1);
                 else Listing = await Paginator.GetNewestPageAsync(0);
             }
-                
-
 
             return Page();
         }

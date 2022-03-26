@@ -28,6 +28,7 @@
             if(Model.Listing == null) {
                 <p>No results match that query.</p>
             } else {
+                //Model.Listing.Reverse();
                 foreach(Beatmapset beatmapSet in Model.Listing) {
                     <div class="beatmap_preview_wrapper" style="background-image: linear-gradient(#FFFFFF, #FFFFFF), url('/resources/image/discoprincebg.jpg');">
                         <p class="beatmap_preview_title">@beatmapSet.Title</p>
@@ -42,21 +43,24 @@
     
     <div class="list_navigation">
         @{
-            var back = int.Parse(Model.PageQuery) - 1;
-            var next = int.Parse(Model.PageQuery) + 1;
+            if (string.IsNullOrEmpty(Model.SearchQuery))
+            {
+                var back = int.Parse(Model.PageQuery) - 1;
+                var next = int.Parse(Model.PageQuery) + 1;
             
-            if (int.Parse(Model.PageQuery) == 1)
-            {
-                <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
-            }
-            else if ((int.Parse(Model.PageQuery) + 1) * 20 > Model.TotalRows)
-            {
-                <a href="/beatmaps?query=@Model.SearchQuery&page=@back">Back</a>
-            }
-            else
-            {
-                <a href="/beatmaps?query=@Model.SearchQuery&page=@back">Back</a>
-                <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
+                if (int.Parse(Model.PageQuery) == 1)
+                {
+                    <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
+                }
+                else if ((int.Parse(Model.PageQuery) + 1) * 20 > Model.TotalRows)
+                {
+                    <a href="/beatmaps?query=@Model.SearchQuery&page=@back">Back</a>
+                }
+                else
+                {
+                    <a href="/beatmaps?query=@Model.SearchQuery&page=@back">Back</a>
+                    <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
+                }
             }
         }
     </div>
