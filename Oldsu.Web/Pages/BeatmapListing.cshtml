@@ -24,10 +24,11 @@
         
     <div class="beatmap_list">
         @{
-            if(Model.BeatmapSets == null) {
+            System.Diagnostics.Debug.Assert(Model.Listing != null, "Model.Listing != null");
+            if(Model.Listing == null) {
                 <p>No results match that query.</p>
             } else {
-                foreach(Beatmapset beatmapSet in Model.BeatmapSets) {
+                foreach(Beatmapset beatmapSet in Model.Listing) {
                     <div class="beatmap_preview_wrapper" style="background-image: linear-gradient(#FFFFFF, #FFFFFF), url('/resources/image/discoprincebg.jpg');">
                         <p class="beatmap_preview_title">@beatmapSet.Title</p>
                         <p class="beatmap_preview_artist">@beatmapSet.Artist</p>    
@@ -35,46 +36,6 @@
                         <p class="beatmap_preview_info" title="Ranked by @beatmapSet.RankedBy"><b>Ranked</b></p>
                     </div>
                 }
-            }
-            await using var database = new Database();
-            
-            if (Model.PageQuery == String.Empty) {
-                Model.PageQuery = "1";
-            }
-            
-            var paginator = Model.BeatmapService.GetBeatmapPaginator(20);
-            var totalRows = database.Beatmapsets.Count();
-            var page = await paginator.GetNewestPageAsync(Int16.Parse(Model.PageQuery) - 1);
-            foreach (var beatmapset in page)
-            {
-                <div class="card">
-                    <p style="float: left;"><img class="card-image" src="https://cdn.britannica.com/43/172743-138-545C299D/overview-Barack-Obama.jpg?w=800&h=450&c=crop"
-                                                 style="width: 200px;
-                                                       float: left; " >
-                    </p>
-                    <div class="card-body">
-                        <div class="card-info"style=
-                             "clear: left;
-                           color: black; 
-                           
-                            outline: 1px;
-">              
-                            <h5 class="card-title">@beatmapset.Artist - @beatmapset.Title</h5>
-                            <h5 class="card-creator">Mapper: @beatmapset.CreatorName</h5>
-                            <!--<h5 class="card-submitdate">Submitted at: </h5>-->
-                            <!--<h5 class="card-ranking-status">Ranking Status: </h5> -->
-                        </div>
-                        <button class="delete-beatmapset"
-                                style="
-                                background-color : rgb(176,166,166);
-                                color: white;
-                                padding: 5px 11px;
-                                border-radius: 7px;
-                                border-color: rgb(176,166,166);
-                                size: 10px;
-                                 ">Download</button>
-                    </div>
-                </div> 
             }
         }
     </div>
@@ -88,7 +49,7 @@
             {
                 <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
             }
-            else if ((int.Parse(Model.PageQuery) + 1) * 20 > totalRows)
+            else if ((int.Parse(Model.PageQuery) + 1) * 20 > Model.TotalRows)
             {
                 <a href="/beatmaps?query=@Model.SearchQuery&page=@back">Back</a>
             }
@@ -98,7 +59,6 @@
                 <a href="/beatmaps?query=@Model.SearchQuery&page=@next">Next</a>
             }
         }
-        
     </div>
     
 </div>
