@@ -31,7 +31,7 @@
                 //Model.Listing.Reverse();
                 foreach(Beatmapset beatmapSet in Model.Listing) {
                     <div class="beatmap_preview_wrapper" style="background-image: linear-gradient(#FFFFFF, #FFFFFF), url('/resources/image/discoprincebg.jpg');">
-                        <p class="beatmap_preview_title">@beatmapSet.Title</p>
+                        <p class="beatmap_preview_title"><a target="_blank" href="https://oldsu.ayyeve.xyz/osz/@beatmapSet.BeatmapsetID">@beatmapSet.Title</a></p>
                         <p class="beatmap_preview_artist">@beatmapSet.Artist</p>    
                         <p class="beatmap_preview_mapper">Mapped by <a href="/u/@beatmapSet.CreatorID">@beatmapSet.CreatorName</a></p>
                         <p class="beatmap_preview_info" title="Ranked by @beatmapSet.RankedBy"><b>Ranked</b></p>
@@ -79,4 +79,9 @@
         border-color: rgb(176,166,166);
         size: 10px;
     }
+     a, a:hover, a:focus, a:active {
+          text-decoration: none;
+          color: inherit;
+     }
+  
 </style>
