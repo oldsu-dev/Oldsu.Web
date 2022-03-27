@@ -37,16 +37,20 @@
 
     <div class="players_wrapper">
         @{
+            
             if (Model.Stats.Length == 0)
             {
                 <p>No rank matches this query.</p>
                 return;
             }
+            
         }
 
         @{
+            
             if (string.IsNullOrEmpty(Model.SearchQuery) && Model.Page == 0)
             {
+                
                 StatsWithRank firstStatWithRank = Model.Stats[0];
 
                 <div class="player player_leader">
@@ -120,6 +124,8 @@
                     </div>
                 }
             }
+            
+          
         }
     </div>
 

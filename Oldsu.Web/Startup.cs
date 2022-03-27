@@ -33,6 +33,8 @@ namespace Oldsu.Web
             #endif
 
             services.AddScoped<AuthenticationService>();
+            services.AddScoped<MySqlStatService>();
+            services.AddTransient<IStatService, MySqlStatService>();
             services.AddTransient<IBeatmapService, MySqlBeatmapService>();
 
 #if DEBUG
