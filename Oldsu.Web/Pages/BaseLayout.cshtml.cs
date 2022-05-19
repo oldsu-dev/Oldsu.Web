@@ -21,7 +21,7 @@ namespace Oldsu.Web.Pages
             (PageName: "Home", Link:  PathCorrection.Correct("/")),
             (PageName: "Beatmaps", Link: PathCorrection.Correct("/beatmaps")),
             (PageName: "Rankings", Link: PathCorrection.Correct("/leaderboard")),
-            (PageName: "Download", Link: PathCorrection.Correct("/download")),
+            (PageName: "Download", Link: PathCorrection.Correct("https://cdn.discordapp.com/attachments/762979932619669514/875022024559435776/1.5.2.zip")),
         };
     }
 }

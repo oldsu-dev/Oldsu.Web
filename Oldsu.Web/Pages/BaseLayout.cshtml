@@ -42,7 +42,17 @@
                     @foreach (var item in BaseLayout.PageMenuItems)
                     {
                         <li class="menu_list_item">
-                            <a class="menu_list_item_link" href="@item.Link">@item.PageName</a>
+                            @{
+                                if (item.PageName == "Download")
+                                {
+                                    <a class="menu_list_item_link" href="@item.Link" target="_blank" >@item.PageName</a>
+                                }
+                                else
+                                {
+                                    <a class="menu_list_item_link" href="@item.Link">@item.PageName</a>
+                                }
+                            }
+                            
                         </li>
                     }
                     @{
@@ -58,10 +68,6 @@
                                 </li>
                             }
                         }
-
-
-
-
                     }
                 </ul>
             </nav>
