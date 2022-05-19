@@ -39,7 +39,6 @@ namespace Oldsu.Web.Pages
         }
         
         public StatsWithRank?[] Stats { get; private set; }
-        public List<StatsWithRank?> lol = new List<StatsWithRank?>();
         public DbSet<StatsWithRank?> Users;
         
         private async Task LoadStats(int page, Mode mode, string? searchQuery)
@@ -47,10 +46,7 @@ namespace Oldsu.Web.Pages
             await using var database = new Database();
             foreach (UserInfo user in database.UserInfo)
             {
-                //Users.Add(await MySqlStatService.GetStatsWithRankAsync(user.UserID, Mode.Standard));
-                Users.Add(MySqlStatService.GetStatsWithRankAsync(user.UserID, Mode.Standard).Result);
-                
-                //lol.Add(MySqlStatService.GetStatsWithRankAsync(user.UserID, Mode.Standard).Result);
+                Users.Add(await MySqlStatService.GetStatsWithRankAsync(user.UserID, Mode.Standard));
             }
             
             var statsQuery = Users
