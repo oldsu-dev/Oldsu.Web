@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Oldsu.Types;
 using Oldsu.Utils;
+using Oldsu.Web.Authentication;
 using Oldsu.Web.Models;
 using Oldsu.Web.Utils;
 using Org.BouncyCastle.Utilities.Collections;
 
 namespace Oldsu.Web.Pages;
 
-public class ForgotPassword : PageModel
+public class ForgotPassword : BaseLayout
 {
     public bool Submitted { get; set; } = false;
 
@@ -46,5 +47,9 @@ public class ForgotPassword : PageModel
         Submitted = true;
 
         return Page();
+    }
+
+    public ForgotPassword(AuthenticationService authenticationService) : base(authenticationService)
+    {
     }
 }
