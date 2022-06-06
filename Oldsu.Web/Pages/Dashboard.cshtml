@@ -1,13 +1,18 @@
 ﻿@page "/dashboard"
+@using Microsoft.AspNetCore.Antiforgery
 @using Oldsu
 @using Oldsu.Enums
 @using Oldsu.Web
 @using Oldsu.Web.Pages
 @model Oldsu.Web.Pages.Dashboard
 
+@inject IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+
 @{
     Layout = "BaseLayout";
-
 }
 
 <div class="dashboard_main no_banner_margin">
@@ -51,10 +56,16 @@
                 <div class="dashboard_accinfo">
                     <h3 class="dashboard_subdiv_title">Account Information</h3>
                     <span class="dashboard_subdiv_label">E-Mail</span>
-                    <input class="dashboard_subdiv_email" type="email" value="@Model.AuthenticatedUserInfo.Email" disabled>
-                    <span class="dashboard_subdiv_label">Password</span>
-                    <input class="dashboard_subdiv_password">
-                    <button class="dashboard_subdiv_passhider">Click to change password</button>
+                    
+                    <form method="post" action=@PathCorrection.Correct("/dashboard/changeEmail")>
+                        @Html.AntiForgeryToken()
+                        <input class="dashboard_subdiv_email" type="email" name="email" value="@Model.AuthenticatedUserInfo.Email">
+                        <input type="submit" class="dashboard_subdiv_passhider" value="Click to change the email"/>
+                    </form>
+                    <form action=@PathCorrection.Correct("/dashboard/changePassword") method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="submit" class="dashboard_subdiv_passhider" value="Click to change password"/>
+                    </form>
                     <span class="gray_text" id="credit_warning">Those settings will require e-mail verification in order to change.</span>
                 </div>
             </div>
@@ -87,62 +98,70 @@
     saveSignatureButton.addEventListener('click', saveSignature);
 
     async function saveChanges(event) {
-        event.preventDefault();
-                        
-        const data = new URLSearchParams();
-        
-        data.append("occupation", document.getElementById('occupation').value);
-        data.append("interests", document.getElementById('interests').value);
-        data.append("age", document.getElementById('age').value);
-        data.append("discord", document.getElementById('discord').value);
-        data.append("twitter", document.getElementById('twitter').value);
-        data.append("website", document.getElementById('website').value);
-        
-        const resp = await fetch("@PathCorrection.Correct("/update_information")", {
-            method: 'PUT',
-            body: data, 
-        }).catch((error) => {
-            console.log(error);
+        return await displayLoading(async() => {
+            event.preventDefault();
+                            
+            const data = new URLSearchParams();
+            
+            data.append("occupation", document.getElementById('occupation').value);
+            data.append("interests", document.getElementById('interests').value);
+            data.append("age", document.getElementById('age').value);
+            data.append("discord", document.getElementById('discord').value);
+            data.append("twitter", document.getElementById('twitter').value);
+            data.append("website", document.getElementById('website').value);
+            
+            const resp = await fetch("@PathCorrection.Correct("/update_information")", {
+                method: 'PUT',
+                body: data, 
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+            if (resp.status === 200) {
+                location.assign("@PathCorrection.Correct("/profile")");
+            }
         });
-        
-        if (resp.status === 200) {
-            location.assign("@PathCorrection.Correct("/profile")");
-        }
     }
      
     async function saveSignature(event) {
-        event.preventDefault();
-                        
-        const data = new URLSearchParams();
-        
-        data.append("bbcode", document.getElementById('signature').value);
-        
-        const resp = await fetch("@PathCorrection.Correct("/update_bbcode")", {
-            method: 'PUT',
-            body: data, 
-        }).catch((error) => {
-            console.log(error);
+        return await displayLoading(async() => {
+            event.preventDefault();
+                            
+            const data = new URLSearchParams();
+            
+            data.append("bbcode", document.getElementById('signature').value);
+            
+            const resp = await fetch("@PathCorrection.Correct("/update_bbcode")", {
+                method: 'PUT',
+                body: data, 
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+            if (resp.status === 200) {
+                location.assign("@PathCorrection.Correct("/profile")");
+            }
         });
-        
-        if (resp.status == 200) {
-            location.assign("@PathCorrection.Correct("/profile")");
-        }
     }  
-     
        
     realFile.addEventListener("change", async function() {
-        let formData = new FormData();
-        
-        formData.append("avatar-image", realFile.files[0]);
-        
-        let resp = await fetch("@PathCorrection.Correct("/avatar")", 
-        { 
-            method: "post",
-            body: formData
-        })
-        
-        if (resp.status === 200) {
-            profileImage.src = profileImage.src + "?" + new Date().getTime();
-        }
+        return await displayLoading(async() => {
+            let formData = new FormData();
+            
+            formData.append("avatar-image", realFile.files[0]);
+            
+            let resp = await fetch("@PathCorrection.Correct("/avatar")", 
+            { 
+                method: "post",
+                body: formData,
+                headers: { "RequestVerificationToken" : "@token" }
+            })
+            
+            if (resp.status === 200) {
+                profileImage.src = profileImage.src + "?" + new Date().getTime();
+            }
+        });
     })
 </script>

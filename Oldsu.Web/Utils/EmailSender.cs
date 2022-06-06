@@ -29,13 +29,12 @@ namespace Oldsu.Web.Utils
             message.Subject = subject;
             message.Body = new TextPart("plain") {Text = body};
 
-            using (var client = new SmtpClient())
-            {
-                await client.ConnectAsync(Host, Port);
-                await client.AuthenticateAsync(Username, Password);
-                await client.SendAsync(message);
-                await client.DisconnectAsync(true);
-            }
+            using var client = new SmtpClient();
+            
+            await client.ConnectAsync(Host, Port);
+            await client.AuthenticateAsync(Username, Password);
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
         }
     }
 }

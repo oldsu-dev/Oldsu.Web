@@ -30,6 +30,7 @@ namespace Oldsu.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Post([FromForm] LoginSubmitModel loginData)
         {
             if (loginData.Password == null || loginData.Username == null)

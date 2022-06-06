@@ -12,7 +12,7 @@ namespace Oldsu.Web.Pages
         public async Task<IActionResult> OnGet()
         {
             if (AuthenticatedUserInfo == null)
-                return Forbid();
+                return Unauthorized();
             
             await using var db = new Database();
             UserPageInformation = await db.UserPages.FindAsync(AuthenticatedUserInfo.UserID) ?? new Types.UserPage();

@@ -72,10 +72,6 @@ namespace Oldsu.Web.Pages
 
                     string token = TokenGenerator.GenerateToken(128);
 
-                    await EmailSender.SendAsync(registerData.Email, "Email verification",
-                        "Hello. Please click on the following link to verify your email: " +
-                        $"https://oldsu.ayyeve.xyz/dev/site/verify_email?token={HttpUtility.UrlEncode(token)}");
-                    
                     await database.RequireEmailConfirmation(
                         token,
                         registerData.Username, 
@@ -83,6 +79,10 @@ namespace Oldsu.Web.Pages
                         registerData.Password, 
                         country);
                     
+                    await EmailSender.SendAsync(registerData.Email, "Email verification",
+                        "Hello. Please click on the following link to verify your email: " +
+                        $"https://oldsu.ayyeve.xyz/dev/site/verify_email?token={HttpUtility.UrlEncode(token)}");
+
                     RegistrationResult = "Registration was successful! Please verify your email to continue.";
                     break;
 
