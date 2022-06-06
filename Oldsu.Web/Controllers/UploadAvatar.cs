@@ -25,6 +25,7 @@ namespace Oldsu.Web.Controllers
         
         // todo check filesize
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPost()
         {
             if (_authenticationService.AuthenticatedUserInfo == null)

@@ -10,7 +10,7 @@ namespace Oldsu.Web.Pages
     public class BaseLayout : PageModel
     {
         public UserInfo? AuthenticatedUserInfo { get; private set; }
-        
+
         public BaseLayout(AuthenticationService authenticationService)
         {
             AuthenticatedUserInfo = authenticationService.AuthenticatedUserInfo;

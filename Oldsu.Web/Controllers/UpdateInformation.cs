@@ -18,6 +18,7 @@ namespace Oldsu.Web.Controllers
         } 
         
         [HttpPut]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPut([FromForm] InformationUpdateModel updatedInformation)
         {
             if (_authenticationService.AuthenticatedUserInfo == null)

@@ -1,7 +1,14 @@
 
+@using Microsoft.AspNetCore.Antiforgery
 @using Oldsu.Web
 @using Oldsu.Web.Pages
 @model BaseLayout
+
+
+@inject IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(Context).RequestToken;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +55,7 @@
                         <a href=@profileLink class="user_dropdown_profile">My Profile</a>
                         <a href="@PathCorrection.Correct("/friends")" class="user_dropdown_profile">Friends</a>
                         <a href="@PathCorrection.Correct("/dashboard")" class="user_dropdown_profile">Settings</a>
-                        <a class="user_dropdown_profile" id="log_out_button">Log Out</a>
+                        <a style="cursor: pointer" class="user_dropdown_profile" id="log_out_button">Log Out</a>
                     }
                 </div>
             }
@@ -82,6 +89,25 @@
 
 <script src=@PathCorrection.Correct("/resources/js/sha256_helper.js")></script>
 
+<div id="loading_screen" style="display: none; z-index: 999999;position: fixed;width: 100vw;height: 100vh; backdrop-filter: blur(9px);top: 0;background: #00000085;">
+    <div class="centered_container" style="
+    width: fit-content;
+    height: fit-content;
+    /* background-color: red; */
+    
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    margin: auto;">
+        <img alt="loading" src="/resources/image/loading.gif" style="">
+        <p style="font-family: sans-serif, 'Quicksand'; color: white;text-align: center;">Logging in...</p>
+    </div>
+    
+</div>
+
 <script>
     const form = document.getElementById('login_panel_dropdown')
             
@@ -94,49 +120,55 @@
         logoutButton.addEventListener('click', logOut)
 
     async function login(event) {
-        event.preventDefault()
-                
-        const username = document.getElementById('username_input').value
-        const password = await sha256(document.getElementById('password_input').value)
-                
-        const data = new URLSearchParams();
-        data.append("username", username);
-        data.append("password", password);
-
-        const resp = await fetch(@Html.Raw("\"" + PathCorrection.Correct("/login") + "\""), {
-            method: 'POST',
-            body: data, 
-        }).catch((error) => {
-            console.log(error);
+        return await displayLoading(async () => {
+            event.preventDefault()
+                    
+            const username = document.getElementById('username_input').value
+            const password = await sha256(document.getElementById('password_input').value)
+                    
+            const data = new URLSearchParams();
+            data.append("username", username);
+            data.append("password", password);
+    
+            const resp = await fetch(@Html.Raw("\"" + PathCorrection.Correct("/login") + "\""), {
+                method: 'POST',
+                body: data, 
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+    
+            const result = await resp.json();
+    
+            if (result.status === "error")
+                document.getElementById('message').innerHTML = result.message;
+            else if (result.status === "ok")
+                window.location.reload();
+                    
+            return false;
         });
-
-        const result = await resp.json();
-
-        if (result.status === "error")
-            document.getElementById('message').innerHTML = result.message;
-        else if (result.status === "ok")
-            window.location.reload();
-                
-        return false;
     }
             
     async function logOut(event) {
-        event.preventDefault()
-        
-        const resp = await fetch(@Html.Raw("\"" + PathCorrection.Correct("/logout") + "\""), {
-            method: 'POST' 
-        }).catch((error) => {
-            console.log(error);
+        return await displayLoading(async () => {
+            event.preventDefault()
+            
+            const resp = await fetch(@Html.Raw("\"" + PathCorrection.Correct("/logout") + "\""), {
+                method: 'POST',
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+            const result = await resp.json();
+            
+            if (result.status === "error")
+                alert(result.message);
+            else if (result.status === "ok")
+                window.location.reload();
+            
+            return false;
         });
-        
-        const result = await resp.json();
-        
-        if (result.status === "error")
-            alert(result.message);
-        else if (result.status === "ok")
-            window.location.reload();
-        
-        return false;
     }
     
     function toggleLoginDropdown() {
@@ -145,6 +177,16 @@
     
     function toggleUserDropdown() {
         document.getElementById("user_dropdown_panel").classList.toggle("show");
+    }
+    
+    async function displayLoading(asyncAction) {
+        let element = document.getElementById("loading_screen");
+        
+        element.focus({preventScroll: true});
+        element.style.display = "block";
+        let result = await asyncAction();
+        element.style.display = "none";
+        return result;
     }
 </script>
 

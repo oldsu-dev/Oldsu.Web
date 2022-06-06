@@ -6,7 +6,6 @@ using Oldsu.Web.Models;
 
 namespace Oldsu.Web.Controllers
 {
-    
     [ApiController]
     [Route("/verify_email")]
     public class VerifyEmail : Controller

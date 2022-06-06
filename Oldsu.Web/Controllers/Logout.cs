@@ -14,6 +14,7 @@ namespace Oldsu.Web.Controllers
     public class Logout : Controller
     {
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Post()
         {
             if (!Request.Cookies.TryGetValue("oldsu-sid", out var sessionId))

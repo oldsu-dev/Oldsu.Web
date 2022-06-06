@@ -18,6 +18,7 @@ namespace Oldsu.Web.Controllers
         }
         
         [HttpPut]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPut([FromForm] BBCodeUpdateModel updatedBBCode)
         {
             if (_authenticationService.AuthenticatedUserInfo == null)
