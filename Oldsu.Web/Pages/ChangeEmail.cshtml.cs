@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Oldsu.Types;
 using Oldsu.Utils;
 using Oldsu.Web.Authentication;
@@ -24,17 +25,25 @@ public class ChangeEmail : BaseLayout
 
         if (token == null)
             return Unauthorized();
-        
+
+        database.EmailChangeTokens.Remove(token);
+        await database.SaveChangesAsync();
+
         UserInfo userInfo = await database.UserInfo.FindAsync(token.UserID);
+
+        if (await database.UserInfo.AnyAsync(u => u.Email == token.Email))
+        {
+            ChangeEmailResult = "That email is already in use.";
+
+            return Page();
+        }
         
         await using var transaction = await database.Database.BeginTransactionAsync();
 
         try
         {
-            database.EmailChangeTokens.Remove(token);
             userInfo.Email = token.Email;
 
-            await database.SaveChangesAsync();
             await transaction.CommitAsync();
         }
         catch

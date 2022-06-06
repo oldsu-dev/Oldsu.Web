@@ -87,7 +87,7 @@ namespace Oldsu.Web.Pages
                     break;
 
                 case RegisterAttemptResult.UsernameAlreadyExists:
-                    RegistrationResult = "Username already exists, please use another one.";
+                    RegistrationResult = "The specified username or email are already being used, please other ones.";
                     break;
             }
         }
