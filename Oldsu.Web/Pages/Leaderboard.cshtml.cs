@@ -25,6 +25,9 @@ namespace Oldsu.Web.Pages
         
         [FromQuery(Name = "page")]
         public int Page { get; set; } = 0;
+
+        public bool HasPreviousPage { get; set; } = true;
+        public bool HasNextPage { get; set; } = true;
         
         public async Task<IActionResult> OnGet()
         {
@@ -39,6 +42,9 @@ namespace Oldsu.Web.Pages
         {
             await using var database = new Database();
 
+            if (page == 0)
+                HasPreviousPage = false;
+
             var statsQuery = database.StatsWithRank
                 .Include(s => s.User)
                 .OrderBy(s => s.Rank)
@@ -47,6 +53,11 @@ namespace Oldsu.Web.Pages
             if (!string.IsNullOrEmpty(searchQuery))
                 statsQuery = statsQuery.Where(s => s.User.Username.Contains(searchQuery));
 
+            int count = await statsQuery.CountAsync();
+
+            if (PerPageRanks * (Page+1) > count)
+                HasNextPage = false;
+            
             statsQuery = statsQuery.Skip(page * PerPageRanks).Take(PerPageRanks);
 
             Stats = await statsQuery.ToArrayAsync();

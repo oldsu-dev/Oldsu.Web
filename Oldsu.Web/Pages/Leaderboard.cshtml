@@ -32,7 +32,7 @@
                 <option value="2" @((int)Model.Mode == 2 ? "selected" : String.Empty)>Catch The Beat</option>
             </select>
         </div>
-        <input type="submit" id="leaderboard_submit" value="Search">
+        <input class="inputbar_wrapper" type="submit" id="leaderboard_submit" value="Search">
     </form>
 
     <div class="players_wrapper">
@@ -122,10 +122,28 @@
             }
         }
     </div>
+    
+    @if (Model.HasNextPage || Model.HasPreviousPage)
+    {
+        <div class="next_page_wrapper">
 
-    <div class="next_page_wrapper">
-        <div class="button_wrapper">
-            <p class="button_label">Next page</p>
+            @if (Model.HasPreviousPage)
+            {
+                <div class="button_wrapper">
+                    <a href="?query=@Model.SearchQuery&page=@(Model.Page)">
+                        <p class="button_label">Previous page</p></a>
+                </div>
+            }
+
+            @if (Model.HasNextPage)
+            {
+                <div class="button_wrapper">
+                    <a href="?query=@Model.SearchQuery&page=@(Model.Page + 2)">
+                        <p class="button_label">Next page</p></a>
+                </div>
+            }
+            
+
         </div>
-    </div>
+    }
 </div>
