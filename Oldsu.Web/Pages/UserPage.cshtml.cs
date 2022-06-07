@@ -70,9 +70,9 @@ namespace Oldsu.Web.Pages {
             {
                 // retrieve scores
                 TopScores = await database.HighScoresWithRank
-                    .Where(s => s.UserId == userId && s.Gamemode == (byte)mode)
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
+                    .Where(s => s.UserId == userId && s.Gamemode == (byte)mode && s.Beatmap.Beatmapset.RankingStatus > RankingStatus.Pending)
                     .OrderByDescending(s => s.Score)
                     .Take(5)
                     .ToListAsync();
