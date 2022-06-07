@@ -244,12 +244,14 @@ body {
 .user_info_website,
 .user_info_twitter,
 .user_info_discord {
-  display: flex;
+  white-space: nowrap;
   justify-content: center;
   font-family: "Raleway", sans-serif;
   font-weight: 700;
   color: white;
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: center;
 }
 
@@ -422,6 +424,7 @@ body {
   width: 850px;
   height: 300px;
   display: flex;
+  overflow: auto;
   justify-content: center;
   margin: 0 auto;
 }
