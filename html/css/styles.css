@@ -32,6 +32,21 @@ body {
   margin: 0 auto;
 }
 
+#leaderboard_submit {
+  font-weight: bold;
+  color: white;
+  border: 0;
+  padding: 0 20px;
+  margin: 0 0 0 27px;
+  font-size: 24px;
+  font-family: "Quicksand", sans-serif;
+  cursor: pointer;
+}
+
+#leaderboard_submit:hover {
+  background: #702039;
+}
+
 .home_info_text {
   color: white;
   font-family: "Quicksand", sans-serif;
@@ -531,7 +546,7 @@ body {
 /* <editor-fold desc="Button"> */
 .button_wrapper {
   height: 36px;
-  width: 123px;
+  width: fit-content;
 
   background-color: #e02f64;
   border: 1px solid #000000;
@@ -546,6 +561,7 @@ body {
   text-align: center;
 
   cursor: pointer;
+  padding: 0 15px;
 }
 
 .button_label {

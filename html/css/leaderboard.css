@@ -118,10 +118,11 @@ th.player_playcount:not(.player_leader) {
 }
 
 .next_page_wrapper {
-    align-items: center;
     display: flex;
-    flex-direction: column;
     padding-bottom: 18px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .player_table, .player_leader_table {
