@@ -82,6 +82,9 @@ namespace Oldsu.Web.Pages
                     await EmailSender.SendAsync(registerData.Email, "Email verification",
                         "Hello. Please click on the following link to verify your email: " +
                         $"https://oldsu.ayyeve.xyz/dev/site/verify_email?token={HttpUtility.UrlEncode(token)}");
+                    
+                    await _loggingManager.LogInfo<Register>(
+                        $"Username: {registerData.Username} has registered, ip: {HttpContext.GetIpAddress()}.");
 
                     RegistrationResult = "Registration was successful! Please verify your email to continue.";
                     break;

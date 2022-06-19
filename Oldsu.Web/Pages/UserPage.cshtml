@@ -129,8 +129,32 @@
                 }
                 <h4 class="user_info_joindate">Joined: @Model.UserInfo.JoinedAt.ToShortDateString()</h4>
             </div>
+            
         }
     }
+</div>
+<div class="user_stat_container">
+<div class="inputbar_wrapper" id="user_stat_mode_selector">
+    <p class="inputbar_label">Gamemode:</p>
+    <select id="inputbar_ranking_gamemode_input" class="inputbar_text" name="mode">
+        <option value="0" @((int)Model.Mode == 0 ? "selected" : String.Empty)>Standard</option>
+        <option value="1" @((int)Model.Mode == 1 ? "selected" : String.Empty)>Taiko</option>
+        <option value="2" @((int)Model.Mode == 2 ? "selected" : String.Empty)>Catch The Beat</option>
+    </select>
+    <script>
+        document.getElementById('user_stat_mode_selector').addEventListener('change', (e) => {
+            switch (e.target.value) {
+                case "0":
+                    return window.location = "@PathCorrection.Correct($"/u/{Model.UserInfo.UserID}/osu")";
+                case "1":
+                    return window.location = "@PathCorrection.Correct($"/u/{Model.UserInfo.UserID}/taiko")";
+                case "2":
+                    return window.location = "@PathCorrection.Correct($"/u/{Model.UserInfo.UserID}/ctb")";
+                default:
+                    return window.location = "@PathCorrection.Correct($"/u/{Model.UserInfo.UserID}/osu")";
+            }
+        });
+    </script>
 </div>
 <div class="user_stat_wrapper">
     @{
@@ -186,7 +210,7 @@
         }
         else
         {
-            <h5>User hasn't yet played any maps on this gamemode, try to persuade them to play it!</h5>
+            <h5 style="margin-top: 25px">User hasn't yet played any maps on this gamemode, try to persuade them to play it!</h5>
         }
     }
     @{
@@ -208,7 +232,7 @@
     }
 
     @{
-        if (Model.UserStats != null)
+        if (Model.UserStats != null && Model.TopScores != null && Model.TopScores.Count > 0)
         {
             <div class="user_stat_wrapper">
                 <div class="user_stat_fp">
@@ -254,36 +278,40 @@
                 </div>
             </div>
 
-            <div class="user_stat_wrapper">
-                <div class="user_stat_fp">
-                    <div class="user_stat_heading_wrapper">
-                        <h4 class="user_stat_heading">First Places</h4>
-                    </div>
-                    <div class="first_places_wrapper">
-                        <div class="first_place_content">
-                            <div class="first_place_metadata-bg_wrapper">
-                                <img class="first_place_bg" src=@PathCorrection.Correct("/resources/image/discoprincebg.jpg") alt="Artist - Title (by Mapper)">
-                                <div class="first_place_metadata_wrapper">
-                                    <span class="first_place_metadata">Artist - Title (by Mapper)</span>
-                                    <span class="first_place_diff">[Difficulty]</span>
-                                </div>
-                            </div>
-                            <div class="first_place_score_details">
-                                <div class="first_place_rank">
-                                    <img class="first_place_rank_image" src=@PathCorrection.Correct("/resources/image/ranks/gl_SS.png")>
-                                </div>
-                                <span class="first_place_score_acc">00.00%</span>
-                                <span class="first_place_score_mods">HD DT HR FL</span>
-                            </div>
+
+        }
+    }
+    
+        <!--
+    <div class="user_stat_wrapper">
+        <div class="user_stat_fp">
+            <div class="user_stat_heading_wrapper">
+                <h4 class="user_stat_heading">First Places</h4>
+            </div>
+            <div class="first_places_wrapper">
+                <div class="first_place_content">
+                    <div class="first_place_metadata-bg_wrapper">
+                        <img class="first_place_bg" src=@PathCorrection.Correct("/resources/image/discoprincebg.jpg") alt="Artist - Title (by Mapper)">
+                        <div class="first_place_metadata_wrapper">
+                            <span class="first_place_metadata">Artist - Title (by Mapper)</span>
+                            <span class="first_place_diff">[Difficulty]</span>
                         </div>
+                    </div>
+                    <div class="first_place_score_details">
+                        <div class="first_place_rank">
+                            <img class="first_place_rank_image" src=@PathCorrection.Correct("/resources/image/ranks/gl_SS.png")>
+                        </div>
+                        <span class="first_place_score_acc">00.00%</span>
+                        <span class="first_place_score_mods">HD DT HR FL</span>
                     </div>
                 </div>
             </div>
-        }
-    }
+        </div>
+    </div>
+    -->
 </div>
 </div>
-
+</div>
 <script>
     const stats = JSON.parse(document.getElementById("stats").textContent);
     document.getElementById("user_card_ranking_level").textContent = `Level: ${calcLevelPrecise(stats.totalScore).toFixed(0)}`
