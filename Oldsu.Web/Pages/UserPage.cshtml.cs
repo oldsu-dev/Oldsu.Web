@@ -19,28 +19,28 @@ namespace Oldsu.Web.Pages {
         public List<RankHistory>? RankHistory { get; set; }
         public List<HighScoreWithRank>? TopScores { get; set; }
         public List<ScoreRow>? RecentScores { get; set; }
-        
+        public Mode Mode { get; set; }
+
         public List<Badge>? Badges { get; set; }
 
         public async Task<IActionResult> OnGet([FromRoute] uint userId, [FromRoute] string strMode = "") 
         {
-            Mode mode;
             switch(strMode) 
             {
                  case "osu":
-                     mode = Mode.Standard;
+                     Mode = Mode.Standard;
                      break;
 
                  case "taiko":
-                     mode = Mode.Taiko;
+                     Mode = Mode.Taiko;
                      break;
                      
                  case "ctb":
-                     mode = Mode.CatchTheBeat;
+                     Mode = Mode.CatchTheBeat;
                      break;
                  
                  case "mania":
-                     mode = Mode.Mania;
+                     Mode = Mode.Mania;
                      break;
                  
                  default:
@@ -57,7 +57,7 @@ namespace Oldsu.Web.Pages {
 
             UserStats = database.StatsWithRank
                 .Include(s => s.User)
-                .FirstOrDefault(s => s.UserID == userId && s.Mode == mode);
+                .FirstOrDefault(s => s.UserID == userId && s.Mode == Mode);
             
             UserPageInfo = await database.UserPages
                 .FirstOrDefaultAsync(s => s.UserID == userId);
@@ -72,13 +72,15 @@ namespace Oldsu.Web.Pages {
                 TopScores = await database.HighScoresWithRank
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
-                    .Where(s => s.UserId == userId && s.Gamemode == (byte)mode && s.Beatmap.Beatmapset.RankingStatus > RankingStatus.Pending)
+                    .Where(s => s.UserId == userId && s.Gamemode == (byte)Mode && s.Beatmap.Beatmapset.RankingStatus > RankingStatus.Pending)
                     .OrderByDescending(s => s.Score)
                     .Take(5)
                     .ToListAsync();
                 
+                
+                
                 RecentScores = await database.Scores
-                    .Where(s => s.UserId == userId && s.Gamemode == (byte)mode)
+                    .Where(s => s.UserId == userId && s.Gamemode == (byte)Mode)
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
                     .OrderByDescending(s => s.SubmittedAt)
@@ -89,7 +91,7 @@ namespace Oldsu.Web.Pages {
                 RankHistory = new List<RankHistory>();
             
                 // dog 123
-                var wtf = await database.RankHistory.Where(r => r.UserID == userId && r.Mode == mode).ToArrayAsync();
+                var wtf = await database.RankHistory.Where(r => r.UserID == userId && r.Mode == Mode).ToArrayAsync();
             
                 RankHistory.AddRange(wtf);
                 RankHistory.Add(new RankHistory {UserID = userId, Date = DateTime.Now, Rank = UserStats.Rank});

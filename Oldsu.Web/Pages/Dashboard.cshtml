@@ -62,11 +62,13 @@
                         <input class="dashboard_subdiv_email" type="email" name="email" value="@Model.AuthenticatedUserInfo.Email">
                         <input type="submit" class="dashboard_subdiv_passhider" value="Click to change the email"/>
                     </form>
+                    <span class="gray_text" id="credit_warning">Enter the new email in the textbox above before clicking the button.</span>
+
                     <form action=@PathCorrection.Correct("/dashboard/changePassword") method="post">
                         @Html.AntiForgeryToken()
                         <input type="submit" class="dashboard_subdiv_passhider" value="Click to change password"/>
                     </form>
-                    <span class="gray_text" id="credit_warning">Those settings will require e-mail verification in order to change.</span>
+                    <span class="gray_text" id="credit_warning">This setting will require e-mail verification in order to change.</span>
                 </div>
             </div>
     <div class="dashboard_underpanel_wrapper">

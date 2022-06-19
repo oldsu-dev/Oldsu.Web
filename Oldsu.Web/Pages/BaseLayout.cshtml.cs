@@ -21,7 +21,6 @@ namespace Oldsu.Web.Pages
             (PageName: "Home", Link:  PathCorrection.Correct("/")),
             (PageName: "Beatmaps", Link: PathCorrection.Correct("/beatmaps")),
             (PageName: "Rankings", Link: PathCorrection.Correct("/leaderboard")),
-            (PageName: "Download", Link: PathCorrection.Correct("/download")),
         };
     }
 }

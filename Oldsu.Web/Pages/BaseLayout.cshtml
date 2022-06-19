@@ -53,7 +53,6 @@
                         var profileLink = PathCorrection.Correct($"/u/{@Model.AuthenticatedUserInfo.UserID}");
                         
                         <a href=@profileLink class="user_dropdown_profile">My Profile</a>
-                        <a href="@PathCorrection.Correct("/friends")" class="user_dropdown_profile">Friends</a>
                         <a href="@PathCorrection.Correct("/dashboard")" class="user_dropdown_profile">Settings</a>
                         <a style="cursor: pointer" class="user_dropdown_profile" id="log_out_button">Log Out</a>
                     }
@@ -103,7 +102,7 @@
     
     margin: auto;">
         <img alt="loading" src=@PathCorrection.Correct("/resources/image/loading.gif") style="">
-        <p style="font-family: sans-serif, 'Quicksand'; color: white;text-align: center;">Logging in...</p>
+        <p style="font-family: sans-serif, 'Quicksand'; color: white;text-align: center;">Loading...</p>
     </div>
     
 </div>
@@ -194,16 +193,16 @@
     <div class="footer_content">
         <ul class="footer_list">
             <li class="footer_list_item">
-                <a class="footer_list_item_link">Privacy</a>
+                <a class="footer_list_item_link" href="@PathCorrection.Correct("/privacy")">Privacy</a>
             </li>
             <li class="footer_list_item">
-                <a class="footer_list_item_link">Gitlab</a>
+                <a class="footer_list_item_link" href="https://gitlab.ayyeve.xyz/oldsu">Gitlab</a>
             </li>
             <li class="footer_list_item">
-                <a class="footer_list_item_link">Terms of Service</a>
+                <a class="footer_list_item_link" href="@PathCorrection.Correct("/tos")">Terms of Service</a>
             </li>
             <li class="footer_list_item">
-                <a class="footer_list_item_link">Copyright</a>
+                <a class="footer_list_item_link" href="@PathCorrection.Correct("/copyright")">Copyright</a>
             </li>
             <li class="footer_list_item">
                 <a class="footer_list_item_link">Discord</a>

@@ -26,7 +26,7 @@
             <input type="password" class="form_cnf-password" id="confirmpassword" name="cnf-password" placeholder="Confirm Password" required>
             <div class="form_checkbox_wrapper">
                 <input type="checkbox" class="form_checkbox" id="tos_checkbox" name="tos_checkbox" value="ss" required>
-                <label for="tos_checkbox" class="form_checkbox_label">I agree to Terms of Service</label>
+                <label for="tos_checkbox" class="form_checkbox_label">I agree to <a href="@PathCorrection.Correct("/tos")">Terms of Service</a> and the <a href="@PathCorrection.Correct("/privacy")">Privacy Policy</a></label>
             </div>
             <input type="submit" class="form_submit_button" id="register_submit" name="register_submit" value="Sign up">
         </form>
@@ -59,7 +59,7 @@ function formCallback() {
 }
 
 function validateForm(password, confirmPassword) {
-    if (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/) == null)
+    if (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\s\W]{8,}$/) == null)
     {
         alert("The password must contain minimum eight characters, at least one uppercase letter, " +
               "one lowercase letter and one number.")
