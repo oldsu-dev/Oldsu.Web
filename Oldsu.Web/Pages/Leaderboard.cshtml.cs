@@ -48,7 +48,7 @@ namespace Oldsu.Web.Pages
             var statsQuery = database.StatsWithRank
                 .Include(s => s.User)
                 .OrderBy(s => s.Rank)
-                .Where(s => s.Mode == mode);
+                .Where(s => s.Mode == mode && !s.User.Banned);
 
             if (!string.IsNullOrEmpty(searchQuery))
                 statsQuery = statsQuery.Where(s => s.User.Username.Contains(searchQuery));
