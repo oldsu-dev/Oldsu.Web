@@ -59,7 +59,7 @@ function formCallback() {
 }
 
 function validateForm(password, confirmPassword) {
-    if (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\s\W]{8,}$/) == null)
+    if (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\s\W_]{8,}$/) == null)
     {
         alert("The password must contain minimum eight characters, at least one uppercase letter, " +
               "one lowercase letter and one number.")
