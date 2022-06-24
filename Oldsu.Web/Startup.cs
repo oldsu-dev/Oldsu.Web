@@ -17,6 +17,7 @@ using Oldsu.DatabaseServices;
 using Oldsu.DatabaseServices.MySql;
 using Oldsu.Logging;
 using Oldsu.Logging.Strategies;
+using Oldsu.Utils;
 using Oldsu.Web.Authentication;
 
 namespace Oldsu.Web
@@ -36,6 +37,7 @@ namespace Oldsu.Web
             services.AddScoped<MySqlStatService>();
             services.AddTransient<IStatService, MySqlStatService>();
             services.AddTransient<IBeatmapService, MySqlBeatmapService>();
+            services.AddTransient<IOnlineUserService, OnlineUserService>();
 
 #if DEBUG
             services.AddScoped(_ =>

@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Oldsu.DatabaseServices;
 using Oldsu.Enums;
+using Oldsu.Logging.Strategies;
 using Oldsu.Types;
+using Oldsu.Utils;
 using Oldsu.Web.Authentication;
 
 namespace Oldsu.Web.Pages
@@ -17,6 +20,8 @@ namespace Oldsu.Web.Pages
 
         public readonly IBeatmapService BeatmapService;
 
+        public OnlineUserService OnlineUserService;
+
         public enum CurrentMenu
         {
             Dashboard = 0,
@@ -26,10 +31,12 @@ namespace Oldsu.Web.Pages
             Reports = 4
         }
         
-        public AdminDashboard(AuthenticationService authenticationService, IBeatmapService beatmapService)
+        public AdminDashboard(AuthenticationService authenticationService, 
+            IBeatmapService beatmapService, OnlineUserService onlineUserService)
         {
             AuthenticatedUserInfo = authenticationService.AuthenticatedUserInfo;
             BeatmapService = beatmapService;
+            OnlineUserService = onlineUserService;
         }
 
         public async Task<IActionResult> OnGet()
@@ -41,9 +48,17 @@ namespace Oldsu.Web.Pages
                 
             await using var db = new Database();
             AdminInformation = await db.UserInfo.FindAsync(AuthenticatedUserInfo.UserID) ?? new Types.UserInfo();
-            //db.TestAddMapAsync("f4b98cf7c6e2d9eed80f4551da211ac3");
-            //db.TestAddMapAsync("f4b98cf7c6e2d9eed80f4551da211ac3");
-            //db.TestAddMapAsync("f4b98cf7c6e2d9eed80f4551da211ac3");
+
+            var users = OnlineUserService.GetOnlineUsers();
+            
+            foreach (OnlineUser? user in users.Result)
+            {
+                System.Console.WriteLine("----");
+                System.Console.WriteLine(user?.Username);
+                System.Console.WriteLine("----");
+            }
+            
+            
             return Page();
         }
         
