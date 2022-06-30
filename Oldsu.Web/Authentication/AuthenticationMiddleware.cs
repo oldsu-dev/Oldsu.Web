@@ -24,7 +24,12 @@ namespace Oldsu.Web.Authentication
                 UserInfo? userInfo = await SessionAuthenticator.Authenticate(sessionId!);
 
                 if (userInfo != null)
-                    authenticationService.AuthenticatedUserInfo = userInfo;
+                {
+                    if (userInfo.Banned)
+                        context.Response.Cookies.Delete("oldsu-sid");
+                    else
+                        authenticationService.AuthenticatedUserInfo = userInfo;
+                }
                 else
                     context.Response.Cookies.Delete("oldsu-sid");
             }
