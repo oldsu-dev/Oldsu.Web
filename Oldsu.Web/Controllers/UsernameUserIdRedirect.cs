@@ -8,7 +8,7 @@ using Oldsu.Utils.Cache;
 namespace Oldsu.Web.Controllers;
 
 [ApiController]
-[Route("/u/{username:alpha}/{mode?}")]
+[Route("/u/{username}/{mode?}")]
 public class UsernameUserIdRedirect : Controller
 {
     [HttpGet()]
