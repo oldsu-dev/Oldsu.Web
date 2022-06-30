@@ -62,6 +62,13 @@ namespace Oldsu.Web.Controllers
                     Message = "Unknown username or wrong password.",
                 });
 
+            if (user.Banned)
+                return Ok(new BasicResponseModel
+                {
+                    Status = "error",
+                    Message = "This account is banned.",
+                });
+            
             var sessionId = TokenGenerator.GenerateToken(128);
 
             await db.AddWebSession(sessionId, user.UserID, _expires);

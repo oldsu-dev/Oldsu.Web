@@ -63,6 +63,15 @@
 
 @model Oldsu.Web.Pages.UserPage
 
+@if (Model.UserInfo.Banned)
+{
+    <div class="tos_content">
+        <h1>This account is banned</h1>
+    </div>
+
+    return;
+}
+
 <div class="user_content">
 <div class="user_card-info_wrapper">
     <div class="user_card">
@@ -282,7 +291,7 @@
         }
     }
     
-        <!--
+    <!--
     <div class="user_stat_wrapper">
         <div class="user_stat_fp">
             <div class="user_stat_heading_wrapper">

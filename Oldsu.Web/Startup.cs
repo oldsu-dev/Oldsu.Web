@@ -74,15 +74,8 @@ namespace Oldsu.Web
                 RequestPath = "/resources/js"
             });
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.GetFullPath(FolderConfiguration.AvatarsFolder)),
-                HttpsCompression = HttpsCompressionMode.Compress,
-                RequestPath = "/avatars"
-            });
-            
-            app.UseRouting(); 
-            
+            app.UseRouting();
+
             app.UseMiddleware<AuthenticationMiddleware>();
             
             app.UseEndpoints(endpoints =>

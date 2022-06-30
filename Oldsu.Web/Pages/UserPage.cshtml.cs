@@ -77,15 +77,13 @@ namespace Oldsu.Web.Pages {
                     .Take(5)
                     .ToListAsync();
                 
-                
-                
-                RecentScores = await database.Scores
+                /*RecentScores = await database.Scores
                     .Where(s => s.UserId == userId && s.Gamemode == (byte)Mode)
                     .Include(s => s.Beatmap)
                     .ThenInclude(b => b.Beatmapset)
                     .OrderByDescending(s => s.SubmittedAt)
                     .Take(5)
-                    .ToListAsync();
+                    .ToListAsync();*/
                 
                 
                 RankHistory = new List<RankHistory>();
