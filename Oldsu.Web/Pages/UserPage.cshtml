@@ -55,7 +55,6 @@
 
 <script src=@PathCorrection.Correct("/resources/js/user_level_calc.js")></script>
 <script src=@PathCorrection.Correct("/resources/js/chart.min.js")></script>
-<script src=@PathCorrection.Correct("/resources/js/accuracy_calc.js")></script>
 
 <script id="stats" type="application/json">
 @Json.Serialize(new {totalScore = userStats?.TotalScore ?? 0, rankHistory = Model.RankHistory})
@@ -65,8 +64,8 @@
 
 @if (Model.UserInfo.Banned)
 {
-    <div class="tos_content">
-        <h1>This account is banned</h1>
+    <div class="user_content">
+        <h3>This account is banned</h3>
     </div>
 
     return;
