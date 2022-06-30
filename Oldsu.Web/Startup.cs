@@ -35,6 +35,9 @@ namespace Oldsu.Web
 
             services.AddScoped<AuthenticationService>();
             services.AddScoped<MySqlStatService>();
+            services.AddScoped<MySqlUserService>();
+            services.AddScoped<OnlineUserService>();
+            services.AddTransient<IUserService, MySqlUserService>();
             services.AddTransient<IStatService, MySqlStatService>();
             services.AddTransient<IBeatmapService, MySqlBeatmapService>();
             services.AddTransient<IOnlineUserService, OnlineUserService>();

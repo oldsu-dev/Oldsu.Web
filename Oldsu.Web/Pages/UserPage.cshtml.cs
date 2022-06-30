@@ -52,7 +52,7 @@ namespace Oldsu.Web.Pages {
             UserInfo = await database.UserInfo
                 .FindAsync(userId);
             
-            if(UserInfo == null) 
+            if(UserInfo == null || UserInfo.Banned) 
                 return NotFound();
 
            //UserStats = database.StatsWithRank
