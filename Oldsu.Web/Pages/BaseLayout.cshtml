@@ -61,8 +61,7 @@
                         if (hasCookie)
                         {
                             var userSession = await database.GetWebSession(cookie);
-                            if (userSession != null && (userSession.UserInfo.Privileges == Privileges.Developer 
-                                                        || userSession.UserInfo.Privileges == Privileges.BAT))
+                            if (userSession != null && (userSession.UserInfo.Privileges == Privileges.Developer))
                             {
                                 <li class="menu_list_item">
                                     <a class="menu_list_item_link" href="/admin/users">Admin Dashboard</a>
