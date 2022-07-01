@@ -12,7 +12,7 @@ namespace Oldsu.Web.Models
         public string? Reason { get; set; }
 
         [BindProperty(Name = "admin")] 
-        public string Admin { get; set; }
+        public UserInfo? Admin { get; set; }
         
         [BindProperty(Name = "userid")] 
         public int UserID { get; set; }

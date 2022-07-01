@@ -92,7 +92,7 @@
             <form asp-page-handler="BanUsername" method="post" name="ban_form" class="form">
               <input type="text" class="form_username" id="username" maxlength="32" name="username" placeholder="Username" required> <br/>
               <input type="text" class="form_reason" id="reason" name="reason" placeholder="Ban reason" required> <br/>
-              <input type="text" class="form_admin" id="admin" name="admin" readonly="readonly" value="@Model.AdminInformation?.Username"> <br/>
+              <p>Current admin: @Model.AdminInformation?.Username</p>
               <input type="submit" class="form_submit_button" id="ban_submit" name="ban_submit" value="YEET!">
             </form>
           </div>
@@ -102,7 +102,7 @@
             <form asp-page-handler="BanUserID" method="post" name="ban_form" class="form">
               <input type="number" class="form_userid" id="userid" maxlength="32" name="userid" placeholder="UserID" required> <br/>
               <input type="text" class="form_reason" id="reason" name="reason" placeholder="Ban reason" required> <br/>
-              <input type="text" class="form_admin" id="admin" name="admin" readonly="readonly" value="@Model.AdminInformation?.Username"> <br/>
+              <p>Current admin: @Model.AdminInformation?.Username</p>
               <input type="submit" class="form_submit_button" id="ban_submit" name="ban_submit" value="YEET!">
             </form>
           </div>
