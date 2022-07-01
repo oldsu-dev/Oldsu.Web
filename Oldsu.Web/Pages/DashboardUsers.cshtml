@@ -1,6 +1,7 @@
 @page "/admin/users"
 @using Oldsu.Enums
 @model Oldsu.Web.Pages.DashboardUsers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     Layout = null;
@@ -85,13 +86,27 @@
     <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
       <div class="user-ban">
         <div class="card">
-          <h3>Yeet the child!! (Ban)</h3>
-          <form onsubmit="" method="post" name="ban_form" class="form">
-            <input type="text" class="form_username" id="username" maxlength="32" name="username" placeholder="Username" required> <br/>
-            <input type="text" class="form_reason" id="reason" name="reason" placeholder="Ban reason" required> <br/>
-            <input type="text" class="form_admin" id="admin" name="admin" readonly="readonly" value="@Model.AdminInformation?.Username"> <br/>
-            <input type="submit" class="form_submit_button" id="ban_submit" name="ban_submit" value="YEET!">
-          </form>
+          <h2>Ban Users</h2>
+          <div class="card">
+            <h4>Using Username</h4>
+            <form asp-page-handler="BanUsername" method="post" name="ban_form" class="form">
+              <input type="text" class="form_username" id="username" maxlength="32" name="username" placeholder="Username" required> <br/>
+              <input type="text" class="form_reason" id="reason" name="reason" placeholder="Ban reason" required> <br/>
+              <input type="text" class="form_admin" id="admin" name="admin" readonly="readonly" value="@Model.AdminInformation?.Username"> <br/>
+              <input type="submit" class="form_submit_button" id="ban_submit" name="ban_submit" value="YEET!">
+            </form>
+          </div>
+          <br/>
+          <div class="card">
+            <h4>Using ID</h4>
+            <form asp-page-handler="BanUserID" method="post" name="ban_form" class="form">
+              <input type="number" class="form_userid" id="userid" maxlength="32" name="userid" placeholder="UserID" required> <br/>
+              <input type="text" class="form_reason" id="reason" name="reason" placeholder="Ban reason" required> <br/>
+              <input type="text" class="form_admin" id="admin" name="admin" readonly="readonly" value="@Model.AdminInformation?.Username"> <br/>
+              <input type="submit" class="form_submit_button" id="ban_submit" name="ban_submit" value="YEET!">
+            </form>
+          </div>
+          <h3 class="clearfix">@Model.BanMessage</h3>
         </div>
       </div>
     </main>

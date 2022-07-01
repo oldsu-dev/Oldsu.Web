@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Oldsu.DatabaseServices.MySql;
 using Oldsu.Enums;
+using Oldsu.Logging;
 using Oldsu.Types;
 using Oldsu.Web.Authentication;
 using Oldsu.Web.Models;
@@ -17,16 +18,21 @@ public class DashboardUsers : PageModel
     public string? BanResult { get; set; }
     public UserInfo? AdminInformation { get; set; }
     public MySqlUserService UserService { get; set; }
-    public DashboardUsers(AuthenticationService authenticationService, MySqlUserService userService)
+    private LoggingManager _loggingManager;
+    public string BanMessage { get; set; } = "";
+    
+    public DashboardUsers(AuthenticationService authenticationService, MySqlUserService userService,
+        LoggingManager loggingManager)
     {
         AuthenticatedUserInfo = authenticationService.AuthenticatedUserInfo;
         UserService = userService;
+        _loggingManager = loggingManager;
     }
     
     public async Task<IActionResult> OnGet()
     {
         if (AuthenticatedUserInfo != null 
-            && (AuthenticatedUserInfo.Privileges == Privileges.Developer || AuthenticatedUserInfo.Privileges == Privileges.BAT))
+            && (AuthenticatedUserInfo.Privileges == Privileges.Developer))
         {
             await using var db = new Database();
             AdminInformation = await db.UserInfo.FindAsync(AuthenticatedUserInfo.UserID) ?? new UserInfo();
@@ -36,9 +42,33 @@ public class DashboardUsers : PageModel
         return Forbid();
     }
     
-    public async Task OnPost([FromForm] BanSubmitModel banData)
+    public async Task OnPostBanUsername([FromForm] BanSubmitModel banData)
     {
-        if (banData.Username != null) await UserService.SetUserBanByName(banData.Username, true);
-        // log the action
+        await using var database = new Database();
+        var userInfo = database.UserInfo.Where(u => u.Username == banData.Username).FirstOrDefaultAsync()
+            .Result;
+        if (userInfo != null)
+            banData.UserID = (int) userInfo
+                .UserID;
+        if (banData.Username != null)
+            if (banData.Reason != null)
+                await UserService.SetUserBanByName(banData.Username, true, banData.Reason);
+        BanMessage = $"User {banData.Username} is banned by {banData.Admin}.\nReason: {banData.Reason}";
+        await _loggingManager.LogInfo<DashboardUsers>(BanMessage);
+    }
+    
+    public async Task OnPostBanUserID([FromForm] BanSubmitModel banData)
+    {
+        await using var database = new Database();
+        var userInfo = database.UserInfo.Where(u => u.UserID == banData.UserID).FirstOrDefaultAsync()
+            .Result;
+        if (userInfo != null)
+            banData.Username = userInfo
+                .Username;
+        if (banData.Username != null)
+            if (banData.Reason != null)
+                await UserService.SetUserBanByID(banData.UserID, true, banData.Reason);
+        BanMessage = $"User {banData.Username} is banned by {banData.Admin}.\nReason: {banData.Reason}";
+        await _loggingManager.LogInfo<DashboardUsers>(BanMessage);
     }
 }

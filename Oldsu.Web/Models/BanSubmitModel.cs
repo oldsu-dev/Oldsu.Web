@@ -13,5 +13,8 @@ namespace Oldsu.Web.Models
 
         [BindProperty(Name = "admin")] 
         public string Admin { get; set; }
+        
+        [BindProperty(Name = "userid")] 
+        public int UserID { get; set; }
     }
 }
