@@ -24,7 +24,7 @@ namespace Oldsu.Web.Utils
         public static async Task SendAsync(string target, string subject, string body)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Oldsu", "oldsu@ayyeve.xyz"));
+            message.From.Add(new MailboxAddress("Oldsu", "oldsu@ayyeve.dev"));
             message.To.Add(new MailboxAddress(target, target));
             message.Subject = subject;
             message.Body = new TextPart("plain") {Text = body};
