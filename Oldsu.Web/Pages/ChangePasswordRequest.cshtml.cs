@@ -26,7 +26,7 @@ public class ChangePasswordRequest : BaseLayout
         await database.RequirePasswordChange(AuthenticatedUserInfo.UserID, token);
 
         await EmailSender.SendAsync(AuthenticatedUserInfo.Email, "Oldsu - Change password",
-            $"Here the link you can follow to change your password: https://oldsu.ayyeve.xyz/change_password?token={HttpUtility.UrlEncode(token)}\n" +
+            $"Here the link you can follow to change your password: https://oldsu.ayyeve.dev/change_password?token={HttpUtility.UrlEncode(token)}\n" +
             $"If you did not expect this email, CONTACT THE STAFF IMMEDIATELY.");
 
         return Page();
