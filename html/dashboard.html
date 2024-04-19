@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>User Settings</title>
+</head>
+<body>
+    <div class="header_wrapper">
+        <header class="header">
+            <div class="logo_wrapper">
+                <h1 class="logo">oldsu!</h1>
+            </div>
+            <div class="menu_wrapper">
+                <nav class="menu">
+                    <ul class="menu_list">
+                        <li class="menu_list_item">
+                            <a class="menu_list_item_link" href="#">Home</a>
+                        </li>
+                        <li class="menu_list_item">
+                            <a class="menu_list_item_link" href="#">Beatmaps</a>
+                        </li>
+                        <li class="menu_list_item">
+                            <a class="menu_list_item_link" href="#">Leaderboard</a>
+                        </li>
+                        <li class="menu_list_item">
+                            <a class="menu_list_item_link" href="#">Community</a>
+                        </li>
+                        <li class="menu_list_item">
+                            <a class="menu_list_item_link" href="#">Help</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <a class="user_profile_link">
+                <img src="image/paimon.jpg" alt="upl" class="user_profile_image">
+                <a href="#" class="sign_in_button">sign in</a>
+            </a>
+            <div class="login_panel">
+                <h3 class="login_panel_header">Please sign in</h3>
+                <input class="login_panel_input" type="text" id="username_input" placeholder="username">
+                <input class="login_panel_input" type="password" id="password_input" placeholder="password">
+                <input class="login_panel_button" type="submit" id="submit_input" value="Sign in">
+                <span class="login_panel_status">Unknown username or password.</span>
+                <a href="#" class="login_panel_linktext">Register</a>
+                <a href="#" class="login_panel_linktext">I forgot my password</a>
+            </div>
+            <div class="user_dropdown">
+                <img src="image/paimon.jpg" class="user_dropdown_avatar">
+                <span class="user_dropdown_nickname">nickname</span>
+                <a href="#" class="user_dropdown_profile">My Profile</a>
+                <a href="#" class="user_dropdown_profile">Friends</a>
+                <a href="#" class="user_dropdown_profile">Settings</a>
+                <a href="#" class="user_dropdown_profile">Log Out</a>
+            </div>
+        </header>
+    </div>
+    <main> 
+        <div class="dashboard_main">
+            <div class="dashboard_subdiv_wrapper">
+                <div class="dashboard_profinfo">
+                    <h3 class="dashboard_subdiv_title">Profile Information</h3>
+                    <span class="dashboard_subdiv_label">Username</span>
+                    <div class="dashboard_label_value_wrapper">
+                        <span class="dashboard_subdiv_username">Paimon</span>
+                    </div>
+                    <span class="dashboard_subdiv_label">Country</span>
+                    <div class="dashboard_label_value_wrapper">
+                        <span class="dashboard_subdiv_country">CIRNOBYL</span>
+                    </div>
+                    <span class="dashboard_subdiv_label">Profile Picture <span class="gray_text">(max. 128x128)</span></span>
+                    <div class="dashboard_avatarupload_wrapper">
+                        <img class="dashboard_avatarupload_avatar" src="image/paimon.jpg">
+                        <button class="dashboard_avatarupload_button">upload</button>
+                    </div>
+                </div>
+                <div class="dashboard_genfinfo">
+                    <h3 class="dashboard_subdiv_title">General Information</h3>
+                    <span class="dashboard_subdiv_label">Occupation</span>
+                        <input class="dashboard_subdiv_occup">
+                    <span class="dashboard_subdiv_label">Interests</span>
+                        <input class="dashboard_subdiv_interests">
+                    <span class="dashboard_subdiv_label">Age</span>
+                        <input class="dashboard_subdiv_age">
+                </div>
+                <div class="dashboard_coninfo">
+                    <h3 class="dashboard_subdiv_title">Contact Information</h3>
+                    <span class="dashboard_subdiv_label">Discord</span>
+                        <input class="dashboard_subdiv_condiscord">
+                    <span class="dashboard_subdiv_label">Twitter</span>
+                        <input class="dashboard_subdiv_contwitter">
+                    <span class="dashboard_subdiv_label">Website</span>
+                        <input class="dashboard_subdiv_conwebsite">
+                </div>
+                <div class="dashboard_accinfo">
+                    <h3 class="dashboard_subdiv_title">Account Information</h3>
+                    <span class="dashboard_subdiv_label">E-Mail</span>
+                    <input class="dashboard_subdiv_email">
+                    <span class="dashboard_subdiv_label">Password</span>
+                    <input class="dashboard_subdiv_password">
+                    <button class="dashboard_subdiv_passhider">Click to change password</button>
+                    <span class="gray_text" id="credit_warning">Those settings will require e-mail verification in order to change.</span>
+                </div>
+            </div>
+            <div class="dashboard_underpanel_wrapper">
+                <span class="dashboard_label">Please contact staff if you want your country or username to be changed.</span>
+                <button class="dashboard_save" id="save_info">Save Changes</button>
+            </div>
+            <div class="dashboard_signature">
+                <span class="dashboard_signature_title">Signature</span>
+                <textarea class="dashboard_signature_textbox" name="signature"></textarea>
+                <button class="dashboard_save" id="save_signature" rows="104">Save Changes</button>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer_content">
+            <ul class="footer_list">
+                <li class="footer_list_item">
+                    <a class="footer_list_item_link">Privacy</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_item_link">Gitlab</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_item_link">Terms of Service</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_item_link">Copyright</a>
+                </li>
+                <li class="footer_list_item">
+                    <a class="footer_list_item_link">Discord</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

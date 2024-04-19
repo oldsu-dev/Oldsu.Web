@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/beatmap_listing.css" rel="stylesheet">
+    <link href="css/beatmap_preview.css" rel="stylesheet">
+    <title>oldsu!</title>
+</head>
+<body>
+<div class="header_wrapper">
+    <header class="header">
+        <div class="logo_wrapper">
+            <h1 class="logo">oldsu!</h1>
+        </div>
+        <div class="menu_wrapper">
+            <nav class="menu">
+                <ul class="menu_list">
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Home</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Beatmaps</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Leaderboard</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Community</a>
+                    </li>
+                    <li class="menu_list_item">
+                        <a class="menu_list_item_link" href="#">Help</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <a class="user_profile_link">
+            <img href="#" alt="upl" class="user_profile_image">
+        </a>
+    </header>
+</div>
+<main>
+    <div class="banner_wrapper">
+        <img src="image/banner.png" alt="oldsu_banner" class="banner_image">
+    </div>
+    <div class="beatmap_listing_content" style="flex-direction: column">
+        <form name="search_settings_wrapper">
+            <div class="inputbar_wrapper" id="inputbar_beatmap_search">
+                <p class="inputbar_label">Search for:</p>
+                <input class="inputbar_text" type="text" name="query"/>
+            </div>
+            <input type="submit" id="beatmap_search_submit" value="Search" class="submit_button">
+        </form>
+        
+        <div class="beatmap_list">
+            <div class="beatmap_preview_wrapper">
+                <p class="beatmap_preview_title">AugoEidEs (Cut Ver.)</p>
+                <p class="beatmap_preview_artist">DystopiaGround</p>
+                <p class="beatmap_preview_mapper">Mapped by My Angel Flandre</p>
+                <p class="beatmap_preview_info">Ranked | Inner Oni | not mcmcl's Tragic Love Extra | Flux3on's fake diff to test line wraps on this site mockup</p>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="footer_content">
+        <ul class="footer_list">
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Privacy</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Gitlab</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Terms of Service</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Copyright</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link">Discord</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+</body>

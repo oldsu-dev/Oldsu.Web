@@ -1,0 +1,22 @@
+@page "/dashboard/changeEmail"
+@model Oldsu.Web.Pages.ChangeEmailRequest
+
+@{
+    Layout = "BaseLayout";
+}
+
+<div class="register_content">
+
+    <div class="register_result">
+        <span class="material-icons">error</span>
+        @if (Model.ChangeEmailRequestError == null)
+        {
+            <p>An email with the link to change the email has just been sent to your new email address (haha funny pun).</p>
+        }
+        else
+        {
+            <p>@Model.ChangeEmailRequestError</p>
+        }
+        
+    </div>
+</div>

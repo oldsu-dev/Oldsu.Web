@@ -1,0 +1,169 @@
+﻿@page "/dashboard"
+@using Microsoft.AspNetCore.Antiforgery
+@using Oldsu
+@using Oldsu.Enums
+@using Oldsu.Web
+@using Oldsu.Web.Pages
+@model Oldsu.Web.Pages.Dashboard
+
+@inject IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+
+@{
+    Layout = "BaseLayout";
+}
+
+<div class="dashboard_main no_banner_margin">
+    <div class="dashboard_subdiv_wrapper">
+        <div class="dashboard_profinfo">
+            <h3 class="dashboard_subdiv_title">Profile Information</h3>
+            <span class="dashboard_subdiv_label">Username</span>
+            <div class="dashboard_label_value_wrapper">
+                <span class="dashboard_subdiv_username">@Model.AuthenticatedUserInfo!.Username</span>
+                </div>
+            <span class="dashboard_subdiv_label">Country</span>
+            <div class="dashboard_label_value_wrapper">
+                <span class="dashboard_subdiv_country">@CountryNames.FromByte[Model.AuthenticatedUserInfo.Country]</span>
+                </div>
+                    <span class="dashboard_subdiv_label">Profile Picture <span class="gray_text">(max. 128x128)</span></span>
+            <div class="dashboard_avatarupload_wrapper">
+                <!-- real file name, using fake one too -->
+                <input type="file" id="real_file" hidden="hidden"/>
+                <img id="profile_image_dashboard" class="dashboard_avatarupload_avatar" src="@PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl)">
+                <button class="dashboard_avatarupload_button" id="file_upload_button">upload</button>
+            </div>
+                </div>
+                <div class="dashboard_genfinfo">
+                    <h3 class="dashboard_subdiv_title">General Information</h3>
+                    <span class="dashboard_subdiv_label">Occupation</span>
+                        <input id="occupation" class="dashboard_subdiv_occup" value="@Model.UserPageInformation.Occupation">
+                    <span class="dashboard_subdiv_label">Interests</span>
+                        <input id="interests" class="dashboard_subdiv_interests" value="@Model.UserPageInformation.Interests">
+                    <span class="dashboard_subdiv_label">Age</span>
+                        <input id="age" class="dashboard_subdiv_age" type="date" value="@Model.UserPageInformation.Birthday">
+                </div>
+                <div class="dashboard_coninfo">
+                    <h3 class="dashboard_subdiv_title">Contact Information</h3>
+                    <span class="dashboard_subdiv_label">Discord</span>
+                        <input id="discord" class="dashboard_subdiv_condiscord" value="@Model.UserPageInformation.Discord">
+                    <span class="dashboard_subdiv_label">Twitter</span>
+                        <input id="twitter" class="dashboard_subdiv_contwitter" value="@Model.UserPageInformation.Twitter">
+                    <span class="dashboard_subdiv_label">Website</span>
+                        <input id="website" class="dashboard_subdiv_conwebsite" value="@Model.UserPageInformation.Website">
+                </div>
+                <div class="dashboard_accinfo">
+                    <h3 class="dashboard_subdiv_title">Account Information</h3>
+                    <span class="dashboard_subdiv_label">E-Mail</span>
+                    
+                    <form method="post" action=@PathCorrection.Correct("/dashboard/changeEmail")>
+                        @Html.AntiForgeryToken()
+                        <input class="dashboard_subdiv_email" type="email" name="email" value="@Model.AuthenticatedUserInfo.Email">
+                        <input type="submit" class="dashboard_subdiv_passhider" value="Click to change the email"/>
+                    </form>
+                    <span class="gray_text" id="credit_warning">Enter the new email in the textbox above before clicking the button.</span>
+
+                    <form action=@PathCorrection.Correct("/dashboard/changePassword") method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="submit" class="dashboard_subdiv_passhider" value="Click to change password"/>
+                    </form>
+                    <span class="gray_text" id="credit_warning">This setting will require e-mail verification in order to change.</span>
+                </div>
+            </div>
+    <div class="dashboard_underpanel_wrapper">
+        <span class="dashboard_label">Please contact staff if you want your country or username to be changed.</span>
+        <button class="dashboard_save" id="save_info">Save Changes</button>
+    </div>
+    <div class="dashboard_signature">
+                <span class="dashboard_signature_title">Signature</span>
+                <textarea class="dashboard_signature_textbox" id="signature" name="signature">@Model.UserPageInformation.BBText</textarea>
+                <button class="dashboard_save" id="save_signature" rows="104">Save Changes</button>
+            </div>
+        </div>
+
+
+<script>
+    const wrapperFileButton = document.getElementById("file_upload_button");
+    const realFile = document.getElementById("real_file");
+    
+    const profileImage = document.getElementById("profile_image_dashboard");
+    
+    wrapperFileButton.addEventListener("click", function() {
+        realFile.click();
+    })
+    
+    const saveChangesButton = document.getElementById('save_info')
+    saveChangesButton.addEventListener('click', saveChanges);
+    
+    const saveSignatureButton = document.getElementById('save_signature')
+    saveSignatureButton.addEventListener('click', saveSignature);
+
+    async function saveChanges(event) {
+        return await displayLoading(async() => {
+            event.preventDefault();
+                            
+            const data = new URLSearchParams();
+            
+            data.append("occupation", document.getElementById('occupation').value);
+            data.append("interests", document.getElementById('interests').value);
+            data.append("age", document.getElementById('age').value);
+            data.append("discord", document.getElementById('discord').value);
+            data.append("twitter", document.getElementById('twitter').value);
+            data.append("website", document.getElementById('website').value);
+            
+            const resp = await fetch("@PathCorrection.Correct("/update_information")", {
+                method: 'PUT',
+                body: data, 
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+            if (resp.status === 200) {
+                location.assign("@PathCorrection.Correct("/profile")");
+            }
+        });
+    }
+     
+    async function saveSignature(event) {
+        return await displayLoading(async() => {
+            event.preventDefault();
+                            
+            const data = new URLSearchParams();
+            
+            data.append("bbcode", document.getElementById('signature').value);
+            
+            const resp = await fetch("@PathCorrection.Correct("/update_bbcode")", {
+                method: 'PUT',
+                body: data, 
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+            if (resp.status === 200) {
+                location.assign("@PathCorrection.Correct("/profile")");
+            }
+        });
+    }  
+       
+    realFile.addEventListener("change", async function() {
+        return await displayLoading(async() => {
+            let formData = new FormData();
+            
+            formData.append("avatar-image", realFile.files[0]);
+            
+            let resp = await fetch("@PathCorrection.Correct("/avatar")", 
+            { 
+                method: "post",
+                body: formData,
+                headers: { "RequestVerificationToken" : "@token" }
+            })
+            
+            if (resp.status === 200) {
+                profileImage.src = profileImage.src + "?" + new Date().getTime();
+            }
+        });
+    })
+</script>

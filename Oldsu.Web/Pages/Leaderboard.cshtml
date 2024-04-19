@@ -1,0 +1,158 @@
+@page "/leaderboard"
+@using System.Globalization
+@using Oldsu.Web.Pages
+@using Oldsu
+@using Oldsu.Enums
+@using Oldsu.Types
+@using Oldsu.Web
+@{
+    Layout = "BaseLayoutWithBanner";
+}
+
+@{
+    CultureInfo defaultCulture = new CultureInfo("en-US");
+
+    string GetCommaSeparatedThousandsNumber(ulong n) => n.ToString("N0", defaultCulture);
+}
+
+@{
+    string mode = Model.Mode switch {
+        Mode.Mania => "mania",
+        Mode.Standard => "osu",
+        Mode.CatchTheBeat => "ctb",
+        Mode.Taiko => "taiko"
+    };
+}
+
+@model Oldsu.Web.Pages.Leaderboard
+
+<div class="leaderboard_content">
+    <form name="search_settings_wrapper">
+        <div class="inputbar_wrapper" id="inputbar_ranking_search">
+            <p class="inputbar_label">Search for:</p> 
+            <input value="@Model.SearchQuery" class="inputbar_text" id="inputbar_ranking_search_input" type="text" name="query"/>
+        </div>
+
+        <div class="inputbar_wrapper" id="inputbar_ranking_gamemode">
+            <p class="inputbar_label">Gamemode:</p>
+            <select id="inputbar_ranking_gamemode_input" class="inputbar_text" name="mode">
+                <option value="0" @((int)Model.Mode == 0 ? "selected" : String.Empty)>Standard</option>
+                <option value="1" @((int)Model.Mode == 1 ? "selected" : String.Empty)>Taiko</option>
+                <option value="2" @((int)Model.Mode == 2 ? "selected" : String.Empty)>Catch The Beat</option>
+            </select>
+        </div>
+        <input class="inputbar_wrapper" type="submit" id="leaderboard_submit" value="Search">
+    </form>
+
+    <div class="players_wrapper">
+        @{
+            if (Model.Stats.Length == 0)
+            {
+                <p>No rank matches this query.</p>
+                return;
+            }
+        }
+
+        @{
+            if (string.IsNullOrEmpty(Model.SearchQuery) && Model.Page == 0)
+            {
+                StatsWithRank firstStatWithRank = Model.Stats[0];
+
+                <div class="player player_leader">
+                    <p class="player_rank player_leader">#1</p>
+                    <p class="player_name player_leader"><a href="@PathCorrection.Correct($"/u/{firstStatWithRank.UserID}/{mode}")">@firstStatWithRank.User.Username</a></p>
+                    <img src="@PathCorrection.Correct(firstStatWithRank.User.FlagBaseUrl)" class="player_flag player_leader" alt="Country: @CountryCodes.FromCode[firstStatWithRank.User.Country]">
+
+                    <div class="player_gap player_leader"></div>
+
+                    <table class="player_leader_table">
+                        <tr>
+                            <th class="player_score player_leader">Score</th>
+                            <th class="player_acc player_leader">Accuracy</th>
+                            <th class="player_playcount player_leader">Plays</th>
+                        </tr>
+                        <tr>
+                            <td class="player_score player_leader" title="Score">@GetCommaSeparatedThousandsNumber(firstStatWithRank.RankedScore)</td>
+                            <td class="player_acc player_leader" title="Accuracy">@($"{@firstStatWithRank.Accuracy:.##}")%</td>
+                            <td class="player_playcount player_leader" title="Plays">@GetCommaSeparatedThousandsNumber(firstStatWithRank.Playcount)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                foreach (var statWithRank in Model.Stats.Skip(1))
+                {
+                    <div class="player">
+                        <p class="player_rank">#@statWithRank.Rank</p>
+                        <p class="player_name"><a href="@PathCorrection.Correct($"/u/{statWithRank.UserID}/{mode}")">@statWithRank.User.Username</a></p>
+                        <img src="@PathCorrection.Correct(statWithRank.User.FlagBaseUrl)" class="player_flag" alt="Country: @CountryCodes.FromCode[statWithRank.User.Country]">
+
+                        <div class="player_gap"></div>
+
+                        <table class="player_table">
+                            <tr>
+                                <th class="player_score">Score</th>
+                                <th class="player_acc">Accuracy</th>
+                                <th class="player_playcount">Plays</th>
+                            </tr>
+                            <tr>
+                                <td class="player_score" title="Score">@GetCommaSeparatedThousandsNumber(statWithRank.RankedScore)</td>
+                                <td class="player_acc" title="Accuracy">@($"{@statWithRank.Accuracy:.##}")%</td>
+                                <td class="player_playcount" title="Plays">@GetCommaSeparatedThousandsNumber(statWithRank.Playcount)</td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                foreach (var statWithRank in Model.Stats)
+                {
+                    <div class="player">
+                        <p class="player_rank">#@statWithRank.Rank</p>
+                        <p class="player_name"><a href="/u/@statWithRank.UserID">@statWithRank.User.Username</a></p>
+                        <img src="@statWithRank.User.FlagBaseUrl" class="player_flag" alt="Country: @CountryCodes.FromCode[statWithRank.User.Country]">
+
+                        <div class="player_gap"></div>
+
+                        <table class="player_table">
+                            <tr>
+                                <th class="player_score">Score</th>
+                                <th class="player_acc">Accuracy</th>
+                                <th class="player_playcount">Plays</th>
+                            </tr>
+                            <tr>
+                                <td class="player_score" title="Score">@GetCommaSeparatedThousandsNumber(statWithRank.RankedScore)</td>
+                                <td class="player_acc" title="Accuracy">@($"{@statWithRank.Accuracy:.##}")%</td>
+                                <td class="player_playcount" title="Plays">@GetCommaSeparatedThousandsNumber(statWithRank.Playcount)</td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            }
+        }
+    </div>
+    
+    @if (Model.HasNextPage || Model.HasPreviousPage)
+    {
+        <div class="next_page_wrapper">
+
+            @if (Model.HasPreviousPage)
+            {
+                <div class="button_wrapper">
+                    <a href="?query=@Model.SearchQuery&page=@(Model.Page)">
+                        <p class="button_label">Previous page</p></a>
+                </div>
+            }
+
+            @if (Model.HasNextPage)
+            {
+                <div class="button_wrapper">
+                    <a href="?query=@Model.SearchQuery&page=@(Model.Page + 2)">
+                        <p class="button_label">Next page</p></a>
+                </div>
+            }
+            
+
+        </div>
+    }
+</div>

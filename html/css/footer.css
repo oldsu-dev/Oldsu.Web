@@ -1,0 +1,33 @@
+.footer {
+    margin-top: 100px;
+    background-color: #2A2021;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 5vh;
+}
+
+.footer_content {
+    background: #5F474A;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.footer_list {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    justify-content: space-between;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.footer_list_item_link {
+    font-family: "Raleway";
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
