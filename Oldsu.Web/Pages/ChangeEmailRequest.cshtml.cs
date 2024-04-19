@@ -56,7 +56,7 @@ public class ChangeEmailRequest : BaseLayout
         }
 
         await EmailSender.SendAsync(model.Email, "Email change request",
-            $"Here the link you can follow to change your email: https://oldsu.ayyeve.xyz/change_email?token={HttpUtility.UrlEncode(token)}\n" +
+            $"Here the link you can follow to change your email: https://oldsu.ayyeve.dev/change_email?token={HttpUtility.UrlEncode(token)}\n" +
             $"If you did not expect this email, just ignore it.");
 
         return Page();
