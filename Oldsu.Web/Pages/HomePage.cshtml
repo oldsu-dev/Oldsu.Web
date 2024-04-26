@@ -1,0 +1,35 @@
+@page "/"
+@using Oldsu.Web.Pages
+@model HomePage
+@using Oldsu
+@using Oldsu.Enums
+@{
+    Layout = "BaseLayoutWithBanner";
+}
+
+<div class="main_content">
+    <div class="home_info">
+        <div class="home_info_heading_wrapper">
+            <h2 class="home_info_heading">What is oldsu?</h2>
+        </div>
+        <p class="home_info_text">
+            oldsu! is a project that started in October 2020 by Eeveelution, the former owner of the initial project. The goal of it
+            is to provide a fully working experience of older versions of osu!. We currently have the 2009 client supported and plan to restore the old 2008 support. The current ownership lies by marshallracer, and is maintained by a volunteering team to provide
+            you the experience many missed out on. oldsu! intends to fix the flaws of old versions, but we will never change gameplay in any
+            way.
+        </p>
+    </div>
+    <div class="home_news">
+        <div class="home_news_heading_wrapper">
+            <h2 class="home_news_heading">Latest News</h2>
+        </div>
+        <h3 class="home_news_title">@(Model.LatestNews?.Title ?? "Nothing to worry about!")</h3>
+        <hr class="home_news_divider">
+        <p class="home_news_text">@(Html.Raw(Model.LatestNews?.Content ?? "There isn't any news right now."))</p>
+        @{
+            if(Model.LatestNews != null) {
+                <p class="home_news_date">Published on @(Model.LatestNews?.Date ?? DateTime.MinValue)</p>
+            }
+        }
+    </div>
+</div>

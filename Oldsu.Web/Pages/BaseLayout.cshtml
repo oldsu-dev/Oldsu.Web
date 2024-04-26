@@ -1,0 +1,211 @@
+@using Microsoft.AspNetCore.Antiforgery
+@using Oldsu.Web
+@using Oldsu.Web.Pages
+@model BaseLayout
+
+
+@inject IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(Context).RequestToken;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href=@PathCorrection.Correct("/resources/css/styles.css") rel="stylesheet">
+    <title>oldsu!</title>
+</head>
+<body>
+<div class="header_wrapper">
+    <header class="header">
+        <div class="logo_wrapper">
+            <h1 class="logo">oldsu!</h1>
+        </div>
+        <div class="menu_wrapper">
+            <nav class="menu">
+                <ul class="menu_list">
+                    @foreach (var item in BaseLayout.PageMenuItems)
+                    {
+                        <li class="menu_list_item">
+                            <a class="menu_list_item_link" href="@item.Link">@item.PageName</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div> 
+        @{
+            if (Model.AuthenticatedUserInfo != null)
+            {
+                <a class="user_profile_link">
+                    <a href="#" onclick="toggleUserDropdown()" class="sign_in_button">
+                        <img src="@(PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl))" alt="upl" class="user_profile_image">
+                    </a>
+                </a>
+                
+                <div class="user_dropdown" id="user_dropdown_panel">
+                    <img src="@(PathCorrection.Correct(Model.AuthenticatedUserInfo.AvatarBaseUrl))" class="user_dropdown_avatar">
+                    <span class="user_dropdown_nickname">@Model.AuthenticatedUserInfo.Username</span>
+                    @{
+                        var profileLink = PathCorrection.Correct($"/u/{@Model.AuthenticatedUserInfo.UserID}");
+                        
+                        <a href=@profileLink class="user_dropdown_profile">My Profile</a>
+                        <a href="@PathCorrection.Correct("/dashboard")" class="user_dropdown_profile">Settings</a>
+                        <a style="cursor: pointer" class="user_dropdown_profile" id="log_out_button">Log Out</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <a class="user_profile_link">
+                    <a href="#" onclick="toggleLoginDropdown()" class="sign_in_button">
+                        Sign In &#9660; 
+                    </a>
+                </a>
+                <form class="login_panel" id="login_panel_dropdown">
+                    <h3 class="login_panel_header">Please sign in</h3>
+                    <input class="login_panel_input" type="text" name="username" id="username_input" placeholder="username" required>
+                    <input type="password" class="login_panel_input" id="password_input" name="password" placeholder="Password" required>
+                    <input type="submit" class="login_panel_button" id="login_submit" name="login_submit" value="Sign In">
+                    
+                    <span class="login_panel_status" id="message"></span>
+
+                    <a href="/register" class="login_panel_linktext">Register</a>
+                    <a href="#" class="login_panel_linktext">I forgot my password</a>
+                </form>
+            }
+        }
+    </header>
+</div>
+<main>
+    @RenderBody()
+</main>
+</body>
+</html>
+
+<script src=@PathCorrection.Correct("/resources/js/sha256_helper.js")></script>
+
+<div id="loading_screen" style="display: none; z-index: 999999;position: fixed;width: 100vw;height: 100vh; backdrop-filter: blur(9px);top: 0;background: #00000085;">
+    <div class="centered_container" style="
+    width: fit-content;
+    height: fit-content;
+    /* background-color: red; */
+    
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    margin: auto;">
+        <img alt="loading" src=@PathCorrection.Correct("/resources/image/loading.gif") style="">
+        <p style="font-family: sans-serif, 'Quicksand'; color: white;text-align: center;">Loading...</p>
+    </div>
+    
+</div>
+
+<script>
+    const form = document.getElementById('login_panel_dropdown')
+            
+    if (form != null)
+        form.addEventListener('submit', login)
+                
+    const logoutButton = document.getElementById('log_out_button')
+                       
+    if (logoutButton != null)
+        logoutButton.addEventListener('click', logOut)
+
+    async function login(event) {
+        return await displayLoading(async () => {
+            event.preventDefault()
+                    
+            const username = document.getElementById('username_input').value
+            const password = await sha256(document.getElementById('password_input').value)
+                    
+            const data = new URLSearchParams();
+            data.append("username", username);
+            data.append("password", password);
+    
+            const resp = await fetch(@Html.Raw("\"" + PathCorrection.Correct("/login") + "\""), {
+                method: 'POST',
+                body: data, 
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+    
+            const result = await resp.json();
+    
+            if (result.status === "error")
+                document.getElementById('message').innerHTML = result.message;
+            else if (result.status === "ok")
+                window.location.reload();
+                    
+            return false;
+        });
+    }
+            
+    async function logOut(event) {
+        return await displayLoading(async () => {
+            event.preventDefault()
+            
+            const resp = await fetch(@Html.Raw("\"" + PathCorrection.Correct("/logout") + "\""), {
+                method: 'POST',
+                headers: { "RequestVerificationToken" : "@token" }
+            }).catch((error) => {
+                console.log(error);
+            });
+            
+            const result = await resp.json();
+            
+            if (result.status === "error")
+                alert(result.message);
+            else if (result.status === "ok")
+                window.location.reload();
+            
+            return false;
+        });
+    }
+    
+    function toggleLoginDropdown() {
+        document.getElementById("login_panel_dropdown").classList.toggle("show");
+    }
+    
+    function toggleUserDropdown() {
+        document.getElementById("user_dropdown_panel").classList.toggle("show");
+    }
+    
+    async function displayLoading(asyncAction) {
+        let element = document.getElementById("loading_screen");
+        
+        element.focus({preventScroll: true});
+        element.style.display = "block";
+        let result = await asyncAction();
+        element.style.display = "none";
+        return result;
+    }
+</script>
+
+<footer class="footer">
+    <div class="footer_content">
+        <ul class="footer_list">
+            <li class="footer_list_item">
+                <a class="footer_list_item_link" href="@PathCorrection.Correct("/privacy")">Privacy</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link" href="https://gitlab.ayyeve.xyz/oldsu">Gitlab</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link" href="@PathCorrection.Correct("/tos")">Terms of Service</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link" href="@PathCorrection.Correct("/copyright")">Copyright</a>
+            </li>
+            <li class="footer_list_item">
+                <a class="footer_list_item_link" href="https://discord.gg/X7QqVNzZUS">Discord</a>
+            </li>
+        </ul>
+    </div>
+</footer>
